@@ -1,4 +1,4 @@
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import GlobalStyles from "./styles/GlobalStyles";
 import PageNotFound from "./pages/PageNotFound";
@@ -12,7 +12,7 @@ const App: React.FC = () => {
   return (
     <>
       <GlobalStyles />
-      <BrowserRouter>
+      <BrowserRouter basename="app">
         <Routes>
           <Route element={<AppLayout />}>
             <Route path="dashboard" element={<Dashboard />} />

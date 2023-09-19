@@ -15,7 +15,6 @@ export default defineConfig({
             res: ServerResponse<IncomingMessage>,
             next: Connect.NextFunction
           ) => {
-            console.log(req.url);
             if (req.url.startsWith("/app")) {
               req.url = "/app/";
             }
@@ -30,9 +29,10 @@ export default defineConfig({
             res: ServerResponse<IncomingMessage>,
             next: Connect.NextFunction
           ) => {
-            console.log(req.url);
-            if (req.url.startsWith("/app")) {
+            if (req.url.startsWith("/app/")) {
+              console.log(req.url);
               req.url = "/app/";
+              console.log(req.url);
             }
             next();
           }
