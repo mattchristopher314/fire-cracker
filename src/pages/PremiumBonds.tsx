@@ -1,5 +1,12 @@
+import { usePremiumBondsStats } from "../features/usePremiumBondsStats";
+import Spinner from "../ui/Spinner";
+
 const PremiumBonds: React.FC = () => {
-  return <div>Premium Bonds Page</div>;
+  const { isLoading, stats } = usePremiumBondsStats();
+
+  if (isLoading) return <Spinner />;
+
+  return <div>{JSON.stringify(stats)}</div>;
 };
 
 export default PremiumBonds;
