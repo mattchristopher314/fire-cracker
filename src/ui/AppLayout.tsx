@@ -1,7 +1,8 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import { styled } from "styled-components";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
+import { useLocationAsTitle } from "../hooks/useLocationAsTitle";
 
 const StyledAppLayout = styled.div`
   display: grid;
@@ -13,17 +14,20 @@ const StyledAppLayout = styled.div`
 const MainArea = styled.div`
   background-color: var(--color-slate-50);
   overflow-y: scroll;
+  padding: 3.2rem;
 `;
 
 const Container = styled.div`
-  max-width: 160rem;
+  max-width: 140rem;
   margin: 0 auto;
 `;
 
 const AppLayout: React.FC = () => {
+  const tabTitle = useLocationAsTitle();
+
   return (
     <StyledAppLayout>
-      <Header />
+      <Header>{tabTitle}</Header>
       <Sidebar />
 
       <MainArea>
