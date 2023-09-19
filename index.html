@@ -12,11 +12,58 @@
       rel="stylesheet"
     />
 
+    <link rel="stylesheet" href="/src/styles/home.css" />
+    <link rel="stylesheet" href="/src/styles/home-style.css" />
+
     <title>FIRECracker</title>
   </head>
   <body>
-    <h1>FIRECracker</h1>
+    <main>
+      <section class="section-hero">
+        <div class="hero">
+          <div class="hero-text-box">
+            <h1 class="heading-primary">FIRECracker</h1>
 
-    <p>Home</p>
+            <p class="hero-description">
+              This app is in development. Check back later!
+            </p>
+
+            <div class="hero-cta">
+              <a href="/app/dashboard" id="cta">App Preview</a>
+              <a
+                href="https://github.com/mattchristopher314/fire-cracker/"
+                id="github-icon"
+                ><ion-icon name="logo-github"
+              /></a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p class="copyright">
+        Copyright &copy; <span class="year"></span> Matthew Christopher. All
+        rights reserved.
+      </p>
+    </footer>
+
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+
+    <script>
+      const yearEl = document.querySelectorAll(".year");
+      const currentYear = new Date().getFullYear();
+
+      yearEl.forEach((el) => {
+        el.textContent = currentYear;
+      });
+    </script>
   </body>
 </html>
