@@ -44,7 +44,7 @@ const StyledNavLink = styled(NavLink)`
   &:active svg,
   &.active:link svg,
   &.active:visited svg {
-    color: var(--color-brand-500);
+    color: var(--color-brand-lo);
   }
 `;
 
