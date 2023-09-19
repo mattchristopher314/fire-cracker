@@ -3,6 +3,10 @@ import { createGlobalStyle } from "styled-components";
 const GlobalStyles = createGlobalStyle`
   :root {
     &, &.light-mode {
+      /* Brand */
+      --color-brand-hi: #22d3ee;
+      --color-brand-lo: #2563eb;
+
       /* Slate */
       --color-slate-0: #ffffff;
       --color-slate-50: #f8fafc;
@@ -16,10 +20,6 @@ const GlobalStyles = createGlobalStyle`
       --color-slate-800: #1e293b;
       --color-slate-900: #0f172a;
       --color-slate-950: #020617;
-
-      /* Brand */
-      --color-brand-hi: #22d3ee;
-      --color-brand-lo: #2563eb;
 
       /* Cyan */
       --color-cyan-50: #ecfeff;
