@@ -30,9 +30,7 @@ export default defineConfig({
             next: Connect.NextFunction
           ) => {
             if (req.url.startsWith("/app/")) {
-              console.log(req.url);
               req.url = "/app/";
-              console.log(req.url);
             }
             next();
           }
