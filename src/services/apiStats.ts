@@ -13,8 +13,11 @@ export async function getStats<T>(type: PossibleStats) {
     .single();
 
   if (error || !data.data) {
-    console.error(error);
-    throw new Error(`${type} statistics could not be fetched`);
+    if (error) {
+      console.error(error);
+    }
+
+    throw new Error(`${type} stats could not be fetched`);
   }
 
   return data.data as T;

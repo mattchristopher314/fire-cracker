@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import { PossibleStats, getStats } from "../services/apiStats";
-import { PBJSONData } from "../services/supabase";
+import { PossibleStats, getStats } from "../../services/apiStats";
+import { PBJSONData } from "../../services/supabase";
 
 export const usePremiumBondsStats = () => {
   const { isLoading, data: stats } = useQuery({

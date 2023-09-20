@@ -49,6 +49,11 @@ const GlobalStyles = createGlobalStyle`
     }
 
     &.dark-mode { }
+
+    --border-radius-tiny: 3px;
+    --border-radius-sm: 5px;
+    --border-radius-md: 7px;
+    --border-radius-lg: 9px;
   }
 
   *,
@@ -57,6 +62,10 @@ const GlobalStyles = createGlobalStyle`
     box-sizing: border-box;
     padding: 0;
     margin: 0;
+  }
+
+  *:disabled {
+    cursor: not-allowed;
   }
 
   html {
@@ -74,6 +83,10 @@ const GlobalStyles = createGlobalStyle`
 
   ul {
     list-style: none;
+  }
+
+  button {
+    cursor: pointer;
   }
 `;
 

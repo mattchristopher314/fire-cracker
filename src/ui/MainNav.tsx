@@ -29,7 +29,7 @@ const StyledNavLink = styled(NavLink)`
   &.active:visited {
     color: var(--color-slate-700);
     background-color: var(--color-slate-50);
-    border-radius: 4px;
+    border-radius: var(--border-radius-sm);
   }
 
   & svg {

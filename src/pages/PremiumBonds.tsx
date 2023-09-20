@@ -1,4 +1,4 @@
-import { usePremiumBondsStats } from "../features/usePremiumBondsStats";
+import { usePremiumBondsStats } from "../features/premium-bonds/usePremiumBondsStats";
 import Spinner from "../ui/Spinner";
 
 const PremiumBonds: React.FC = () => {
