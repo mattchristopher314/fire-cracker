@@ -1,4 +1,8 @@
-import { HomeIcon, SparklesIcon } from "@heroicons/react/24/outline";
+import {
+  CalculatorIcon,
+  HomeIcon,
+  SparklesIcon,
+} from "@heroicons/react/24/outline";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
@@ -56,6 +60,13 @@ const MainNav: React.FC = () => {
           <StyledNavLink to="/dashboard">
             <HomeIcon />
             <span>Dashboard</span>
+          </StyledNavLink>
+        </li>
+
+        <li>
+          <StyledNavLink to="/budget">
+            <CalculatorIcon />
+            <span>Budget</span>
           </StyledNavLink>
         </li>
 

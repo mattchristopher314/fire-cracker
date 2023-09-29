@@ -7,6 +7,10 @@ const IconButton = styled.button`
   border-radius: var(--border-radius-sm);
   transition: background-color 0.3s ease-in-out;
 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   &:hover {
     background-color: var(--color-slate-100);
   }
