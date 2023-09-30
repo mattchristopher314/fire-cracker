@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
+import { breaks } from "../styles/GlobalStyles";
 
 const StyledLogo = styled.div`
   text-align: center;
@@ -28,6 +29,10 @@ const StyledNavLink = styled(NavLink)`
 const LogoImg = styled.img`
   height: 3.2rem;
   width: auto;
+
+  @media ${breaks.AppNavPoint} {
+    height: 4.8rem;
+  }
 `;
 
 const LogoText = styled.h1`
@@ -35,6 +40,10 @@ const LogoText = styled.h1`
   font-weight: 600;
 
   letter-spacing: -0.5px;
+
+  @media ${breaks.AppNavPoint} {
+    font-size: 3.1rem;
+  }
 `;
 
 const Logo: React.FC = () => {
