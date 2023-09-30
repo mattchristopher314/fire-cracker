@@ -1,6 +1,9 @@
 import styled from "styled-components";
 import IconButton from "./IconButton";
-import { Cog6ToothIcon } from "@heroicons/react/24/outline";
+import {
+  ArrowRightOnRectangleIcon,
+  Cog6ToothIcon,
+} from "@heroicons/react/24/outline";
 import { useNavigate } from "react-router-dom";
 
 const StyledHeaderMenu = styled.ul`
@@ -15,6 +18,10 @@ const HeaderMenu: React.FC = () => {
     <StyledHeaderMenu>
       <IconButton onClick={() => navigate("/settings")}>
         <Cog6ToothIcon />
+      </IconButton>
+
+      <IconButton onClick={() => (window.location.href = "/")}>
+        <ArrowRightOnRectangleIcon />
       </IconButton>
     </StyledHeaderMenu>
   );
