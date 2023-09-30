@@ -13,7 +13,6 @@ import PageNotFound from "./pages/PageNotFound";
 import Login from "./pages/Login";
 import AppLayout from "./ui/AppLayout";
 import Dashboard from "./pages/Dashboard";
-import Home from "./pages/Home";
 import PremiumBonds from "./pages/PremiumBonds";
 import IconButton from "./ui/IconButton";
 import Budget from "./pages/Budget";
@@ -52,8 +51,7 @@ const App: React.FC = () => {
               <Route path="settings" element={<Settings />} />
             </Route>
 
-            <Route index element={<Home />} />
-            <Route path="login" element={<Login />} />
+            <Route index element={<Login />} />
             <Route path="*" element={<PageNotFound />} />
           </Routes>
         </BrowserRouter>
