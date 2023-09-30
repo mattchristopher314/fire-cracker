@@ -19,9 +19,18 @@ const StyledNavigation = styled.aside<{ $show?: boolean }>`
   gap: 3.2rem;
 
   position: relative;
+  transform: translateX(-100%);
 
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
   @media ${breaks.AppNavPoint} {
-    display: ${(props) => (props.$show ? "flex" : "none")};
+    /* display: ${(props) => (props.$show ? "flex" : "none")}; */
+
+    opacity: ${(props) => (props.$show ? 1 : 0)};
+    visibility: ${(props) => (props.$show ? "visible" : "hidden")};
+    pointer-events: ${(props) => (props.$show ? "auto" : "none")};
+
+    transform: ${(props) =>
+      props.$show ? "translateX(0)" : "translateX(-100%)"};
 
     position: absolute;
     top: 0;
