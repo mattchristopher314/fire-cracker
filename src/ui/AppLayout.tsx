@@ -1,14 +1,21 @@
 import { Outlet } from "react-router-dom";
 import { styled } from "styled-components";
-import Header from "./Header";
-import Sidebar from "./Sidebar";
+import { breaks } from "../styles/GlobalStyles";
 import { useLocationAsTitle } from "../hooks/useLocationAsTitle";
+import Header from "./Header";
+import Navigation from "./Navigation";
 
 const StyledAppLayout = styled.div`
+  position: relative;
+
   display: grid;
   grid-template-columns: 26rem 1fr;
   grid-template-rows: auto 1fr;
   height: 100vh;
+
+  @media ${breaks.AppNavPoint} {
+    grid-template-columns: auto 1fr;
+  }
 `;
 
 const MainArea = styled.div`
@@ -28,7 +35,7 @@ const AppLayout: React.FC = () => {
   return (
     <StyledAppLayout>
       <Header>{tabTitle}</Header>
-      <Sidebar />
+      <Navigation />
 
       <MainArea>
         <Container>

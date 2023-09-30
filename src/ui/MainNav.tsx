@@ -52,25 +52,27 @@ const StyledNavLink = styled(NavLink)`
   }
 `;
 
-const MainNav: React.FC = () => {
+const MainNav: React.FC<{
+  onClick?: React.MouseEventHandler<HTMLLIElement>;
+}> = ({ onClick }) => {
   return (
     <nav>
       <NavList>
-        <li>
+        <li onClick={onClick}>
           <StyledNavLink to="/dashboard">
             <HomeIcon />
             <span>Dashboard</span>
           </StyledNavLink>
         </li>
 
-        <li>
+        <li onClick={onClick}>
           <StyledNavLink to="/budget">
             <CalculatorIcon />
             <span>Budget</span>
           </StyledNavLink>
         </li>
 
-        <li>
+        <li onClick={onClick}>
           <StyledNavLink to="/premium-bonds">
             <SparklesIcon />
             <span>Premium Bonds</span>

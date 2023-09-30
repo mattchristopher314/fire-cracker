@@ -83,9 +83,9 @@
 
 .footer {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
 
-  justify-items: center;
+  align-items: center;
 
   margin-top: 4.8rem;
   padding: 4.8rem 3.2rem;

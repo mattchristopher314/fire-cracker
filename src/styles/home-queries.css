@@ -1,0 +1,9 @@
+@media (max-width: 66em) {
+  html {
+    /* 9px */
+    font-size: 56.25%;
+  }
+  .footer {
+    grid-template-columns: 1fr;
+  }
+}

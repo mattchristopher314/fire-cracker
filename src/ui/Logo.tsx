@@ -31,7 +31,7 @@ const LogoImg = styled.img`
 `;
 
 const LogoText = styled.h1`
-  font-size: 2.6rem;
+  font-size: 2.5rem;
   font-weight: 600;
 
   letter-spacing: -0.5px;

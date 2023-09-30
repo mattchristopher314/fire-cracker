@@ -1,5 +1,9 @@
 import { createGlobalStyle } from "styled-components";
 
+export const breaks = {
+  AppNavPoint: "(max-width: 37em)",
+};
+
 const GlobalStyles = createGlobalStyle`
   :root {
     &, &.light-mode {
@@ -46,6 +50,9 @@ const GlobalStyles = createGlobalStyle`
       --color-blue-800: #1e40af;
       --color-blue-900: #1e3a8a;
       --color-blue-950: #172554;
+
+      /* Nav Background */
+      --color-slate-0-trans: rgba(255, 255, 255, 0.9);
     }
 
     &.dark-mode { }
@@ -73,7 +80,13 @@ const GlobalStyles = createGlobalStyle`
   }
 
   body {
+    line-height: 1;
     font-family: "Inter", sans-serif;
+    font-weight: 400;
+  }
+
+  p {
+    line-height: 1.6;
   }
 
   a {
