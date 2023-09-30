@@ -52,8 +52,7 @@ const App: React.FC = () => {
               <Route path="settings" element={<Settings />} />
             </Route>
 
-            <Route index element={<Home />} />
-            <Route path="login" element={<Login />} />
+            <Route index element={<Login />} />
             <Route path="*" element={<PageNotFound />} />
           </Routes>
         </BrowserRouter>
