@@ -11,6 +11,11 @@ const DrawerContainer = styled.div`
 
   display: none;
 
+  & svg {
+    width: 3.2rem;
+    height: 3.2rem;
+  }
+
   @media ${breaks.AppNavPoint} {
     display: block;
   }
@@ -22,7 +27,7 @@ const DrawerContainer = styled.div`
 `;
 
 const DrawerButton = styled(IconButton)`
-  margin: 1.2rem;
+  margin: 0.8rem 0.4rem;
 `;
 
 const NavigationDrawer: React.FC<{
