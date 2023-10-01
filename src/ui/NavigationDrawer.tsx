@@ -14,6 +14,11 @@ const DrawerContainer = styled.div`
   @media ${breaks.AppNavPoint} {
     display: block;
   }
+
+  @media ${breaks.AppMinNavPoint} {
+    grid-row: 1;
+    border-bottom: 1px solid var(--color-slate-200);
+  }
 `;
 
 const DrawerButton = styled(IconButton)`

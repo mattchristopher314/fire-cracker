@@ -22,6 +22,10 @@ const MainArea = styled.div`
   background-color: var(--color-slate-50);
   overflow-y: scroll;
   padding: 3.2rem;
+
+  @media ${breaks.AppMinNavPoint} {
+    grid-column: 1 / -1;
+  }
 `;
 
 const Container = styled.div`
