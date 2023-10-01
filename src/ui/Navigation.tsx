@@ -7,6 +7,8 @@ import { useState } from "react";
 import IconButton from "./IconButton";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 
+const NAV_TRANSITION_DURATION = 300;
+
 const StyledNavigation = styled.aside<{ $show?: boolean }>`
   grid-row: 1 / -1;
 
@@ -20,8 +22,12 @@ const StyledNavigation = styled.aside<{ $show?: boolean }>`
 
   position: relative;
 
-  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out,
-    visibility 0.3s ease-in-out;
+  &.should-transition {
+    transition: transform ${NAV_TRANSITION_DURATION}ms ease-in-out,
+      opacity ${NAV_TRANSITION_DURATION}ms ease-in-out,
+      visibility ${NAV_TRANSITION_DURATION}ms ease-in-out;
+  }
+
   @media ${breaks.AppNavPoint} {
     opacity: ${(props) => (props.$show ? 1 : 0)};
     visibility: ${(props) => (props.$show ? "visible" : "hidden")};
@@ -65,20 +71,29 @@ const CloseButton = styled(IconButton)`
 
 const Navigation: React.FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isAnimating, setIsAnimating] = useState<boolean>(false);
 
   const openNav = () => {
     setIsOpen(true);
+    setIsAnimating(true);
   };
 
   const closeNav = () => {
     setIsOpen(false);
+
+    setTimeout(() => {
+      setIsAnimating(false);
+    }, NAV_TRANSITION_DURATION);
   };
 
   return (
     <>
       <NavigationDrawer onClick={openNav} />
 
-      <StyledNavigation $show={isOpen}>
+      <StyledNavigation
+        $show={isOpen}
+        className={isAnimating ? "should-transition" : ""}
+      >
         <CloseButton onClick={closeNav}>
           <XMarkIcon />
         </CloseButton>
