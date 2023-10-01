@@ -46,9 +46,11 @@ const LogoText = styled.h1`
   }
 `;
 
-const Logo: React.FC = () => {
+const Logo: React.FC<{
+  onClick?: React.MouseEventHandler<HTMLDivElement>;
+}> = ({ onClick }) => {
   return (
-    <StyledLogo>
+    <StyledLogo onClick={onClick}>
       <StyledNavLink to="/dashboard">
         <LogoImg src="/FIRECracker-small.png" alt="FIRECracker logo" />
         <LogoText>FIRECracker</LogoText>

@@ -21,10 +21,9 @@ const StyledNavigation = styled.aside<{ $show?: boolean }>`
   position: relative;
   transform: translateX(-100%);
 
-  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out,
+    visibility 0.3s ease-in-out;
   @media ${breaks.AppNavPoint} {
-    /* display: ${(props) => (props.$show ? "flex" : "none")}; */
-
     opacity: ${(props) => (props.$show ? 1 : 0)};
     visibility: ${(props) => (props.$show ? "visible" : "hidden")};
     pointer-events: ${(props) => (props.$show ? "auto" : "none")};
@@ -85,7 +84,7 @@ const Navigation: React.FC = () => {
           <XMarkIcon />
         </CloseButton>
 
-        <Logo />
+        <Logo onClick={closeNav} />
         <MainNav onClick={closeNav} />
       </StyledNavigation>
     </>
