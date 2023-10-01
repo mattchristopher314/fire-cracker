@@ -11,6 +11,13 @@ const GlobalStyles = createGlobalStyle`
       /* Brand */
       --color-brand-hi: #22d3ee;
       --color-brand-lo: #2563eb;
+      --color-brand-lo-hover: #1d4ed8;
+
+      /* Error */
+      --color-error-super-soft: #fee2e2;
+      --color-error-soft: #fca5a5;
+      --color-error-harsh: #e74c3c;
+      --color-error-harsh-hover: #c0392b;
 
       /* Slate */
       --color-slate-0: #ffffff;
@@ -62,6 +69,10 @@ const GlobalStyles = createGlobalStyle`
     --border-radius-sm: 5px;
     --border-radius-md: 7px;
     --border-radius-lg: 9px;
+
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.2);
+    --shadow-md: 0px 0.6rem 2.4rem rgba(0, 0, 0, 0.3);
+    --shadow-lg: 0 2.4rem 3.2rem rgba(0, 0, 0, 0.4);
   }
 
   *,

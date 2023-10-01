@@ -66,6 +66,10 @@ const App: React.FC = () => {
             },
             error: {
               duration: 5 * 1000,
+              iconTheme: {
+                primary: "var(--color-error-harsh)",
+                secondary: "white",
+              },
             },
             style: {
               fontSize: "1.4rem",
