@@ -29,11 +29,6 @@ const Heading = styled.h1`
     `}
 
   line-height: 1.2;
-
-  & svg {
-    width: 3.9rem;
-    height: 3.9rem;
-  }
 `;
 
 export default Heading;

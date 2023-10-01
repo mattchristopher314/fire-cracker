@@ -52,7 +52,10 @@ const App: React.FC = () => {
             </Route>
 
             <Route index element={<Login />} />
-            <Route path="*" element={<PageNotFound />} />
+            <Route
+              path="*"
+              element={<PageNotFound titleError="FIRECracker | Error 404" />}
+            />
           </Routes>
         </BrowserRouter>
 

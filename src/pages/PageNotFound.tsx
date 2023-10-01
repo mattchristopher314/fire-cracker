@@ -1,11 +1,12 @@
 import styled from "styled-components";
 
-import { ExclamationCircleIcon } from "@heroicons/react/20/solid";
+import { ExclamationCircleIcon } from "@heroicons/react/24/solid";
 
 import { useMoveBack } from "../hooks/useMoveBack";
 
 import Heading from "../ui/Heading";
 import Button from "../ui/Button";
+import { useEffect } from "react";
 
 const StyledPageNotFound = styled.main`
   height: 100vh;
@@ -49,8 +50,12 @@ const ErrorContainer = styled.div`
   }
 `;
 
-function PageNotFound() {
+const PageNotFound: React.FC<{ titleError: string }> = ({ titleError }) => {
   const moveBack = useMoveBack();
+
+  useEffect(() => {
+    document.title = titleError;
+  }, [titleError]);
 
   return (
     <StyledPageNotFound>
@@ -77,6 +82,6 @@ function PageNotFound() {
       </Box>
     </StyledPageNotFound>
   );
-}
+};
 
 export default PageNotFound;

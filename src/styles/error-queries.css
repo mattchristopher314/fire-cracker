@@ -1,0 +1,9 @@
+@media (max-width: 41em) {
+  .error-box {
+    padding: 1.6rem;
+  }
+
+  .error-header {
+    flex-direction: column;
+  }
+}
