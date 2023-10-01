@@ -40,7 +40,7 @@ const StyledNavigation = styled.aside<{ $show?: boolean }>`
     top: 0;
     left: 0;
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
 
     background-color: var(--color-slate-0-trans);
 
