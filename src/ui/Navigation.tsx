@@ -19,7 +19,6 @@ const StyledNavigation = styled.aside<{ $show?: boolean }>`
   gap: 3.2rem;
 
   position: relative;
-  transform: translateX(-100%);
 
   transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out,
     visibility 0.3s ease-in-out;
