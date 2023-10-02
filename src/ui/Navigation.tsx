@@ -9,6 +9,41 @@ import { XMarkIcon } from "@heroicons/react/24/outline";
 
 const NAV_TRANSITION_DURATION = 300;
 
+const Overlay = styled.div<{ $show?: boolean }>`
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.01);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+
+  &.should-transition-nav {
+    transition: transform ${NAV_TRANSITION_DURATION}ms ease-in-out,
+      opacity ${NAV_TRANSITION_DURATION}ms ease-in-out,
+      visibility ${NAV_TRANSITION_DURATION}ms ease-in-out;
+  }
+
+  @media ${breaks.AppNavPoint} {
+    opacity: ${(props) => (props.$show ? 1 : 0)};
+    visibility: ${(props) => (props.$show ? "visible" : "hidden")};
+    pointer-events: ${(props) => (props.$show ? "auto" : "none")};
+  }
+
+  @media ${breaks.AppFullWidthNavPoint} {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+`;
+
 const StyledNavigation = styled.aside<{ $show?: boolean }>`
   grid-row: 1 / -1;
 
@@ -21,8 +56,9 @@ const StyledNavigation = styled.aside<{ $show?: boolean }>`
   gap: 3.2rem;
 
   position: relative;
+  z-index: 2;
 
-  &.should-transition {
+  &.should-transition-nav {
     transition: transform ${NAV_TRANSITION_DURATION}ms ease-in-out,
       opacity ${NAV_TRANSITION_DURATION}ms ease-in-out,
       visibility ${NAV_TRANSITION_DURATION}ms ease-in-out;
@@ -39,15 +75,19 @@ const StyledNavigation = styled.aside<{ $show?: boolean }>`
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
     min-height: 100vh;
 
+    width: min(100%, 45rem);
+
     background-color: var(--color-slate-0-trans);
+  }
+
+  @media ${breaks.AppFullWidthNavPoint} {
+    width: 100%;
+    border: none;
 
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
-
-    border-right: none;
   }
 `;
 
@@ -72,27 +112,40 @@ const CloseButton = styled(IconButton)`
 const Navigation: React.FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isAnimating, setIsAnimating] = useState<boolean>(false);
+  const [isAnimatingOverlay, setIsAnimatingOverlay] = useState<boolean>(false);
 
   const openNav = () => {
     setIsOpen(true);
     setIsAnimating(true);
+    setIsAnimatingOverlay(true);
+
+    setTimeout(() => {
+      setIsAnimatingOverlay(false);
+    }, NAV_TRANSITION_DURATION);
   };
 
   const closeNav = () => {
     setIsOpen(false);
+    setIsAnimating(true);
+    setIsAnimatingOverlay(true);
 
     setTimeout(() => {
       setIsAnimating(false);
+      setIsAnimatingOverlay(false);
     }, NAV_TRANSITION_DURATION);
   };
 
   return (
     <>
       <NavigationDrawer onClick={openNav} />
+      <Overlay
+        $show={isOpen}
+        className={isAnimatingOverlay ? "should-transition-nav" : ""}
+      />
 
       <StyledNavigation
         $show={isOpen}
-        className={isAnimating ? "should-transition" : ""}
+        className={isAnimating ? "should-transition-nav" : ""}
       >
         <CloseButton onClick={closeNav}>
           <XMarkIcon />
