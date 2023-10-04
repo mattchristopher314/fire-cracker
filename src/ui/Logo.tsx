@@ -1,12 +1,12 @@
-import { NavLink } from "react-router-dom";
-import styled from "styled-components";
+import { NavLink, To } from "react-router-dom";
+import styled, { css } from "styled-components";
 import { breaks } from "../styles/GlobalStyles";
 
 const StyledLogo = styled.div`
   text-align: center;
 `;
 
-const StyledNavLink = styled(NavLink)`
+const StyledNavLink = styled(NavLink)<{ $hasHoverEffect: boolean }>`
   &:link,
   &:visited {
     text-decoration: none;
@@ -15,10 +15,17 @@ const StyledNavLink = styled(NavLink)`
     transition: color 0.2s ease-in-out;
   }
 
-  &:hover,
-  &:active {
-    color: var(--color-brand-lo);
-  }
+  ${(props) =>
+    props.$hasHoverEffect
+      ? css`
+          &:hover,
+          &:active {
+            color: var(--color-brand-lo);
+          }
+        `
+      : css`
+          cursor: default;
+        `}
 
   display: flex;
   flex-direction: column;
@@ -26,37 +33,67 @@ const StyledNavLink = styled(NavLink)`
   gap: 0.8rem;
 `;
 
-const LogoImg = styled.img`
-  height: 3.2rem;
-  width: auto;
+const LogoImg = styled.img<{ size?: string }>`
+  ${(props) =>
+    props.size === "regular" &&
+    css`
+      height: 3.2rem;
 
-  @media ${breaks.AppNavPoint} {
-    height: 4.8rem;
-  }
+      @media ${breaks.AppNavPoint} {
+        height: 4.8rem;
+      }
+    `}
+  ${(props) =>
+    props.size === "large" &&
+    css`
+      height: 4.8rem;
+    `}
+  
+  width: auto;
 `;
 
-const LogoText = styled.h1`
-  font-size: 2.5rem;
+const LogoText = styled.h1<{ size?: string }>`
+  ${(props) =>
+    props.size === "regular" &&
+    css`
+      font-size: 2.5rem;
+
+      @media ${breaks.AppNavPoint} {
+        font-size: 3.1rem;
+      }
+    `}
+  ${(props) =>
+    props.size === "large" &&
+    css`
+      font-size: 3.1rem;
+    `}
+
   font-weight: 600;
 
   letter-spacing: -0.5px;
-
-  @media ${breaks.AppNavPoint} {
-    font-size: 3.1rem;
-  }
 `;
 
 const Logo: React.FC<{
   onClick?: React.MouseEventHandler<HTMLDivElement>;
-}> = ({ onClick }) => {
+  to?: To;
+  size?: string;
+}> = ({ onClick, to, size }) => {
   return (
     <StyledLogo onClick={onClick}>
-      <StyledNavLink to="/dashboard">
-        <LogoImg src="/FIRECracker-small.png" alt="FIRECracker logo" />
-        <LogoText>FIRECracker</LogoText>
+      <StyledNavLink to={to || ""} $hasHoverEffect={!!onClick || !!to}>
+        <LogoImg
+          src="/FIRECracker-small.png"
+          alt="FIRECracker logo"
+          size={size}
+        />
+        <LogoText size={size}>FIRECracker</LogoText>
       </StyledNavLink>
     </StyledLogo>
   );
+};
+
+Logo.defaultProps = {
+  size: "regular",
 };
 
 export default Logo;

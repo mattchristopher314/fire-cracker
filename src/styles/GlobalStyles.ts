@@ -112,8 +112,30 @@ const GlobalStyles = createGlobalStyle`
     list-style: none;
   }
 
+  input,
+  button,
+  textarea,
+  select {
+    font: inherit;
+    color: inherit;
+  }
+
   button {
     cursor: pointer;
+  }
+
+  select:disabled,
+  input:disabled {
+    background-color: var(--color-slate-200) !important;
+    color: var(--color-slate-500) !important;
+  }
+
+  input:focus,
+  button:focus,
+  textarea:focus,
+  select:focus {
+    outline: 2px solid var(--color-brand-lo);
+    outline-offset: -1px;
   }
 `;
 

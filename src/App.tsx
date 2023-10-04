@@ -17,6 +17,7 @@ import PremiumBonds from "./pages/PremiumBonds";
 import IconButton from "./ui/IconButton";
 import Budget from "./pages/Budget";
 import Settings from "./pages/Settings";
+import ProtectedRoute from "./ui/ProtectedRoute";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -43,7 +44,13 @@ const App: React.FC = () => {
 
         <BrowserRouter basename="app">
           <Routes>
-            <Route element={<AppLayout />}>
+            <Route
+              element={
+                <ProtectedRoute>
+                  <AppLayout />
+                </ProtectedRoute>
+              }
+            >
               <Route path="dashboard" element={<Dashboard />} />
               <Route path="budget" element={<Budget />} />
               <Route path="premium-bonds" element={<PremiumBonds />} />
@@ -51,7 +58,15 @@ const App: React.FC = () => {
               <Route path="settings" element={<Settings />} />
             </Route>
 
-            <Route index element={<Login />} />
+            <Route
+              index
+              element={
+                <ProtectedRoute redirectUrl="/dashboard" noAuth>
+                  <Login />
+                </ProtectedRoute>
+              }
+            />
+
             <Route
               path="*"
               element={<PageNotFound titleError="FIRECracker | Error 404" />}

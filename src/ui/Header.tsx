@@ -1,5 +1,6 @@
 import { styled } from "styled-components";
 import HeaderMenu from "./HeaderMenu";
+import User from "../features/authentication/User";
 
 const StyledHeader = styled.header`
   background-color: var(--color-slate-0);
@@ -10,7 +11,7 @@ const StyledHeader = styled.header`
 
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 0.8rem;
 `;
 
 const Header: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -18,6 +19,7 @@ const Header: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     <StyledHeader>
       {children}
 
+      <User />
       <HeaderMenu />
     </StyledHeader>
   );

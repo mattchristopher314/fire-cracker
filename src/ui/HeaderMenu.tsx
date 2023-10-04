@@ -1,10 +1,8 @@
 import styled from "styled-components";
 import IconButton from "./IconButton";
-import {
-  ArrowRightOnRectangleIcon,
-  Cog6ToothIcon,
-} from "@heroicons/react/24/outline";
+import { Cog6ToothIcon } from "@heroicons/react/24/outline";
 import { useNavigate } from "react-router-dom";
+import Logout from "../features/authentication/Logout";
 
 const StyledHeaderMenu = styled.ul`
   display: flex;
@@ -20,9 +18,7 @@ const HeaderMenu: React.FC = () => {
         <Cog6ToothIcon />
       </IconButton>
 
-      <IconButton onClick={() => (window.location.href = "/")}>
-        <ArrowRightOnRectangleIcon />
-      </IconButton>
+      <Logout />
     </StyledHeaderMenu>
   );
 };
