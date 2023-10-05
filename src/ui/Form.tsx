@@ -12,6 +12,7 @@ const Form = styled.form<{ type?: string }>`
     `}
 
   font-size: 1.4rem;
+  width: 100%;
 `;
 
 Form.defaultProps = {

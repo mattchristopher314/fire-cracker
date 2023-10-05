@@ -9,7 +9,6 @@ import styled from "styled-components";
 
 const StyledDevOnlyButtonContainer = styled.div`
   display: flex;
-  /* width: 100%; */
   flex-grow: 1;
 
   gap: 0.8rem;
