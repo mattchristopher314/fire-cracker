@@ -37,7 +37,6 @@ const UserAvatar = styled.img`
 const User: React.FC = () => {
   const { user } = useUser();
   const metadata = !user ? {} : user.user_metadata;
-  console.log(metadata);
 
   const avatar = metadata.avatar || "/default-user.jpg";
   const name = metadata.fullName || "Unknown";

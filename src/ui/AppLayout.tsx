@@ -10,10 +10,11 @@ const StyledAppLayout = styled.div`
 
   display: grid;
   grid-template-columns: 26rem 1fr;
-  grid-template-rows: auto 1fr;
+  grid-template-rows: 6.1rem 1fr;
 
   height: 100dvh;
-  overflow: scroll;
+  overflow-y: auto;
+  overflow-x: hidden;
 
   @media ${breaks.AppNavPoint} {
     grid-template-columns: auto 1fr;

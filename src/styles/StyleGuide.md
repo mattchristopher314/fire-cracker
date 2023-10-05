@@ -24,6 +24,7 @@
 ### Letter spacing (px)
 
 - Small: -0.5
+- Medium: 0.5
 
 ## COLORS
 

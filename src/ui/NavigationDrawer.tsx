@@ -27,7 +27,7 @@ const DrawerContainer = styled.div`
 `;
 
 const DrawerButton = styled(IconButton)`
-  margin: 0.8rem 0.4rem;
+  margin: 1.05rem 0.4rem;
 `;
 
 const NavigationDrawer: React.FC<{

@@ -9,7 +9,7 @@ import Button from "../ui/Button";
 import { useEffect } from "react";
 
 const StyledPageNotFound = styled.main`
-  height: 100vh;
+  height: 100dvh;
   background-color: var(--color-grey-50);
   display: flex;
   align-items: center;

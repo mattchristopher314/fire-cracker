@@ -75,6 +75,10 @@ const GlobalStyles = createGlobalStyle`
     --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.2);
     --shadow-md: 0px 0.6rem 2.4rem rgba(0, 0, 0, 0.3);
     --shadow-lg: 0 2.4rem 3.2rem rgba(0, 0, 0, 0.4);
+
+    @media ${breaks.AppNavPoint} {
+      font-size: 56.25%;
+    }
   }
 
   *,

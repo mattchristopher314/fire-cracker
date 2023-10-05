@@ -6,7 +6,7 @@ import { useUser } from "../features/authentication/useUser";
 import Spinner from "./Spinner";
 
 const FullPage = styled.div`
-  height: 100vh;
+  height: 100dvh;
   background-color: var(--color-grey-50);
   display: flex;
   align-items: center;

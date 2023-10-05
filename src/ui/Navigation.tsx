@@ -10,8 +10,8 @@ import { XMarkIcon } from "@heroicons/react/24/outline";
 const NAV_TRANSITION_DURATION = 300;
 
 const Overlay = styled.div<{ $show?: boolean }>`
-  width: 100vw;
-  height: 100vh;
+  width: 100dvw;
+  height: 100dvh;
   background-color: rgba(0, 0, 0, 0.01);
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
@@ -75,7 +75,7 @@ const StyledNavigation = styled.aside<{ $show?: boolean }>`
     position: absolute;
     top: 0;
     left: 0;
-    min-height: 100vh;
+    min-height: 100dvh;
 
     width: min(100%, 45rem);
 

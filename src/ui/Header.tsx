@@ -23,7 +23,7 @@ const StyledHeader = styled.header`
 const StyledHeaderText = styled.h1`
   font-weight: 500;
   font-size: 2rem;
-  letter-spacing: 0.75px;
+  letter-spacing: 0.5px;
 
   @media ${breaks.AppMinNavPoint} {
     display: none;
