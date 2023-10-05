@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import { useUser } from "./useUser";
+import { breaks } from "../../styles/GlobalStyles";
 
-const StyledUserAvatar = styled.div`
+const StyledUser = styled.div`
   margin-left: auto;
   display: flex;
   gap: 1.2rem;
@@ -9,9 +10,19 @@ const StyledUserAvatar = styled.div`
   font-weight: 500;
   font-size: 1.4rem;
   color: var(--color-grey-600);
+
+  @media ${breaks.AppMinNavPoint} {
+    margin-left: initial;
+  }
+
+  @media ${breaks.AppCompactPoint} {
+    & span {
+      display: none;
+    }
+  }
 `;
 
-const Avatar = styled.img`
+const UserAvatar = styled.img`
   display: block;
   width: 4rem;
   width: 3.6rem;
@@ -32,10 +43,10 @@ const User: React.FC = () => {
   const name = metadata.fullName || "Unknown";
 
   return (
-    <StyledUserAvatar>
-      <Avatar src={avatar} alt={`Avatar of ${name}`} />
+    <StyledUser>
+      <UserAvatar src={avatar} alt={`Avatar of ${name}`} />
       <span>{name}</span>
-    </StyledUserAvatar>
+    </StyledUser>
   );
 };
 

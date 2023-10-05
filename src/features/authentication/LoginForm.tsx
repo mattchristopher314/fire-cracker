@@ -8,11 +8,22 @@ import Form from "../../ui/Form";
 import styled from "styled-components";
 
 const StyledDevOnlyButtonContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
+  /* width: 100%; */
+  flex-grow: 1;
 
   gap: 0.8rem;
   padding: 1.2rem 0;
+
+  & button {
+    flex: 1 1 0;
+  }
+
+  @media (max-width: 34em) {
+    /* grid-template-columns: 1fr; */
+    flex-direction: column;
+    gap: 1.2rem;
+  }
 `;
 
 const LoginForm: React.FC = () => {
