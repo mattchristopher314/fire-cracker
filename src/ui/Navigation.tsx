@@ -155,7 +155,7 @@ const Navigation: React.FC = () => {
           <XMarkIcon />
         </CloseButton>
 
-        <Logo onClick={closeNav} />
+        <Logo onClick={closeNav} to="/dashboard" />
         <MainNav onClick={closeNav} />
       </StyledNavigation>
     </>
