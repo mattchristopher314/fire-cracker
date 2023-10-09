@@ -6,6 +6,7 @@ import NavigationDrawer from "./NavigationDrawer";
 import { useState } from "react";
 import IconButton from "./IconButton";
 import { XMarkIcon } from "@heroicons/react/24/outline";
+import { useClickOut } from "../hooks/useClickOut";
 
 const NAV_TRANSITION_DURATION = 300;
 
@@ -135,6 +136,8 @@ const Navigation: React.FC = () => {
     }, NAV_TRANSITION_DURATION);
   };
 
+  const ref = useClickOut(closeNav);
+
   return (
     <>
       <NavigationDrawer onClick={openNav} />
@@ -146,6 +149,7 @@ const Navigation: React.FC = () => {
       <StyledNavigation
         $show={isOpen}
         className={isAnimating ? "should-transition-nav" : ""}
+        ref={ref}
       >
         <CloseButton onClick={closeNav}>
           <XMarkIcon />
