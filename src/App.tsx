@@ -18,6 +18,7 @@ import IconButton from "./ui/IconButton";
 import Budget from "./pages/Budget";
 import Settings from "./pages/Settings";
 import ProtectedRoute from "./ui/ProtectedRoute";
+import Account from "./pages/Account";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -55,6 +56,7 @@ const App: React.FC = () => {
               <Route path="budget" element={<Budget />} />
               <Route path="premium-bonds" element={<PremiumBonds />} />
 
+              <Route path="account" element={<Account />} />
               <Route path="settings" element={<Settings />} />
             </Route>
 

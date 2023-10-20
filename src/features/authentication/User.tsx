@@ -2,8 +2,9 @@ import styled from "styled-components";
 import { breaks } from "../../styles/GlobalStyles";
 import MiniSpinner from "../../ui/MiniSpinner";
 import { useProfileData } from "../../context/useProfileData";
+import { NavLink } from "react-router-dom";
 
-const StyledUser = styled.div`
+const StyledUser = styled(NavLink)`
   margin-left: auto;
   display: flex;
   gap: 1.2rem;
@@ -48,7 +49,7 @@ const User: React.FC = () => {
   const fullName = `${first_name}${last_name && ` ${last_name}`}`;
 
   return (
-    <StyledUser>
+    <StyledUser to="/account">
       {isLoading ? (
         <StyledLoaderContainer>
           <MiniSpinner />
