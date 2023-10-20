@@ -1,6 +1,7 @@
 import styled from "styled-components";
-import { useUser } from "./useUser";
 import { breaks } from "../../styles/GlobalStyles";
+import MiniSpinner from "../../ui/MiniSpinner";
+import { useProfileData } from "../../context/useProfileData";
 
 const StyledUser = styled.div`
   margin-left: auto;
@@ -34,17 +35,33 @@ const UserAvatar = styled.img`
   transition: outline 0.3s ease-in-out;
 `;
 
-const User: React.FC = () => {
-  const { user } = useUser();
-  const metadata = !user ? {} : user.user_metadata;
+const StyledLoaderContainer = styled.div`
+  color: var(--color-brand-lo);
+`;
 
-  const avatar = metadata.avatar || "/default-user.jpg";
-  const name = metadata.fullName || "Unknown";
+const User: React.FC = () => {
+  const {
+    isLoading,
+    profile: { first_name, last_name, avatar },
+  } = useProfileData();
+
+  const fullName = `${first_name}${last_name && ` ${last_name}`}`;
 
   return (
     <StyledUser>
-      <UserAvatar src={avatar} alt={`Avatar of ${name}`} />
-      <span>{name}</span>
+      {isLoading ? (
+        <StyledLoaderContainer>
+          <MiniSpinner />
+        </StyledLoaderContainer>
+      ) : (
+        <>
+          <UserAvatar
+            src={avatar || "/default-user.jpg"}
+            alt={`${fullName}'s avatar`}
+          />
+          <span>{fullName}</span>
+        </>
+      )}
     </StyledUser>
   );
 };

@@ -31,7 +31,7 @@ export interface Database {
       "global-stats": {
         Row: {
           created_at: string;
-          data: PBJSONData | TaxJSONData | null;
+          data: Json | null;
           id: number;
           parent: string | null;
           source: string | null;
@@ -51,6 +51,37 @@ export interface Database {
           source?: string | null;
         };
         Relationships: [];
+      };
+      profiles: {
+        Row: {
+          created_at: string;
+          first_name: string | null;
+          id: string;
+          last_name: string | null;
+          avatar: string | null;
+        };
+        Insert: {
+          created_at?: string;
+          first_name?: string | null;
+          id: string;
+          last_name?: string | null;
+          avatar: string | null;
+        };
+        Update: {
+          created_at?: string;
+          first_name?: string | null;
+          id?: string;
+          last_name?: string | null;
+          avatar: string | null;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "profiles_id_fkey";
+            columns: ["id"];
+            referencedRelation: "users";
+            referencedColumns: ["id"];
+          }
+        ];
       };
     };
     Views: {

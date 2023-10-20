@@ -1,9 +1,12 @@
 import { Outlet } from "react-router-dom";
 import { styled } from "styled-components";
-import { breaks } from "../styles/GlobalStyles";
+
 import { useLocationAsTitle } from "../hooks/useLocationAsTitle";
+
+import { breaks } from "../styles/GlobalStyles";
 import Header from "./Header";
 import Navigation from "./Navigation";
+import { ProfileProvider } from "../context/ProfileProvider";
 
 const StyledAppLayout = styled.div`
   position: relative;
@@ -40,16 +43,18 @@ const AppLayout: React.FC = () => {
   const tabTitle = useLocationAsTitle();
 
   return (
-    <StyledAppLayout>
-      <Header>{tabTitle}</Header>
-      <Navigation />
+    <ProfileProvider>
+      <StyledAppLayout>
+        <Header>{tabTitle}</Header>
+        <Navigation />
 
-      <MainArea>
-        <Container>
-          <Outlet />
-        </Container>
-      </MainArea>
-    </StyledAppLayout>
+        <MainArea>
+          <Container>
+            <Outlet />
+          </Container>
+        </MainArea>
+      </StyledAppLayout>
+    </ProfileProvider>
   );
 };
 
