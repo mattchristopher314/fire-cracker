@@ -34,6 +34,7 @@ const StyledUser = styled(NavLink)`
     border-radius: 50%;
 
     transition: transform 0.4s cubic-bezier(0.6, -0.7, 0.4, 1.7);
+    display: none;
   }
 
   &::before {
@@ -62,11 +63,13 @@ const StyledUser = styled(NavLink)`
 
   &.active::before,
   &:hover::before {
+    display: block;
     transform: translateX(-0.2rem);
   }
 
   &.active::after,
   &:hover::after {
+    display: block;
     transform: translateX(-0.35rem);
   }
 
