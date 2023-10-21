@@ -11,11 +11,14 @@ interface Table
 }
 
 const StyledTable = styled.div`
+  max-width: 70rem;
+  margin: 0 auto;
+  margin-top: 3.2rem;
   border: 1px solid var(--color-slate-200);
 
   font-size: 1.4rem;
   background-color: var(--color-slate-0);
-  border-radius: 7px;
+  border-radius: var(--border-radius-md);
   overflow: hidden;
 `;
 
@@ -32,7 +35,7 @@ const StyledHeader = styled(CommonRow)`
   background-color: var(--color-slate-50);
   border-bottom: 1px solid var(--color-slate-100);
   text-transform: uppercase;
-  letter-spacing: 0.4px;
+  letter-spacing: 0.5px;
   font-weight: 600;
   color: var(--color-slate-600);
 `;
@@ -60,10 +63,11 @@ const StyledRow = styled(CommonRow)`
 `;
 
 const Empty = styled.p`
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   font-weight: 500;
   text-align: center;
   margin: 2.4rem;
+  color: var(--color-slate-600);
 `;
 
 const Table: Table = ({ $columns, children }) => {
