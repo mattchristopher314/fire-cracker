@@ -41,7 +41,7 @@ const StyledUser = styled(NavLink)`
     height: 3rem;
     z-index: 1;
     opacity: 0.65;
-    transform: translateX(-0.2rem) scale(0.5);
+    transform: translateX(-0.2rem) scale(0.78);
   }
 
   &::after {
@@ -49,7 +49,7 @@ const StyledUser = styled(NavLink)`
     height: 3.3rem;
     z-index: 0;
     opacity: 0.35;
-    transform: translateX(-0.35rem) scale(0.5);
+    transform: translateX(-0.35rem) scale(0.78);
   }
 
   & ${UserAvatar} {
