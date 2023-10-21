@@ -3,14 +3,13 @@ import styled from "styled-components";
 
 type BodyProps<T> = { data: T[]; render: (datum: T) => React.ReactNode };
 
-interface Table
-  extends React.FC<{ $columns: string; children: React.ReactNode }> {
+type Table<T> = T & {
   Header: React.FC<{ children: React.ReactNode }>;
   Body: <T>({ data, render }: BodyProps<T>) => React.ReactElement;
   Row: React.FC<{ children: React.ReactNode }>;
   Footer: React.FC<{ children?: React.ReactNode }>;
   Attribution: React.FC<{ url: string; source_updated: string }>;
-}
+};
 
 const StyledTable = styled.div`
   max-width: 70rem;
@@ -75,7 +74,9 @@ const Empty = styled.p`
   color: var(--color-slate-600);
 `;
 
-const Table: Table = ({ $columns, children }) => {
+const Table: Table<
+  React.FC<{ $columns: string; children: React.ReactNode }>
+> = ({ $columns, children }) => {
   return (
     <TableContext.Provider value={{ $columns }}>
       <StyledTable role="table">{children}</StyledTable>
