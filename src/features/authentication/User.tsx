@@ -26,15 +26,45 @@ const StyledUser = styled(NavLink)`
   font-size: 1.4rem;
   color: var(--color-grey-600);
 
+  & ${UserAvatar} {
+    transition: box-shadow 0.3s ease-in-out;
+  }
+
+  &.active ${UserAvatar}, &:hover ${UserAvatar} {
+    box-shadow: none;
+  }
+
+  @media ${breaks.AppMinNavPoint} {
+    margin-left: initial;
+  }
+
+  @media ${breaks.AppCompactPoint} {
+    & span {
+      display: none;
+    }
+  }
+`;
+
+const StyledLoaderContainer = styled.div`
+  color: var(--color-brand-lo);
+`;
+
+const StyledLoadedUserContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+
+  position: relative;
+
   &::before,
   &::after {
     content: "";
     background: var(--color-brand-lo);
     position: absolute;
+    left: 0;
     border-radius: 50%;
 
     transition: transform 0.4s cubic-bezier(0.6, -0.7, 0.4, 1.7);
-    display: none;
   }
 
   &::before {
@@ -53,23 +83,13 @@ const StyledUser = styled(NavLink)`
     transform: translateX(-0.35rem) scale(0.78);
   }
 
-  & ${UserAvatar} {
-    transition: box-shadow 0.3s ease-in-out;
-  }
-
-  &.active ${UserAvatar}, &:hover ${UserAvatar} {
-    box-shadow: none;
-  }
-
-  &.active::before,
+  .active &::before,
   &:hover::before {
-    display: block;
     transform: translateX(-0.2rem);
   }
 
-  &.active::after,
+  .active &::after,
   &:hover::after {
-    display: block;
     transform: translateX(-0.35rem);
   }
 
@@ -92,20 +112,6 @@ const StyledUser = styled(NavLink)`
       transform: translateX(-0.35rem);
     }
   }
-
-  @media ${breaks.AppMinNavPoint} {
-    margin-left: initial;
-  }
-
-  @media ${breaks.AppCompactPoint} {
-    & span {
-      display: none;
-    }
-  }
-`;
-
-const StyledLoaderContainer = styled.div`
-  color: var(--color-brand-lo);
 `;
 
 const User: React.FC = () => {
@@ -123,13 +129,13 @@ const User: React.FC = () => {
           <MiniSpinner />
         </StyledLoaderContainer>
       ) : (
-        <>
+        <StyledLoadedUserContainer>
           <UserAvatar
             src={avatar || "/default-user.jpg"}
             alt={`${fullName}'s avatar`}
           />
           <span>{fullName}</span>
-        </>
+        </StyledLoadedUserContainer>
       )}
     </StyledUser>
   );
