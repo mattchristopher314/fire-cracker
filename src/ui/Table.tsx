@@ -159,7 +159,7 @@ const Attribution: React.FC<{ url: string; source_updated: string }> = ({
       <StyledSourceLink href={url}>{new URL(url).hostname}</StyledSourceLink>
       <StyledSourceDecorator>
         {" "}
-        (last updated: {source_updated})
+        (last updated {source_updated})
       </StyledSourceDecorator>
     </StyledAttribution>
   );

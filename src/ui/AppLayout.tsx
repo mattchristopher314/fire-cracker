@@ -7,6 +7,7 @@ import { breaks } from "../styles/GlobalStyles";
 import Header from "./Header";
 import Navigation from "./Navigation";
 import { ProfileProvider } from "../context/ProfileProvider";
+import Container from "./Container";
 
 const StyledAppLayout = styled.div`
   position: relative;
@@ -32,11 +33,6 @@ const MainArea = styled.div`
   @media ${breaks.AppMinNavPoint} {
     grid-column: 1 / -1;
   }
-`;
-
-const Container = styled.div`
-  max-width: 140rem;
-  margin: 0 auto;
 `;
 
 const AppLayout: React.FC = () => {

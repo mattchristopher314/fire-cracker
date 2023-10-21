@@ -10,7 +10,14 @@ type Accordion<T> = T & {
   }>;
 };
 
-const StyledAccordion = styled.section``;
+const StyledAccordion = styled.section`
+  margin-top: 3.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+
+  /* max-width: 80rem; */
+`;
 
 const Accordion: Accordion<
   React.FC<{ children: React.ReactNode; multiopen?: boolean }>
@@ -47,7 +54,6 @@ const StyledAccordionOpener = styled.div`
   font-size: 2rem;
   font-weight: 500;
   border-bottom: 1px solid var(--color-slate-200);
-  margin-top: 3.2rem;
   cursor: pointer;
   position: relative;
   transition: color 0.2s ease-in-out;
@@ -85,8 +91,6 @@ const StyledAccordionOpener = styled.div`
   }
 `;
 
-const StyledAccordionItem = styled.section``;
-
 const AccordionItem: React.FC<{
   children: React.ReactNode;
   title: string;
@@ -99,7 +103,7 @@ const AccordionItem: React.FC<{
     (isToggled && multiopen) || (!multiopen && activeId === id);
 
   return (
-    <StyledAccordionItem>
+    <div>
       <StyledAccordionOpener
         onClick={() => {
           setIsToggled((cur) => !cur);
@@ -115,7 +119,7 @@ const AccordionItem: React.FC<{
       </StyledAccordionOpener>
 
       {currentlyOpen && children}
-    </StyledAccordionItem>
+    </div>
   );
 };
 
