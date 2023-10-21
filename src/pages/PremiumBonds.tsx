@@ -3,17 +3,19 @@ import { usePremiumBondsStats } from "../features/premium-bonds/usePremiumBondsS
 import Spinner from "../ui/Spinner";
 
 const PremiumBonds: React.FC = () => {
-  const { isLoading, stats } = usePremiumBondsStats();
+  const { isLoading, data } = usePremiumBondsStats();
 
-  if (isLoading || !stats) return <Spinner />;
+  if (isLoading || !(data && data.data)) return <Spinner />;
 
   return (
     <>
-      <p>Headline Rate: {stats.averageRatePercentage}</p>
-      <p>Prize Probability per Bond: 1/{stats.oddsReciprocal}</p>
+      <p>Headline Rate: {data.data.averageRatePercentage}%</p>
+      <p>Prize Probability per Bond: 1/{data.data.oddsReciprocal}</p>
 
       <PremiumBondsAllocationTable
-        data={stats.prizeAllocations}
+        data={data.data.prizeAllocations}
+        source={data.source || ""}
+        source_updated={data.source_updated || ""}
       ></PremiumBondsAllocationTable>
     </>
   );

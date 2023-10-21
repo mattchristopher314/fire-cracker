@@ -4,7 +4,9 @@ import PremiumBondsAllocationTableRow from "./PremiumBondsAllocationTableRow";
 
 const PremiumBondsAllocationTable: React.FC<{
   data: PBJSONData["prizeAllocations"];
-}> = ({ data }) => {
+  source: string;
+  source_updated: string;
+}> = ({ data, source, source_updated }) => {
   return (
     <Table $columns="repeat(2, 1fr)">
       <Table.Header>
@@ -21,6 +23,15 @@ const PremiumBondsAllocationTable: React.FC<{
           />
         )}
       />
+
+      <Table.Footer></Table.Footer>
+
+      {!!source && (
+        <Table.Attribution
+          url={source}
+          source_updated={source_updated}
+        ></Table.Attribution>
+      )}
     </Table>
   );
 };

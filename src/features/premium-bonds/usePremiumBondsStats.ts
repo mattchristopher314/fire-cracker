@@ -3,10 +3,10 @@ import { PossibleStats, getStats } from "../../services/apiStats";
 import { PBJSONData } from "../../services/supabase";
 
 export const usePremiumBondsStats = () => {
-  const { isLoading, data: stats } = useQuery({
+  const { isLoading, data } = useQuery({
     queryKey: ["stats", PossibleStats.PB],
     queryFn: () => getStats<PBJSONData>(PossibleStats.PB),
   });
 
-  return { isLoading, stats };
+  return { isLoading, data };
 };

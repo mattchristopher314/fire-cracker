@@ -8,18 +8,15 @@ interface Table
   Header: React.FC<{ children: React.ReactNode }>;
   Body: <T>({ data, render }: BodyProps<T>) => React.ReactElement;
   Row: React.FC<{ children: React.ReactNode }>;
+  Footer: React.FC<{ children?: React.ReactNode }>;
+  Attribution: React.FC<{ url: string; source_updated: string }>;
 }
 
 const StyledTable = styled.div`
   max-width: 70rem;
   margin: 0 auto;
   margin-top: 3.2rem;
-  border: 1px solid var(--color-slate-200);
-
   font-size: 1.4rem;
-  background-color: var(--color-slate-0);
-  border-radius: var(--border-radius-md);
-  overflow: hidden;
 `;
 
 const CommonRow = styled.div<{ $columns: string }>`
@@ -31,16 +28,24 @@ const CommonRow = styled.div<{ $columns: string }>`
 
 const StyledHeader = styled(CommonRow)`
   padding: 1.6rem 2.4rem;
-
-  background-color: var(--color-slate-50);
+  border: 1px solid var(--color-slate-200);
   border-bottom: 1px solid var(--color-slate-100);
+  background-color: var(--color-slate-50);
   text-transform: uppercase;
   letter-spacing: 0.5px;
   font-weight: 600;
   color: var(--color-slate-600);
+  border-radius: var(--border-radius-md) var(--border-radius-md) 0 0;
 `;
 
-const StyledBody = styled.section``;
+const StyledBody = styled.section`
+  border: 1px solid var(--color-slate-200);
+  border-top: none;
+
+  background-color: var(--color-slate-0);
+  border-radius: 0 0 var(--border-radius-md) var(--border-radius-md);
+  overflow: hidden;
+`;
 
 const StyledRow = styled(CommonRow)`
   padding: 1.2rem 2.4rem;
@@ -105,6 +110,60 @@ const Row: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   );
 };
 
+const Footer = styled.footer`
+  background-color: var(--color-slate-50);
+  display: flex;
+  justify-content: center;
+  padding: 1.2rem;
+
+  &:empty {
+    display: none;
+  }
+`;
+
+const StyledAttribution = styled.aside`
+  display: flex;
+  justify-content: flex-end;
+  font-style: italic;
+  padding: 0.8rem;
+  font-size: 1.2rem;
+  color: var(--color-slate-400);
+`;
+
+const StyledSourceDecorator = styled.span`
+  white-space: pre;
+`;
+
+const StyledSourceLink = styled.a`
+  transition: color 0.1s ease-in-out;
+
+  &:link,
+  &:visited {
+    text-decoration: underline;
+  }
+
+  &:hover,
+  &:active {
+    color: var(--color-slate-500);
+  }
+`;
+
+const Attribution: React.FC<{ url: string; source_updated: string }> = ({
+  url,
+  source_updated,
+}) => {
+  return (
+    <StyledAttribution>
+      <StyledSourceDecorator>Source: </StyledSourceDecorator>
+      <StyledSourceLink href={url}>{new URL(url).hostname}</StyledSourceLink>
+      <StyledSourceDecorator>
+        {" "}
+        (last updated: {source_updated})
+      </StyledSourceDecorator>
+    </StyledAttribution>
+  );
+};
+
 Table.defaultProps = {
   $columns: "1fr",
 };
@@ -116,5 +175,7 @@ const TableContext = createContext<{ $columns: string }>({
 Table.Header = Header;
 Table.Body = Body;
 Table.Row = Row;
+Table.Footer = Footer;
+Table.Attribution = Attribution;
 
 export default Table;

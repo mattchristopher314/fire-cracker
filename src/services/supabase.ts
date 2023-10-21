@@ -35,6 +35,7 @@ export interface Database {
           id: number;
           parent: string | null;
           source: string | null;
+          source_updated: string | null;
         };
         Insert: {
           created_at?: string;
@@ -42,6 +43,7 @@ export interface Database {
           id?: number;
           parent?: string | null;
           source?: string | null;
+          source_updated?: string | null;
         };
         Update: {
           created_at?: string;
@@ -49,30 +51,31 @@ export interface Database {
           id?: number;
           parent?: string | null;
           source?: string | null;
+          source_updated?: string | null;
         };
         Relationships: [];
       };
       profiles: {
         Row: {
+          avatar: string | null;
           created_at: string;
           first_name: string | null;
           id: string;
           last_name: string | null;
-          avatar: string | null;
         };
         Insert: {
+          avatar?: string | null;
           created_at?: string;
           first_name?: string | null;
           id: string;
           last_name?: string | null;
-          avatar: string | null;
         };
         Update: {
+          avatar?: string | null;
           created_at?: string;
           first_name?: string | null;
           id?: string;
           last_name?: string | null;
-          avatar: string | null;
         };
         Relationships: [
           {

@@ -8,7 +8,7 @@ export enum PossibleStats {
 export async function getStats<T>(type: PossibleStats) {
   const { data, error } = await supabase
     .from("global-stats")
-    .select("data")
+    .select("data, source, source_updated")
     .eq("parent", type)
     .single();
 
@@ -20,5 +20,11 @@ export async function getStats<T>(type: PossibleStats) {
     throw new Error(`${type} stats could not be fetched`);
   }
 
-  return data.data as T;
+  return {
+    data: data.data as T,
+    source: data.source,
+    source_updated: data.source_updated
+      ? new Date(data.source_updated).toLocaleDateString()
+      : null,
+  };
 }
