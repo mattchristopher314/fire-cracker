@@ -26,7 +26,8 @@ const ProtectedRoute: React.FC<{
     function () {
       if (noAuth !== !isAuthenticated && !isLoading) {
         navigate(
-          redirectUrl || ProtectedRoute.defaultProps?.redirectUrl || "/"
+          redirectUrl || ProtectedRoute.defaultProps?.redirectUrl || "/",
+          { replace: true }
         );
 
         return;
