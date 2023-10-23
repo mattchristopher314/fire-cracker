@@ -15,8 +15,6 @@ const StyledAccordion = styled.section`
   display: flex;
   flex-direction: column;
   gap: 2.4rem;
-
-  /* max-width: 80rem; */
 `;
 
 const Accordion: Accordion<
@@ -57,14 +55,15 @@ const StyledAccordionOpener = styled.div`
   cursor: pointer;
   position: relative;
   transition: color 0.2s ease-in-out;
-  overflow: hidden;
 
   &::before {
     content: "";
+    box-sizing: content-box;
     position: absolute;
     top: 0;
     left: 0;
-    transform: translateX(-100%);
+    transform-origin: left center;
+    transform: scaleX(0);
     width: 100%;
     height: 100%;
     border-bottom: 1px solid var(--color-brand-lo);
