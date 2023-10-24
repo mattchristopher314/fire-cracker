@@ -6,7 +6,7 @@ export function useProfile() {
   const { user } = useUser();
 
   const { isLoading, data: profile } = useQuery({
-    queryKey: ["profile"],
+    queryKey: ["profile", user?.id],
     queryFn: () => getProfile(user?.id || ""),
   });
 
