@@ -13,13 +13,14 @@ const StyledComingSoon = styled.section`
     color: var(--color-slate-400);
     width: 4.8rem;
     height: 4.8rem;
-
+    transform-origin: center center;
     transition: color 0.4s ease-in-out, transform 0.4s ease-in-out;
   }
 
   &:hover svg {
     color: var(--color-slate-400-hover);
     transform: scale(1.05);
+    will-change: transform;
   }
 `;
 
