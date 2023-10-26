@@ -25,10 +25,12 @@ const StyledAppLayout = styled.div`
   }
 `;
 
-const MainArea = styled.div`
+const MainArea = styled.main`
   background-color: var(--color-slate-50);
   overflow-y: scroll;
   padding: 3.2rem;
+
+  color: var(--color-slate-900);
 
   @media ${breaks.AppMinNavPoint} {
     grid-column: 1 / -1;

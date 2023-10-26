@@ -28,6 +28,7 @@ const GlobalStyles = createGlobalStyle`
       --color-slate-200: #e2e8f0;
       --color-slate-300: #cbd5e1;
       --color-slate-400: #94a3b8;
+      --color-slate-400-hover: #a5b2c4;
       --color-slate-500: #64748b;
       --color-slate-600: #475569;
       --color-slate-700: #334155;
@@ -72,7 +73,7 @@ const GlobalStyles = createGlobalStyle`
     --border-radius-md: 7px;
     --border-radius-lg: 9px;
 
-    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.2);
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.1);
     --shadow-md: 0px 0.6rem 2.4rem rgba(0, 0, 0, 0.3);
     --shadow-lg: 0 2.4rem 3.2rem rgba(0, 0, 0, 0.4);
 

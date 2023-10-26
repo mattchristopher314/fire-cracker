@@ -1,5 +1,24 @@
+import Heading from "../ui/Heading";
+import Row from "../ui/Row";
+import UpdateUserDataForm from "../features/profile/UpdateUserDataForm";
+import UserStatsForm from "../ui/UserStatsForm";
+
 const Account: React.FC = () => {
-  return <div>Account Page</div>;
+  return (
+    <>
+      <Heading as="h1">Your Account</Heading>
+
+      <Row>
+        <Heading as="h3">Update User Data</Heading>
+        <UpdateUserDataForm />
+      </Row>
+
+      <Row>
+        <Heading as="h3">User Stats</Heading>
+        <UserStatsForm />
+      </Row>
+    </>
+  );
 };
 
 export default Account;

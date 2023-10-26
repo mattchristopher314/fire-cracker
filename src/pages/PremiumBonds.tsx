@@ -10,8 +10,10 @@ const PremiumBonds: React.FC = () => {
 
   return (
     <>
-      <p>Headline Rate: {data.data.averageRatePercentage}%</p>
-      <p>Prize Probability per Bond: 1/{data.data.oddsReciprocal}</p>
+      <div>
+        <p>Headline Rate: {data.data.averageRatePercentage}%</p>
+        <p>Prize Probability per Bond: 1/{data.data.oddsReciprocal}</p>
+      </div>
 
       <Accordion multiopen>
         <Accordion.AccordionItem title="Stats" id={1}>

@@ -7,7 +7,6 @@ const Heading = styled.h1`
     css`
       font-size: 3.1rem;
       font-weight: 700;
-      letter-spacing: -0.5px;
     `}
   ${(props) =>
     props.as === "h2" &&
@@ -30,5 +29,10 @@ const Heading = styled.h1`
 
   line-height: 1.2;
 `;
+
+Heading.defaultProps = {
+  color: "inherit",
+  as: "h1",
+};
 
 export default Heading;

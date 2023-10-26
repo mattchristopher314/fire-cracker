@@ -52,7 +52,7 @@ const StyledLoaderContainer = styled.div`
 const StyledLoadedUserContainer = styled.div`
   display: flex;
   align-items: center;
-  gap: 0.8rem;
+  gap: 1.2rem;
 
   position: relative;
 
