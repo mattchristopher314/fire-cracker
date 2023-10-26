@@ -1,7 +1,7 @@
 import Heading from "../ui/Heading";
 import Row from "../ui/Row";
 import UpdateUserDataForm from "../features/profile/UpdateUserDataForm";
-import UserStatsForm from "../ui/UserStatsForm";
+import UserStatsForm from "../features/profile/UserStatsForm";
 
 const Account: React.FC = () => {
   return (

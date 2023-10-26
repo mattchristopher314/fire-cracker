@@ -1,5 +1,5 @@
-import ComingSoon from "./ComingSoon";
-import Form from "./Form";
+import ComingSoon from "../../ui/ComingSoon";
+import Form from "../../ui/Form";
 
 const UserStatsForm: React.FC = () => {
   return (

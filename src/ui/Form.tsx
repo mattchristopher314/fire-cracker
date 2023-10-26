@@ -37,9 +37,18 @@ const StyledForm = styled.form<{ type?: string }>`
 `;
 
 const Form: FormParent<
-  React.FC<{ type?: string; children: React.ReactNode }>
-> = ({ type, children }) => {
-  return <StyledForm type={type}>{children}</StyledForm>;
+  React.FC<
+    React.FormHTMLAttributes<HTMLFormElement> & {
+      type?: string;
+      children: React.ReactNode;
+    }
+  >
+> = ({ type, children, ...intrinsic }) => {
+  return (
+    <StyledForm type={type} {...intrinsic}>
+      {children}
+    </StyledForm>
+  );
 };
 
 Form.defaultProps = {
@@ -55,7 +64,7 @@ const StyledRow = styled.div<{ type?: string }>`
     css`
       display: grid;
       align-items: center;
-      grid-template-columns: 24rem minmax(0, 1fr) 1.2fr;
+      grid-template-columns: 15rem minmax(auto, 1fr) 1fr;
 
       &:first-child {
         padding-top: 0;
