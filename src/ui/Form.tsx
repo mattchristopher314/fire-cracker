@@ -2,6 +2,7 @@ import React from "react";
 import styled, { css } from "styled-components";
 import { breaks } from "../styles/GlobalStyles";
 import Input from "./Input";
+import Button from "./Button";
 
 type FormParent<T> = T & {
   Row: React.FC<{
@@ -101,6 +102,22 @@ const StyledRow = styled.div<{ type?: string; disallowStack?: boolean }>`
         display: flex;
         flex-direction: column;
         align-items: flex-start;
+      }
+    `}
+
+  ${(props) =>
+    props.disallowStack &&
+    css`
+      flex-wrap: wrap;
+
+      & ${Button} {
+        flex-shrink: 0;
+      }
+
+      @media ${breaks.AppMinNavPoint} {
+        & ${Button} {
+          flex: 1 1 auto;
+        }
       }
     `}
 

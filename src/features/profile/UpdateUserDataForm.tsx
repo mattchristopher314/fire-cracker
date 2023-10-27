@@ -2,18 +2,31 @@ import Button from "../../ui/Button";
 import FileUpload from "../../ui/FileUpload";
 import Form from "../../ui/Form";
 import Input from "../../ui/Input";
+import { useUser } from "../authentication/useUser";
+import { useProfile } from "./useProfile";
 
 const UpdateUserDataForm: React.FC = () => {
+  const { isLoading, profile } = useProfile();
+  const { user } = useUser();
+
   return (
     <Form>
       <Form.Row label="Email address">
-        <Input value={"hi@matthewlukechristopher.TEMP"} disabled />
+        <Input value={(user && user.email) || ""} disabled />
       </Form.Row>
 
       <Form.Row label="Name">
         <Form.MultiFieldContainer columns={2}>
-          <Input type="text" value={"Matthew"} />
-          <Input type="text" value={"Christopher"} />
+          <Input
+            type="text"
+            disabled={isLoading}
+            value={isLoading ? "Loading..." : profile?.first_name || ""}
+          />
+          <Input
+            type="text"
+            disabled={isLoading}
+            value={isLoading ? "Loading..." : profile?.last_name || ""}
+          />
         </Form.MultiFieldContainer>
       </Form.Row>
 
@@ -22,10 +35,10 @@ const UpdateUserDataForm: React.FC = () => {
       </Form.Row>
 
       <Form.SubmissionRow>
-        <Button type="reset" $variation="secondary">
+        <Button type="reset" $size="large" $variation="secondary">
           Cancel
         </Button>
-        <Button>Update account</Button>
+        <Button $size="large">Update account</Button>
       </Form.SubmissionRow>
     </Form>
   );
