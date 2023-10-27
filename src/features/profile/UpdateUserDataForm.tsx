@@ -6,14 +6,11 @@ import Input from "../../ui/Input";
 const UpdateUserDataForm: React.FC = () => {
   return (
     <Form>
-      <Form.Row
-        error="Error: the file could not be uploaded because the connection was interrupted."
-        label="Email address"
-      >
+      <Form.Row label="Email address">
         <Input value={"hi@matthewlukechristopher.TEMP"} disabled />
       </Form.Row>
 
-      <Form.Row error="Error: this is some random test error" label="Name">
+      <Form.Row label="Name">
         <Form.MultiFieldContainer columns={2}>
           <Input type="text" value={"Matthew"} />
           <Input type="text" value={"Christopher"} />

@@ -1,5 +1,7 @@
 import React from "react";
 import styled, { css } from "styled-components";
+import { breaks } from "../styles/GlobalStyles";
+import Input from "./Input";
 
 type FormParent<T> = T & {
   Row: React.FC<{
@@ -55,7 +57,7 @@ Form.defaultProps = {
   type: "regular",
 };
 
-const StyledRow = styled.div<{ type?: string }>`
+const StyledRow = styled.div<{ type?: string; disallowStack?: boolean }>`
   gap: 2.4rem;
   padding: 1.2rem 0;
 
@@ -64,7 +66,7 @@ const StyledRow = styled.div<{ type?: string }>`
     css`
       display: grid;
       align-items: center;
-      grid-template-columns: 15rem minmax(auto, 1fr) 1fr;
+      grid-template-columns: minmax(auto, 15rem) 1.5fr 1fr;
 
       &:first-child {
         padding-top: 0;
@@ -91,7 +93,27 @@ const StyledRow = styled.div<{ type?: string }>`
       display: flex;
       flex-direction: column;
     `}
+
+  ${(props) =>
+    !props.disallowStack &&
+    css`
+      @media ${breaks.AppWideStackPoint} {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    `}
+
+  @media ${breaks.AppFullWidthNavPoint} {
+    & ${Input} {
+      width: 100%;
+    }
+  }
 `;
+
+StyledRow.defaultProps = {
+  disallowStack: false,
+};
 
 const Label = styled.label`
   font-weight: 500;
@@ -147,7 +169,11 @@ MultiFieldContainer.defaultProps = {
 const SubmissionRow: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  return <StyledRow type="regular">{children}</StyledRow>;
+  return (
+    <StyledRow type="regular" disallowStack>
+      {children}
+    </StyledRow>
+  );
 };
 
 Form.Row = Row;
