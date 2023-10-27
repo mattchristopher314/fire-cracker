@@ -69,6 +69,10 @@ const StyledRow = styled.div<{ type?: string; disallowStack?: boolean }>`
       align-items: center;
       grid-template-columns: minmax(auto, 15rem) 1.5fr 1fr;
 
+      & ${Input} {
+        width: 100%;
+      }
+
       &:first-child {
         padding-top: 0;
       }
@@ -102,6 +106,12 @@ const StyledRow = styled.div<{ type?: string; disallowStack?: boolean }>`
         display: flex;
         flex-direction: column;
         align-items: flex-start;
+        padding-right: calc(100% / 3);
+      }
+
+      @media ${breaks.AppMinNavPoint} {
+        padding-right: 0;
+        width: 100%;
       }
     `}
 
@@ -120,12 +130,6 @@ const StyledRow = styled.div<{ type?: string; disallowStack?: boolean }>`
         }
       }
     `}
-
-  @media ${breaks.AppFullWidthNavPoint} {
-    & ${Input} {
-      width: 100%;
-    }
-  }
 `;
 
 StyledRow.defaultProps = {
@@ -170,6 +174,11 @@ const StyledMultiField = styled.div<{ columns: number }>`
     css`
       grid-template-columns: repeat(${props.columns}, minmax(0, auto));
     `}
+
+  @media ${breaks.AppWideStackPoint} {
+    /* padding-right: calc(100% / 3); */
+    width: 100%;
+  }
 `;
 
 const MultiFieldContainer: React.FC<{
