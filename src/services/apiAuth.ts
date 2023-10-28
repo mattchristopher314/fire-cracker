@@ -21,7 +21,7 @@ export const login = async ({
   return data;
 };
 
-export async function getCurrentUser(): Promise<User | null> {
+export const getCurrentUser = async (): Promise<User | null> => {
   const { data: session } = await supabase.auth.getSession();
 
   if (!session.session) return null;
@@ -31,7 +31,7 @@ export async function getCurrentUser(): Promise<User | null> {
   if (error) throw new Error(error.message);
 
   return data?.user;
-}
+};
 
 export const logout = async (): Promise<void> => {
   const { error } = await supabase.auth.signOut();

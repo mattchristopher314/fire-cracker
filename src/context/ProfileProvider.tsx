@@ -12,7 +12,8 @@ const defaultProfile = {
 export const ProfileContext = createContext<{
   isLoading: boolean;
   profile: Database["public"]["Tables"]["profiles"]["Row"];
-}>({ isLoading: false, profile: defaultProfile });
+  profileImg: string;
+}>({ isLoading: false, profile: defaultProfile, profileImg: "" });
 
 export const ProfileProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
@@ -23,7 +24,8 @@ export const ProfileProvider: React.FC<{ children: React.ReactNode }> = ({
     <ProfileContext.Provider
       value={{
         isLoading: isLoadingProfile,
-        profile: profile || defaultProfile,
+        profile: profile?.["data"] || defaultProfile,
+        profileImg: profile?.["profileImg"] || "",
       }}
     >
       {children}

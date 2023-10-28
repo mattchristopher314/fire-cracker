@@ -117,7 +117,8 @@ const StyledLoadedUserContainer = styled.div`
 const User: React.FC = () => {
   const {
     isLoading,
-    profile: { first_name, last_name, avatar },
+    profile: { first_name, last_name },
+    profileImg,
   } = useProfileData();
 
   const fullName = `${first_name}${last_name && ` ${last_name}`}`;
@@ -131,7 +132,7 @@ const User: React.FC = () => {
       ) : (
         <StyledLoadedUserContainer>
           <UserAvatar
-            src={avatar || "/default-user.jpg"}
+            src={profileImg || "/default-user.jpg"}
             alt={`${fullName}'s avatar`}
           />
           <span>{fullName}</span>
