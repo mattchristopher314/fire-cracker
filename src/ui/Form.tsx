@@ -58,9 +58,13 @@ Form.defaultProps = {
   type: "regular",
 };
 
-const StyledRow = styled.div<{ type?: string; disallowStack?: boolean }>`
+const StyledRow = styled.div<{ type?: string; $disallowStack?: boolean }>`
   gap: 2.4rem;
   padding: 1.2rem 0;
+
+  &:last-child {
+    padding-top: 2.4rem;
+  }
 
   ${(props) =>
     props.type === "regular" &&
@@ -100,7 +104,7 @@ const StyledRow = styled.div<{ type?: string; disallowStack?: boolean }>`
     `}
 
   ${(props) =>
-    !props.disallowStack &&
+    !props.$disallowStack &&
     css`
       @media ${breaks.AppWideStackPoint} {
         display: flex;
@@ -116,7 +120,7 @@ const StyledRow = styled.div<{ type?: string; disallowStack?: boolean }>`
     `}
 
   ${(props) =>
-    props.disallowStack &&
+    props.$disallowStack &&
     css`
       flex-wrap: wrap;
 
@@ -133,7 +137,7 @@ const StyledRow = styled.div<{ type?: string; disallowStack?: boolean }>`
 `;
 
 StyledRow.defaultProps = {
-  disallowStack: false,
+  $disallowStack: false,
 };
 
 const Label = styled.label`
@@ -165,14 +169,14 @@ Row.defaultProps = {
   type: "regular",
 };
 
-const StyledMultiField = styled.div<{ columns: number }>`
+const StyledMultiField = styled.div<{ $columns: number }>`
   display: grid;
   column-gap: 1.2rem;
 
   ${(props) =>
-    props.columns &&
+    props.$columns &&
     css`
-      grid-template-columns: repeat(${props.columns}, minmax(0, auto));
+      grid-template-columns: repeat(${props.$columns}, minmax(0, auto));
     `}
 
   @media ${breaks.AppWideStackPoint} {
@@ -185,7 +189,7 @@ const MultiFieldContainer: React.FC<{
   columns: number;
   children: React.ReactNode;
 }> = ({ columns, children }) => {
-  return <StyledMultiField columns={columns}>{children}</StyledMultiField>;
+  return <StyledMultiField $columns={columns}>{children}</StyledMultiField>;
 };
 
 MultiFieldContainer.defaultProps = {
@@ -196,7 +200,7 @@ const SubmissionRow: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   return (
-    <StyledRow type="regular" disallowStack>
+    <StyledRow type="regular" $disallowStack>
       {children}
     </StyledRow>
   );
