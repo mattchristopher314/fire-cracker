@@ -8,6 +8,7 @@ type FormParent<T> = T & {
   Row: React.FC<{
     type?: string;
     label: string;
+    labelsId?: string;
     error?: string;
     children: React.ReactElement;
   }>;
@@ -153,12 +154,13 @@ const Error = styled.span`
 const Row: React.FC<{
   type?: string;
   label: string;
+  labelsId?: string;
   error?: string;
   children: React.ReactElement;
-}> = ({ type, label, error, children }) => {
+}> = ({ type, label, labelsId, error, children }) => {
   return (
     <StyledRow type={type}>
-      {label && <Label htmlFor={children.props.id}>{label}</Label>}
+      {label && <Label htmlFor={labelsId || children.props.id}>{label}</Label>}
       {children}
       {error && <Error>{error}</Error>}
     </StyledRow>
