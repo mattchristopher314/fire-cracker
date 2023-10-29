@@ -87,6 +87,7 @@ const App: React.FC = () => {
         <Toaster
           position="top-right"
           gutter={12}
+          containerClassName={"toaster-container"}
           containerStyle={{ margin: "8px" }}
           toastOptions={{
             success: {
@@ -99,9 +100,12 @@ const App: React.FC = () => {
                 secondary: "white",
               },
             },
-
             style: {
               fontSize: "1.4rem",
+              backdropFilter: "blur(5px)",
+              WebkitBackdropFilter: "blur(5px)",
+              background: "rgba(255, 255, 255, 0.9)",
+              transition: "background 0.3s ease-in-out",
             },
           }}
         >

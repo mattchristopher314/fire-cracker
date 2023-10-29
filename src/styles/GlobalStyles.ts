@@ -144,6 +144,10 @@ const GlobalStyles = createGlobalStyle`
     outline: 2px solid var(--color-brand-lo);
     outline-offset: -1px;
   }
+
+  .toaster-container > div > div:hover  {
+    background-color: rgba(255, 255, 255, 1) !important;
+  }
 `;
 
 export default GlobalStyles;
