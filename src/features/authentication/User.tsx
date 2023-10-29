@@ -124,6 +124,11 @@ const StyledLoadedUserContainer = styled.div`
   }
 `;
 
+const StyledNameContainer = styled.span`
+  vertical-align: middle;
+  line-height: 2.6rem;
+`;
+
 const User: React.FC = () => {
   const {
     isLoading,
@@ -152,7 +157,7 @@ const User: React.FC = () => {
             alt={`${fullName}'s avatar`}
             onLoad={() => setIsLoadingAvatar(false)}
           />
-          <span>{fullName}</span>
+          <StyledNameContainer>{fullName}</StyledNameContainer>
         </StyledLoadedUserContainer>
       )}
     </StyledUser>
