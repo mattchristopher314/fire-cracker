@@ -6,6 +6,7 @@ import Input from "../../ui/Input";
 import { useUser } from "../authentication/useUser";
 import { useProfile } from "./useProfile";
 import { useUpdateProfile } from "./useUpdateProfile";
+import toast from "react-hot-toast";
 
 const UpdateUserDataForm: React.FC = () => {
   const { isLoading, profile } = useProfile();
@@ -19,19 +20,28 @@ const UpdateUserDataForm: React.FC = () => {
   const [password, setPassword] = useState<string>();
   const [confirmPassword, setConfirmPassword] = useState<string>();
 
-  const { updateProfile, isUpdating } = useUpdateProfile();
+  const updateProfileMutation = useUpdateProfile();
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    updateProfile(
+    const updateProfile = updateProfileMutation.mutateAsync(
       { firstName, lastName, avatar },
       {
         onSuccess: () => {
           setAvatar(undefined);
         },
+        onSettled: () => {
+          (e.target as HTMLFormElement).reset();
+        },
       }
     );
+
+    toast.promise(updateProfile, {
+      loading: "Updating profile",
+      success: "Successfully updated profile",
+      error: "Error when updating profile",
+    });
   };
 
   const handleReset = () => {
@@ -61,7 +71,7 @@ const UpdateUserDataForm: React.FC = () => {
                 : firstName ?? (profile?.first_name || "")
             }
             onChange={(e) => setFirstName(e.target.value)}
-            disabled={isLoading || isUpdating}
+            disabled={isLoading || updateProfileMutation.isLoading}
           />
           <Input
             type="text"
@@ -70,7 +80,7 @@ const UpdateUserDataForm: React.FC = () => {
               isLoading ? "Loading..." : lastName ?? (profile?.last_name || "")
             }
             onChange={(e) => setLastName(e.target.value)}
-            disabled={isLoading || isUpdating}
+            disabled={isLoading || updateProfileMutation.isLoading}
           />
         </Form.MultiFieldContainer>
       </Form.Row>
@@ -80,7 +90,7 @@ const UpdateUserDataForm: React.FC = () => {
           accept="image/jpeg, image/png"
           id="avatar"
           onChange={(e) => setAvatar(e.target.files?.[0])}
-          disabled={isUpdating}
+          disabled={updateProfileMutation.isLoading}
         />
       </Form.Row>
 
@@ -92,7 +102,7 @@ const UpdateUserDataForm: React.FC = () => {
             placeholder="New password"
             value={password || ""}
             onChange={(e) => setPassword(e.target.value)}
-            disabled={isUpdating}
+            disabled={updateProfileMutation.isLoading}
           />
           <Input
             type="password"
@@ -100,7 +110,7 @@ const UpdateUserDataForm: React.FC = () => {
             placeholder="Confirm new password"
             value={confirmPassword || ""}
             onChange={(e) => setConfirmPassword(e.target.value)}
-            disabled={isUpdating}
+            disabled={updateProfileMutation.isLoading}
           />
         </Form.MultiFieldContainer>
       </Form.Row>
@@ -111,11 +121,11 @@ const UpdateUserDataForm: React.FC = () => {
           $size="large"
           $variation="secondary"
           onClick={handleReset}
-          disabled={isUpdating}
+          disabled={updateProfileMutation.isLoading}
         >
           Cancel
         </Button>
-        <Button $size="large" disabled={isUpdating}>
+        <Button $size="large" disabled={updateProfileMutation.isLoading}>
           Update account
         </Button>
       </Form.SubmissionRow>

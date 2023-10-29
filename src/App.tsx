@@ -19,6 +19,8 @@ import Budget from "./pages/Budget";
 import Settings from "./pages/Settings";
 import ProtectedRoute from "./ui/ProtectedRoute";
 import Account from "./pages/Account";
+import MiniSpinner from "./ui/MiniSpinner";
+import styled from "styled-components";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -34,6 +36,12 @@ const queryClient = new QueryClient({
     },
   }),
 });
+
+const StyledLoadingToastSpinnerContainer = styled.span`
+  padding: 6px 0;
+  display: flex;
+  align-items: center;
+`;
 
 const App: React.FC = () => {
   return (
@@ -91,6 +99,7 @@ const App: React.FC = () => {
                 secondary: "white",
               },
             },
+
             style: {
               fontSize: "1.4rem",
             },
@@ -100,7 +109,13 @@ const App: React.FC = () => {
             <ToastBar toast={t}>
               {({ icon, message }) => (
                 <>
-                  {icon}
+                  {t.type === "loading" ? (
+                    <StyledLoadingToastSpinnerContainer>
+                      <MiniSpinner size="20px" />
+                    </StyledLoadingToastSpinnerContainer>
+                  ) : (
+                    icon
+                  )}
                   {message}
                   {t.type !== "loading" && (
                     <IconButton onClick={() => toast.dismiss(t.id)}>
