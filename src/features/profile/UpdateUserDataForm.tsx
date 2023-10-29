@@ -58,7 +58,7 @@ const UpdateUserDataForm: React.FC = () => {
             value={
               isLoading
                 ? "Loading..."
-                : firstName ?? (profile?.["data"]?.first_name || "")
+                : firstName ?? (profile?.first_name || "")
             }
             onChange={(e) => setFirstName(e.target.value)}
             disabled={isLoading || isUpdating}
@@ -67,9 +67,7 @@ const UpdateUserDataForm: React.FC = () => {
             type="text"
             id="last-name"
             value={
-              isLoading
-                ? "Loading..."
-                : lastName ?? (profile?.["data"]?.last_name || "")
+              isLoading ? "Loading..." : lastName ?? (profile?.last_name || "")
             }
             onChange={(e) => setLastName(e.target.value)}
             disabled={isLoading || isUpdating}
