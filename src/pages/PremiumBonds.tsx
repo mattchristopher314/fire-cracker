@@ -1,18 +1,43 @@
+import { useEffect, useState } from "react";
 import PremiumBondsAllocationTable from "../features/premium-bonds/PremiumBondsAllocationTable";
 import { usePremiumBondsStats } from "../features/premium-bonds/usePremiumBondsStats";
 import Accordion from "../ui/Accordion";
 import Spinner from "../ui/Spinner";
+import { useHolding } from "../hooks/useHolding";
+import PremiumBondHolding from "../features/premium-bonds/PremiumBondHolding";
 
 const PremiumBonds: React.FC = () => {
-  const { isLoading, data } = usePremiumBondsStats();
+  const { isLoading: isLoadingStats, data } = usePremiumBondsStats();
+
+  const { isLoading: isLoadingHolding, holding: holdingInfo } =
+    useHolding("premium-bonds");
+  const amount = holdingInfo?.quantity || 0;
+
+  const [holding, setHolding] = useState<number>(0);
+
+  const isLoading = isLoadingStats || isLoadingHolding;
+
+  useEffect(() => {
+    setHolding(amount);
+  }, [amount]);
 
   if (isLoading || !(data && data.data)) return <Spinner />;
 
   return (
     <>
+      <PremiumBondHolding
+        heldAmount={amount}
+        holding={holding}
+        setHolding={setHolding}
+      ></PremiumBondHolding>
+
       <div>
         <p>Headline Rate: {data.data.averageRatePercentage}%</p>
         <p>Prize Probability per Bond: 1/{data.data.oddsReciprocal}</p>
+        <p>
+          Probability of winning at least once per draw:{" "}
+          {1 - (1 - 1 / data.data.oddsReciprocal) ** holding}
+        </p>
       </div>
 
       <Accordion multiopen>

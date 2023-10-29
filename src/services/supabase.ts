@@ -55,6 +55,40 @@ export interface Database {
         };
         Relationships: [];
       };
+      holdings: {
+        Row: {
+          created_at: string;
+          data: Json | null;
+          description: string | null;
+          id: string;
+          quantity: number | null;
+          vehicle: string;
+        };
+        Insert: {
+          created_at?: string;
+          data?: Json | null;
+          description?: string | null;
+          id: string;
+          quantity?: number | null;
+          vehicle: string;
+        };
+        Update: {
+          created_at?: string;
+          data?: Json | null;
+          description?: string | null;
+          id?: string;
+          quantity?: number | null;
+          vehicle?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "holdings_id_fkey";
+            columns: ["id"];
+            referencedRelation: "users";
+            referencedColumns: ["id"];
+          }
+        ];
+      };
       profiles: {
         Row: {
           avatar: string | null;
