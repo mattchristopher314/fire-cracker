@@ -1,7 +1,7 @@
 import { createGlobalStyle } from "styled-components";
 
 export const breaks = {
-  AppWideStackPoint: "(max-width: 69em)",
+  AppWideStackPoint: "(max-width: 75em)",
   AppNavPoint: "(max-width: 58em)",
   AppFullWidthNavPoint: "(max-width: 39em)",
   AppMinNavPoint: "(max-width: 31em)",

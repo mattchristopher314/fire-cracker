@@ -73,7 +73,7 @@ const StyledRow = styled.div<{ type?: string; $disallowStack?: boolean }>`
     css`
       display: grid;
       align-items: center;
-      grid-template-columns: minmax(auto, 15rem) 1.5fr 1fr;
+      grid-template-columns: minmax(auto, 15rem) 7.2fr 2.8fr;
 
       & ${Input}, & ${FileUpload} {
         width: 100%;
@@ -112,10 +112,10 @@ const StyledRow = styled.div<{ type?: string; $disallowStack?: boolean }>`
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        padding-right: calc(100% / 3);
+        padding-right: 28%;
       }
 
-      @media ${breaks.AppMinNavPoint} {
+      @media ${breaks.AppFullWidthNavPoint} {
         padding-right: 0;
         width: 100%;
       }
@@ -174,6 +174,7 @@ Row.defaultProps = {
 
 const StyledMultiField = styled.div<{ $columns: number }>`
   display: grid;
+  width: 100%;
   column-gap: 1.2rem;
 
   ${(props) =>
@@ -182,9 +183,10 @@ const StyledMultiField = styled.div<{ $columns: number }>`
       grid-template-columns: repeat(${props.$columns}, minmax(0, auto));
     `}
 
-  @media ${breaks.AppWideStackPoint} {
-    /* padding-right: calc(100% / 3); */
+  @media ${breaks.AppFullWidthNavPoint} {
     width: 100%;
+    grid-template-columns: 1fr;
+    row-gap: 1.2rem;
   }
 `;
 
