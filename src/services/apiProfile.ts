@@ -12,6 +12,8 @@ export async function getProfile(id: string | undefined) {
     throw new Error("Profile could not be loaded");
   }
 
+  if (!data?.avatar) return { data, profileImg: "" };
+
   const { data: profileImg, error: profileImgError } = await supabase.storage
     .from("avatars")
     .createSignedUrl(data.avatar || "", 86400);

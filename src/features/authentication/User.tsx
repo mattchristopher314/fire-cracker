@@ -3,18 +3,22 @@ import { breaks } from "../../styles/GlobalStyles";
 import MiniSpinner from "../../ui/MiniSpinner";
 import { useProfileData } from "../../context/useProfileData";
 import { NavLink } from "react-router-dom";
+import { useState } from "react";
 
 const UserAvatar = styled.img`
+  .unloaded & {
+    visibility: hidden;
+    box-shadow: none;
+  }
+
   display: block;
   width: 2.6rem;
   height: 2.6rem;
   object-fit: cover;
   object-position: center;
   border-radius: 50%;
-  outline: 2px solid var(--color-grey-100);
-  transition: outline 0.3s ease-in-out;
   z-index: 2;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--shadow-avatar);
 `;
 
 const StyledUser = styled(NavLink)`
@@ -27,7 +31,7 @@ const StyledUser = styled(NavLink)`
   color: var(--color-grey-600);
 
   & ${UserAvatar} {
-    transition: box-shadow 0.3s ease-in-out;
+    transition: box-shadow 0.2s ease-in-out;
   }
 
   &.active ${UserAvatar}, &:hover ${UserAvatar} {
@@ -56,6 +60,11 @@ const StyledLoadedUserContainer = styled.div`
 
   position: relative;
 
+  &.unloaded::before,
+  &.unloaded::after {
+    visibility: hidden;
+  }
+
   &::before,
   &::after {
     content: "";
@@ -72,7 +81,7 @@ const StyledLoadedUserContainer = styled.div`
     height: 3rem;
     z-index: 1;
     opacity: 0.65;
-    transform: translateX(-0.2rem) scale(0.78);
+    transform: translateX(-0.2rem) scale(0);
   }
 
   &::after {
@@ -80,7 +89,7 @@ const StyledLoadedUserContainer = styled.div`
     height: 3.3rem;
     z-index: 0;
     opacity: 0.35;
-    transform: translateX(-0.35rem) scale(0.78);
+    transform: translateX(-0.35rem) scale(0);
   }
 
   .active &::before,
@@ -121,6 +130,7 @@ const User: React.FC = () => {
     profileImg,
   } = useProfileData();
 
+  const [isLoadingAvatar, setIsLoadingAvatar] = useState<boolean>(true);
   const fullName = `${first_name}${last_name && ` ${last_name}`}`;
 
   return (
@@ -130,10 +140,17 @@ const User: React.FC = () => {
           <MiniSpinner />
         </StyledLoaderContainer>
       ) : (
-        <StyledLoadedUserContainer>
+        <StyledLoadedUserContainer
+          className={isLoadingAvatar ? "unloaded" : ""}
+        >
           <UserAvatar
             src={profileImg || "/default-user.jpg"}
             alt={`${fullName}'s avatar`}
+            onLoad={() => {
+              setTimeout(() => {
+                setIsLoadingAvatar(false);
+              }, 0);
+            }}
           />
           <span>{fullName}</span>
         </StyledLoadedUserContainer>
