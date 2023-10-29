@@ -3,6 +3,7 @@ import styled, { css } from "styled-components";
 import { breaks } from "../styles/GlobalStyles";
 import Input from "./Input";
 import Button from "./Button";
+import FileUpload from "./FileUpload";
 
 type FormParent<T> = T & {
   Row: React.FC<{
@@ -74,7 +75,7 @@ const StyledRow = styled.div<{ type?: string; $disallowStack?: boolean }>`
       align-items: center;
       grid-template-columns: minmax(auto, 15rem) 1.5fr 1fr;
 
-      & ${Input} {
+      & ${Input}, & ${FileUpload} {
         width: 100%;
       }
 
