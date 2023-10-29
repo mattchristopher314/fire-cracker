@@ -12,17 +12,7 @@ export async function getProfile(id: string | undefined) {
     throw new Error("Profile could not be loaded");
   }
 
-  if (!data?.avatar) return { data, profileImg: "" };
-
-  const { data: profileImg, error: profileImgError } = await supabase.storage
-    .from("avatars")
-    .createSignedUrl(data.avatar || "", 86400);
-
-  if (profileImgError) {
-    throw new Error("Could not fetch profile image");
-  }
-
-  return { data, profileImg: profileImg?.["signedUrl"] };
+  return data;
 }
 
 export const updateCurrentUser = async ({
@@ -39,7 +29,7 @@ export const updateCurrentUser = async ({
   if (!user) throw new Error("Failed to fetch active user to update.");
 
   const avatarPath = avatar
-    ? `${user.id}/av-${Date.now() + Math.random()}`
+    ? `/${user.id}/av-${Date.now() + Math.random()}`
     : undefined;
 
   const { data, error } = await supabase

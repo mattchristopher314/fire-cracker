@@ -4,6 +4,7 @@ import MiniSpinner from "../../ui/MiniSpinner";
 import { useProfileData } from "../../context/useProfileData";
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
+import { supabaseUrl } from "../../services/supabase";
 
 const UserAvatar = styled.img`
   .unloaded & {
@@ -126,8 +127,7 @@ const StyledLoadedUserContainer = styled.div`
 const User: React.FC = () => {
   const {
     isLoading,
-    profile: { first_name, last_name },
-    profileImg,
+    profile: { first_name, last_name, avatar },
   } = useProfileData();
 
   const [isLoadingAvatar, setIsLoadingAvatar] = useState<boolean>(true);
@@ -144,13 +144,13 @@ const User: React.FC = () => {
           className={isLoadingAvatar ? "unloaded" : ""}
         >
           <UserAvatar
-            src={profileImg || "/default-user.jpg"}
+            src={
+              avatar
+                ? `${supabaseUrl}/storage/v1/object/public/avatars${avatar}`
+                : "/default-user.jpg"
+            }
             alt={`${fullName}'s avatar`}
-            onLoad={() => {
-              setTimeout(() => {
-                setIsLoadingAvatar(false);
-              }, 0);
-            }}
+            onLoad={() => setIsLoadingAvatar(false)}
           />
           <span>{fullName}</span>
         </StyledLoadedUserContainer>
