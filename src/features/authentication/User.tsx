@@ -136,7 +136,7 @@ const User: React.FC = () => {
   } = useProfileData();
 
   const [isLoadingAvatar, setIsLoadingAvatar] = useState<boolean>(true);
-  const fullName = `${first_name}${last_name && ` ${last_name}`}`;
+  const fullName = `${first_name || ""}${last_name ? ` ${last_name}` : ""}`;
 
   return (
     <StyledUser to="/account">

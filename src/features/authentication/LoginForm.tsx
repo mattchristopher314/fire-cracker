@@ -53,7 +53,7 @@ const LoginForm: React.FC = () => {
         <FormInput
           type="email"
           id="email"
-          autoComplete="username"
+          autoComplete="username email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           disabled={isLoggingIn}

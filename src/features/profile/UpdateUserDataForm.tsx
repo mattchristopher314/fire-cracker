@@ -9,6 +9,7 @@ import toast from "react-hot-toast";
 import { useForm } from "react-hook-form";
 
 type FormValues = {
+  username: string | undefined;
   firstName: string | undefined;
   lastName: string | undefined;
   avatar: FileList | undefined;
@@ -31,11 +32,9 @@ const UpdateUserDataForm: React.FC = () => {
     const updateProfile = updateProfileMutation.mutateAsync(
       { firstName, lastName, avatar: file, password },
       {
-        onSuccess: () => {
-          history.replaceState(window.history.state, "");
-        },
         onSettled: () => {
           reset();
+          history.replaceState(window.history.state, "");
         },
       }
     );
@@ -50,7 +49,12 @@ const UpdateUserDataForm: React.FC = () => {
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
       <Form.Row label="Email address">
-        <Input value={(user && user.email) || ""} disabled />
+        <Input
+          value={(user && user.email) || ""}
+          disabled
+          {...register("username")}
+          autoComplete="email username"
+        />
       </Form.Row>
 
       <Form.Row

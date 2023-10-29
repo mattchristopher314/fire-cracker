@@ -105,7 +105,7 @@ const App: React.FC = () => {
               backdropFilter: "blur(5px)",
               WebkitBackdropFilter: "blur(5px)",
               background: "rgba(255, 255, 255, 0.9)",
-              transition: "background 0.3s ease-in-out",
+              transition: "background 0.2s ease-in-out",
             },
           }}
         >
