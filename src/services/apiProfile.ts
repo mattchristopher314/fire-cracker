@@ -19,10 +19,12 @@ export const updateCurrentUser = async ({
   firstName,
   lastName,
   avatar,
+  password,
 }: {
   firstName: string | undefined;
   lastName: string | undefined;
   avatar: File | undefined;
+  password: string | undefined;
 }): Promise<Database["public"]["Tables"]["profiles"]["Row"] | null> => {
   const user = await getCurrentUser();
 
@@ -32,26 +34,40 @@ export const updateCurrentUser = async ({
     ? `/${user.id}/av-${Date.now() + Math.random()}`
     : undefined;
 
-  const { data, error } = await supabase
-    .from("profiles")
-    .update({
-      first_name: firstName,
-      last_name: lastName,
-      avatar: avatarPath,
-    })
-    .eq("id", user.id)
-    .select()
-    .single();
+  if (password) {
+    const { error: updatePasswordError } = await supabase.auth.updateUser({
+      password: password,
+    });
 
-  if (error) throw new Error(error.message);
-
-  if (avatar && avatarPath) {
-    const { error: uploadError } = await supabase.storage
-      .from("avatars")
-      .upload(avatarPath, avatar);
-
-    if (uploadError) throw new Error(uploadError.message);
+    if (updatePasswordError) throw new Error(updatePasswordError.message);
   }
 
-  return data;
+  if (firstName || lastName || avatar) {
+    const { data, error } = await supabase
+      .from("profiles")
+      .update({
+        first_name: firstName || undefined,
+        last_name: lastName || undefined,
+        avatar: avatarPath || undefined,
+      })
+      .eq("id", user.id)
+      .select()
+      .single();
+
+    if (error) throw new Error(error.message);
+
+    if (avatar && avatarPath) {
+      const { error: uploadError } = await supabase.storage
+        .from("avatars")
+        .upload(avatarPath, avatar);
+
+      if (uploadError) throw new Error(uploadError.message);
+    }
+
+    return data;
+  }
+
+  if (password) return null;
+
+  throw new Error("Nothing to update!");
 };

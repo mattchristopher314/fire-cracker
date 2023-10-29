@@ -1,4 +1,3 @@
-import { FormEvent, useState } from "react";
 import Button from "../../ui/Button";
 import FileUpload from "../../ui/FileUpload";
 import Form from "../../ui/Form";
@@ -7,32 +6,36 @@ import { useUser } from "../authentication/useUser";
 import { useProfile } from "./useProfile";
 import { useUpdateProfile } from "./useUpdateProfile";
 import toast from "react-hot-toast";
+import { useForm } from "react-hook-form";
+
+type FormValues = {
+  firstName: string | undefined;
+  lastName: string | undefined;
+  avatar: FileList | undefined;
+  password: string | undefined;
+  confirmPassword: string | undefined;
+};
 
 const UpdateUserDataForm: React.FC = () => {
   const { isLoading, profile } = useProfile();
   const { user } = useUser();
 
-  const [firstName, setFirstName] = useState<string>();
-  const [lastName, setLastName] = useState<string>();
-
-  const [avatar, setAvatar] = useState<File>();
-
-  const [password, setPassword] = useState<string>();
-  const [confirmPassword, setConfirmPassword] = useState<string>();
-
   const updateProfileMutation = useUpdateProfile();
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const { register, handleSubmit, formState, getValues, reset } =
+    useForm<FormValues>();
+  const { errors } = formState;
 
+  const onSubmit = ({ firstName, lastName, avatar, password }: FormValues) => {
+    const file = avatar?.[0];
     const updateProfile = updateProfileMutation.mutateAsync(
-      { firstName, lastName, avatar },
+      { firstName, lastName, avatar: file, password },
       {
         onSuccess: () => {
-          setAvatar(undefined);
+          history.replaceState(window.history.state, "");
         },
         onSettled: () => {
-          (e.target as HTMLFormElement).reset();
+          reset();
         },
       }
     );
@@ -40,77 +43,77 @@ const UpdateUserDataForm: React.FC = () => {
     toast.promise(updateProfile, {
       loading: "Updating profile",
       success: "Successfully updated profile",
-      error: "Error when updating profile",
+      error: (e: Error) => e.message,
     });
   };
 
-  const handleReset = () => {
-    setFirstName(undefined);
-    setLastName(undefined);
-
-    setAvatar(undefined);
-
-    setPassword(undefined);
-    setConfirmPassword(undefined);
-  };
-
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit(onSubmit)}>
       <Form.Row label="Email address">
         <Input value={(user && user.email) || ""} disabled />
       </Form.Row>
 
-      <Form.Row label="Name" labelsId="first-name">
+      <Form.Row
+        label="Name"
+        labelsId="first-name"
+        error={errors?.firstName?.message || errors?.lastName?.message}
+      >
         <Form.MultiFieldContainer columns={2}>
           <Input
             type="text"
             id="first-name"
-            value={
-              isLoading
-                ? "Loading..."
-                : firstName ?? (profile?.first_name || "")
-            }
-            onChange={(e) => setFirstName(e.target.value)}
             disabled={isLoading || updateProfileMutation.isLoading}
+            placeholder={profile?.first_name || "First name"}
+            {...register("firstName")}
           />
           <Input
             type="text"
             id="last-name"
-            value={
-              isLoading ? "Loading..." : lastName ?? (profile?.last_name || "")
-            }
-            onChange={(e) => setLastName(e.target.value)}
             disabled={isLoading || updateProfileMutation.isLoading}
+            placeholder={profile?.last_name || "Last name"}
+            {...register("lastName")}
           />
         </Form.MultiFieldContainer>
       </Form.Row>
 
-      <Form.Row label="Avatar image">
+      <Form.Row label="Avatar image" error={errors?.avatar?.message}>
         <FileUpload
           accept="image/jpeg, image/png"
           id="avatar"
-          onChange={(e) => setAvatar(e.target.files?.[0])}
           disabled={updateProfileMutation.isLoading}
+          {...register("avatar")}
         />
       </Form.Row>
 
-      <Form.Row label="Change password" labelsId="password">
+      <Form.Row
+        label="Change password"
+        labelsId="password"
+        error={errors?.password?.message || errors?.confirmPassword?.message}
+      >
         <Form.MultiFieldContainer columns={2}>
           <Input
             type="password"
             id="password"
             placeholder="New password"
-            value={password || ""}
-            onChange={(e) => setPassword(e.target.value)}
+            autoComplete="new-password"
             disabled={updateProfileMutation.isLoading}
+            {...register("password", {
+              minLength: {
+                value: 8,
+                message: "Password needs at least 8 characters",
+              },
+            })}
           />
           <Input
             type="password"
             id="confirm-password"
             placeholder="Confirm new password"
-            value={confirmPassword || ""}
-            onChange={(e) => setConfirmPassword(e.target.value)}
+            autoComplete="new-password"
             disabled={updateProfileMutation.isLoading}
+            {...register("confirmPassword", {
+              validate: (value) =>
+                getValues().password === value || "Passwords do not match",
+            })}
           />
         </Form.MultiFieldContainer>
       </Form.Row>
@@ -120,7 +123,7 @@ const UpdateUserDataForm: React.FC = () => {
           type="reset"
           $size="large"
           $variation="secondary"
-          onClick={handleReset}
+          onClick={() => reset()}
           disabled={updateProfileMutation.isLoading}
         >
           Cancel
