@@ -67,14 +67,18 @@ const UpdateUserDataForm: React.FC = () => {
             type="text"
             id="first-name"
             disabled={isLoading || updateProfileMutation.isLoading}
-            placeholder={profile?.first_name || "First name"}
+            placeholder={
+              isLoading ? "Loading..." : profile?.first_name || "First name"
+            }
             {...register("firstName")}
           />
           <Input
             type="text"
             id="last-name"
             disabled={isLoading || updateProfileMutation.isLoading}
-            placeholder={profile?.last_name || "Last name"}
+            placeholder={
+              isLoading ? "Loading..." : profile?.last_name || "Last name"
+            }
             {...register("lastName")}
           />
         </Form.MultiFieldContainer>
