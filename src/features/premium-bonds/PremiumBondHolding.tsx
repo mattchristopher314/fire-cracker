@@ -50,7 +50,7 @@ const PremiumBondHolding: React.FC<{
               inputMode="numeric"
               pattern="[0-9]*"
               value={holding || ""}
-              size={3}
+              size={6}
               maxLength={6}
               max={100000}
               onChange={(e) => {
