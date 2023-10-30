@@ -13,7 +13,7 @@ const PremiumBonds: React.FC = () => {
     useHolding("premium-bonds");
   const amount = holdingInfo?.quantity || 0;
 
-  const [holding, setHolding] = useState<number>(0);
+  const [holding, setHolding] = useState<number | null>(0);
 
   const isLoading = isLoadingStats || isLoadingHolding;
 
@@ -27,7 +27,7 @@ const PremiumBonds: React.FC = () => {
     <>
       <PremiumBondHolding
         heldAmount={amount}
-        holding={holding}
+        holding={holding || 0}
         setHolding={setHolding}
       ></PremiumBondHolding>
 
@@ -36,7 +36,7 @@ const PremiumBonds: React.FC = () => {
         <p>Prize Probability per Bond: 1/{data.data.oddsReciprocal}</p>
         <p>
           Probability of winning at least once per draw:{" "}
-          {1 - (1 - 1 / data.data.oddsReciprocal) ** holding}
+          {1 - (1 - 1 / data.data.oddsReciprocal) ** (holding || 0)}
         </p>
       </div>
 

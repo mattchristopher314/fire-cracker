@@ -2,7 +2,7 @@ import { css, styled } from "styled-components";
 
 const sizes = {
   small: css`
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     padding: 0.4rem 0.8rem;
     text-transform: uppercase;
     font-weight: 600;
@@ -52,6 +52,8 @@ const Button = styled.button<{
   $size?: keyof typeof sizes;
   $variation?: keyof typeof variations;
 }>`
+  display: inline-flex;
+  align-items: center;
   border: none;
   border-radius: var(--border-radius-sm);
   box-shadow: var(--shadow-sm);

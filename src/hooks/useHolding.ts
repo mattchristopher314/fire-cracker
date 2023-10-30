@@ -6,8 +6,8 @@ export function useHolding(vehicle: string) {
   const { user } = useUser();
 
   const { isLoading, data: holding } = useQuery({
-    queryKey: ["holding", user?.id, vehicle],
     queryFn: () => getHolding(user?.id, vehicle),
+    queryKey: ["holding", user?.id, vehicle],
   });
 
   return { isLoading, holding };
