@@ -12,6 +12,10 @@ const StyledHoldingAmount = styled.span`
   font-style: italic;
 `;
 
+const StyledCurrencyDecorator = styled.span`
+  border-bottom: 1px solid transparent;
+`;
+
 const HoldingContainer = styled.div`
   display: flex;
   gap: 0.8rem;
@@ -44,7 +48,7 @@ const PremiumBondHolding: React.FC<{
         <HoldingContainer>
           Holding:
           <PreventWrap>
-            {" £"}
+            <StyledCurrencyDecorator>£</StyledCurrencyDecorator>
             <InlineInput
               type="text"
               inputMode="numeric"
