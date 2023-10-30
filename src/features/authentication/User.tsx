@@ -18,7 +18,7 @@ const UserAvatar = styled.img`
   object-fit: cover;
   object-position: center;
   border-radius: 50%;
-  z-index: 2;
+  z-index: 1;
   box-shadow: var(--shadow-avatar);
 `;
 
