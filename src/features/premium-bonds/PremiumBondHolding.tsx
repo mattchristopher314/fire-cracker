@@ -73,7 +73,7 @@ const PremiumBondHolding: React.FC<{
                 }}
               />
             </PreventWrap>
-            {holding && heldAmount !== holding && (
+            {!!holding && heldAmount !== holding && (
               <Button
                 $variation="primary"
                 $size="small"
