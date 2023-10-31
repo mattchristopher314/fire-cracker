@@ -17,8 +17,7 @@ const StyledCurrencyDecorator = styled.span`
 `;
 
 const HoldingContainer = styled.div`
-  &,
-  & * {
+  & {
     display: flex;
     gap: 0.8rem;
     flex-wrap: wrap;
@@ -48,9 +47,9 @@ const PremiumBondHolding: React.FC<{
   return (
     <Row $background>
       <Heading as="h3">
-        <HoldingContainer>
-          Holding:
-          <form onSubmit={(e) => e.preventDefault()}>
+        <form onSubmit={(e) => e.preventDefault()}>
+          <HoldingContainer>
+            Holding:
             <PreventWrap>
               <StyledCurrencyDecorator>£</StyledCurrencyDecorator>
               <InlineInput
@@ -89,8 +88,8 @@ const PremiumBondHolding: React.FC<{
                 Update Holding
               </Button>
             )}
-          </form>
-        </HoldingContainer>
+          </HoldingContainer>
+        </form>
       </Heading>
       <StyledHoldingAmount>
         Currently, you have £{heldAmount} saved.
