@@ -11,7 +11,7 @@ export const useLogout = () => {
   const { mutate: logout, isLoading: isLoggingOut } = useMutation({
     mutationFn: logoutApi,
     onSuccess: () => {
-      queryClient.removeQueries();
+      queryClient.invalidateQueries(["user"]);
       navigate("/", { replace: true });
     },
     onError: (err) => {

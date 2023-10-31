@@ -28,7 +28,7 @@ export const updateCurrentUser = async ({
 }): Promise<Database["public"]["Tables"]["profiles"]["Row"] | null> => {
   const user = await getCurrentUser();
 
-  if (!user) throw new Error("Failed to fetch active user to update.");
+  if (!user) throw new Error("Failed to fetch active user to update");
 
   const avatarPath = avatar
     ? `/${user.id}/av-${Date.now() + Math.random()}`

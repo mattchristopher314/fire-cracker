@@ -2,8 +2,8 @@ import { styled } from "styled-components";
 import { To, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
-import { useUser } from "../features/authentication/useUser";
 import Spinner from "./Spinner";
+import { useUserData } from "../context/useUserData";
 
 const FullPage = styled.div`
   height: 100dvh;
@@ -20,7 +20,7 @@ const ProtectedRoute: React.FC<{
 }> = ({ redirectUrl, noAuth, children }) => {
   const navigate = useNavigate();
 
-  const { isLoading, isAuthenticated } = useUser();
+  const { isLoading, isAuthenticated } = useUserData();
 
   useEffect(
     function () {

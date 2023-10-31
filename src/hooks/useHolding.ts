@@ -1,12 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
-import { useUser } from "../features/authentication/useUser";
 import { getHolding } from "../services/apiHolding";
+import { useUserData } from "../context/useUserData";
 
 export function useHolding(vehicle: string) {
-  const { user } = useUser();
+  const { user } = useUserData();
 
   const { isLoading, data: holding } = useQuery({
-    queryFn: () => getHolding(user?.id, vehicle),
+    queryFn: () => getHolding(vehicle),
     queryKey: ["holding", user?.id, vehicle],
   });
 

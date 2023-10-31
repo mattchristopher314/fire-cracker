@@ -2,11 +2,11 @@ import Button from "../../ui/Button";
 import FileUpload from "../../ui/FileUpload";
 import Form from "../../ui/Form";
 import Input from "../../ui/Input";
-import { useUser } from "../authentication/useUser";
 import { useUpdateProfile } from "./useUpdateProfile";
 import toast from "react-hot-toast";
 import { useForm } from "react-hook-form";
 import { useProfileData } from "../../context/useProfileData";
+import { useUserData } from "../../context/useUserData";
 
 type FormValues = {
   username: string | undefined;
@@ -19,7 +19,7 @@ type FormValues = {
 
 const UpdateUserDataForm: React.FC = () => {
   const { isLoading, profile } = useProfileData();
-  const { user } = useUser();
+  const { user } = useUserData();
 
   const updateProfileMutation = useUpdateProfile();
 

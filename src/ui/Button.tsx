@@ -54,6 +54,7 @@ const Button = styled.button<{
 }>`
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   border: none;
   border-radius: var(--border-radius-sm);
   box-shadow: var(--shadow-sm);

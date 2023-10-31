@@ -2,13 +2,16 @@ import { getCurrentUser } from "./apiAuth";
 import { Database, Json, supabase } from "./supabase";
 
 export async function getHolding(
-  id: string | undefined,
   vehicle: string
 ): Promise<Database["public"]["Tables"]["holdings"]["Row"] | null> {
+  const user = await getCurrentUser();
+
+  if (!user) throw new Error("Failed to fetch active user");
+
   const { data, error } = await supabase
     .from("holdings")
     .select("*")
-    .eq("id", id || "")
+    .eq("id", user?.id || "")
     .eq("vehicle", vehicle);
 
   if (error) {

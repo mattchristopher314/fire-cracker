@@ -21,6 +21,7 @@ import ProtectedRoute from "./ui/ProtectedRoute";
 import Account from "./pages/Account";
 import MiniSpinner from "./ui/MiniSpinner";
 import styled from "styled-components";
+import { UserProvider } from "./context/UserProvider";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -50,39 +51,40 @@ const App: React.FC = () => {
         <ReactQueryDevtools initialIsOpen={false} />
 
         <GlobalStyles />
+        <UserProvider>
+          <BrowserRouter basename="app">
+            <Routes>
+              <Route
+                element={
+                  <ProtectedRoute>
+                    <AppLayout />
+                  </ProtectedRoute>
+                }
+              >
+                <Route path="dashboard" element={<Dashboard />} />
+                <Route path="budget" element={<Budget />} />
+                <Route path="premium-bonds" element={<PremiumBonds />} />
 
-        <BrowserRouter basename="app">
-          <Routes>
-            <Route
-              element={
-                <ProtectedRoute>
-                  <AppLayout />
-                </ProtectedRoute>
-              }
-            >
-              <Route path="dashboard" element={<Dashboard />} />
-              <Route path="budget" element={<Budget />} />
-              <Route path="premium-bonds" element={<PremiumBonds />} />
+                <Route path="account" element={<Account />} />
+                <Route path="settings" element={<Settings />} />
+              </Route>
 
-              <Route path="account" element={<Account />} />
-              <Route path="settings" element={<Settings />} />
-            </Route>
+              <Route
+                index
+                element={
+                  <ProtectedRoute redirectUrl="/dashboard" noAuth>
+                    <Login />
+                  </ProtectedRoute>
+                }
+              />
 
-            <Route
-              index
-              element={
-                <ProtectedRoute redirectUrl="/dashboard" noAuth>
-                  <Login />
-                </ProtectedRoute>
-              }
-            />
-
-            <Route
-              path="*"
-              element={<PageNotFound titleError="FIRECracker | Error 404" />}
-            />
-          </Routes>
-        </BrowserRouter>
+              <Route
+                path="*"
+                element={<PageNotFound titleError="FIRECracker | Error 404" />}
+              />
+            </Routes>
+          </BrowserRouter>
+        </UserProvider>
 
         <Toaster
           position="top-right"
