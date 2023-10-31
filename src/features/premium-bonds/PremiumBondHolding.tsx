@@ -27,7 +27,7 @@ const HoldingContainer = styled.div`
 
 const PremiumBondHolding: React.FC<{
   heldAmount: number;
-  holding: number;
+  holding: number | null;
   setHolding: React.Dispatch<React.SetStateAction<number | null>>;
 }> = ({ heldAmount, holding, setHolding }) => {
   const updateHoldingMutation = useUpdateHolding("premium-bonds");
@@ -35,7 +35,7 @@ const PremiumBondHolding: React.FC<{
   const handleUpdateHolding = (): void => {
     const updateHolding = updateHoldingMutation.mutateAsync({
       vehicle: "premium-bonds",
-      quantity: holding,
+      quantity: holding || 0,
     });
 
     toast.promise(updateHolding, {
@@ -74,7 +74,7 @@ const PremiumBondHolding: React.FC<{
                 }}
               />
             </PreventWrap>
-            {heldAmount !== holding && (
+            {holding && heldAmount !== holding && (
               <Button
                 $variation="primary"
                 $size="small"

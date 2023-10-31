@@ -27,7 +27,7 @@ const PremiumBonds: React.FC = () => {
     <>
       <PremiumBondHolding
         heldAmount={amount}
-        holding={holding || 0}
+        holding={holding}
         setHolding={setHolding}
       ></PremiumBondHolding>
 
