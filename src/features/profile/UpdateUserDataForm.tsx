@@ -9,7 +9,7 @@ import { useProfileData } from "../../context/useProfileData";
 import { useUserData } from "../../context/useUserData";
 
 type FormValues = {
-  username: string | undefined;
+  email: string | undefined;
   firstName: string | undefined;
   lastName: string | undefined;
   avatar: FileList | undefined;
@@ -27,7 +27,12 @@ const UpdateUserDataForm: React.FC = () => {
     useForm<FormValues>();
   const { errors } = formState;
 
-  const onSubmit = ({ firstName, lastName, avatar, password }: FormValues) => {
+  const onSubmit = ({
+    firstName,
+    lastName,
+    avatar,
+    password,
+  }: FormValues): void => {
     const file = avatar?.[0];
     const updateProfile = updateProfileMutation.mutateAsync(
       { firstName, lastName, avatar: file, password },
@@ -52,7 +57,7 @@ const UpdateUserDataForm: React.FC = () => {
         <Input
           value={(user && user.email) || ""}
           disabled
-          {...register("username")}
+          {...register("email")}
           autoComplete="email username"
         />
       </Form.Row>
@@ -134,7 +139,7 @@ const UpdateUserDataForm: React.FC = () => {
           onClick={() => reset()}
           disabled={updateProfileMutation.isLoading}
         >
-          Cancel
+          Reset
         </Button>
         <Button $size="large" disabled={updateProfileMutation.isLoading}>
           Update account

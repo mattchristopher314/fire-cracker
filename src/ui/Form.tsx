@@ -15,8 +15,9 @@ type FormParent<T> = T & {
   }>;
   FullRow: React.FC<{
     label?: string;
+    labelsId?: string;
     error?: string;
-    children: React.ReactNode;
+    children: React.ReactElement;
   }>;
   Input: React.FC<React.InputHTMLAttributes<HTMLInputElement>>;
   MultiFieldContainer: React.FC<{
@@ -202,12 +203,13 @@ const StyledFullRow = styled.div`
 
 const FullRow: React.FC<{
   label?: string;
+  labelsId?: string;
   error?: string;
-  children: React.ReactNode;
-}> = ({ label, error, children }) => {
+  children: React.ReactElement;
+}> = ({ label, labelsId, error, children }) => {
   return (
     <StyledFullRow>
-      {label && <Label>{label}</Label>}
+      {label && <Label htmlFor={labelsId || children.props.id}>{label}</Label>}
       {children}
       {error && <Error>{error}</Error>}
     </StyledFullRow>
