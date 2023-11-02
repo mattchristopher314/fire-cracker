@@ -1,7 +1,5 @@
 import { useState } from "react";
 import Button from "../../ui/Button";
-import FormFullRow from "../../ui/FormFullRow";
-import FormInput from "../../ui/FormInput";
 import { useLogin } from "./useLogin";
 import MiniSpinner from "../../ui/MiniSpinner";
 import Form from "../../ui/Form";
@@ -12,7 +10,7 @@ const StyledDevOnlyButtonContainer = styled.div`
   flex-grow: 1;
 
   gap: 0.8rem;
-  padding: 1.2rem 0;
+  padding-top: 2.4rem;
 
   & button {
     flex: 1 1 0;
@@ -48,9 +46,9 @@ const LoginForm: React.FC = () => {
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
-      <FormFullRow label="Email Address">
-        <FormInput
+    <Form onSubmit={handleSubmit} type="basic">
+      <Form.FullRow label="Email Address">
+        <Form.Input
           type="email"
           id="email"
           autoComplete="username email"
@@ -58,10 +56,10 @@ const LoginForm: React.FC = () => {
           onChange={(e) => setEmail(e.target.value)}
           disabled={isLoggingIn}
         />
-      </FormFullRow>
+      </Form.FullRow>
 
-      <FormFullRow label="Password">
-        <FormInput
+      <Form.FullRow label="Password">
+        <Form.Input
           type="password"
           id="password"
           autoComplete="current-password"
@@ -69,11 +67,11 @@ const LoginForm: React.FC = () => {
           onChange={(e) => setPassword(e.target.value)}
           disabled={isLoggingIn}
         />
-      </FormFullRow>
+      </Form.FullRow>
 
       <StyledDevOnlyButtonContainer>
         <Button $size="large">
-          {!isLoggingIn ? "Login" : <MiniSpinner size="12px" />}
+          {!isLoggingIn ? "Log in" : <MiniSpinner size="12px" />}
         </Button>
 
         <Button

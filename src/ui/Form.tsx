@@ -1,7 +1,7 @@
 import React from "react";
 import styled, { css } from "styled-components";
 import { breaks } from "../styles/GlobalStyles";
-import Input from "./Input";
+import StandardInput from "./Input";
 import Button from "./Button";
 import FileUpload from "./FileUpload";
 
@@ -13,11 +13,17 @@ type FormParent<T> = T & {
     error?: string;
     children: React.ReactElement;
   }>;
+  FullRow: React.FC<{
+    label?: string;
+    error?: string;
+    children: React.ReactNode;
+  }>;
+  Input: React.FC<React.InputHTMLAttributes<HTMLInputElement>>;
   MultiFieldContainer: React.FC<{
     columns: number;
     children: React.ReactNode;
   }>;
-  SubmissionRow: React.FC<{ children: React.ReactNode }>;
+  SubmissionRow: React.FC<{ $devPad?: boolean; children: React.ReactNode }>;
 };
 
 const StyledForm = styled.form<{ type?: string }>`
@@ -60,7 +66,11 @@ Form.defaultProps = {
   type: "regular",
 };
 
-const StyledRow = styled.div<{ type?: string; $disallowStack?: boolean }>`
+const StyledRow = styled.div<{
+  type?: string;
+  $disallowStack?: boolean;
+  $devPad?: boolean;
+}>`
   gap: 2.4rem;
   padding: 1.2rem 0;
 
@@ -75,7 +85,7 @@ const StyledRow = styled.div<{ type?: string; $disallowStack?: boolean }>`
       align-items: center;
       grid-template-columns: minmax(auto, 15rem) 7.2fr 2.8fr;
 
-      & ${Input}, & ${FileUpload} {
+      & ${StandardInput}, & ${FileUpload} {
         width: 100%;
       }
 
@@ -136,6 +146,16 @@ const StyledRow = styled.div<{ type?: string; $disallowStack?: boolean }>`
         }
       }
     `}
+
+    ${(props) =>
+    props.$devPad &&
+    css`
+      margin: 1px;
+
+      @media ${breaks.AppMinNavPoint} {
+        margin: initial;
+      }
+    `}
 `;
 
 StyledRow.defaultProps = {
@@ -172,6 +192,28 @@ Row.defaultProps = {
   type: "regular",
 };
 
+const StyledFullRow = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  gap: 0.8rem;
+  padding: 1.2rem 0;
+`;
+
+const FullRow: React.FC<{
+  label?: string;
+  error?: string;
+  children: React.ReactNode;
+}> = ({ label, error, children }) => {
+  return (
+    <StyledFullRow>
+      {label && <Label>{label}</Label>}
+      {children}
+      {error && <Error>{error}</Error>}
+    </StyledFullRow>
+  );
+};
+
 const StyledMultiField = styled.div<{ $columns: number }>`
   display: grid;
   width: 100%;
@@ -190,6 +232,14 @@ const StyledMultiField = styled.div<{ $columns: number }>`
   }
 `;
 
+const Input = styled.input`
+  border: 1px solid var(--color-slate-300);
+  background-color: var(--color-slate-0);
+  border-radius: var(--border-radius-sm);
+  box-shadow: var(--shadow-sm);
+  padding: 1.2rem 1.6rem;
+`;
+
 const MultiFieldContainer: React.FC<{
   columns: number;
   children: React.ReactNode;
@@ -201,17 +251,24 @@ MultiFieldContainer.defaultProps = {
   columns: 1,
 };
 
-const SubmissionRow: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
+const SubmissionRow: React.FC<{
+  $devPad?: boolean;
+  children: React.ReactNode;
+}> = ({ $devPad, children }) => {
   return (
-    <StyledRow type="regular" $disallowStack>
+    <StyledRow type="regular" $disallowStack $devPad={$devPad}>
       {children}
     </StyledRow>
   );
 };
 
+SubmissionRow.defaultProps = {
+  $devPad: false,
+};
+
 Form.Row = Row;
+Form.FullRow = FullRow;
+Form.Input = Input;
 Form.MultiFieldContainer = MultiFieldContainer;
 Form.SubmissionRow = SubmissionRow;
 

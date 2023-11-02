@@ -10,7 +10,6 @@ import toast, { Toast, ToastBar, Toaster } from "react-hot-toast";
 
 import GlobalStyles from "./styles/GlobalStyles";
 import PageNotFound from "./pages/PageNotFound";
-import Login from "./pages/Login";
 import AppLayout from "./ui/AppLayout";
 import Dashboard from "./pages/Dashboard";
 import PremiumBonds from "./pages/PremiumBonds";
@@ -22,6 +21,7 @@ import Account from "./pages/Account";
 import MiniSpinner from "./ui/MiniSpinner";
 import styled from "styled-components";
 import { UserProvider } from "./context/UserProvider";
+import LoginSignup from "./pages/LoginSignup";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -73,7 +73,7 @@ const App: React.FC = () => {
                 index
                 element={
                   <ProtectedRoute redirectUrl="/dashboard" noAuth>
-                    <Login />
+                    <LoginSignup />
                   </ProtectedRoute>
                 }
               />
