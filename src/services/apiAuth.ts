@@ -1,10 +1,11 @@
 import { User, Session } from "@supabase/supabase-js";
 import { LoginProps } from "../features/authentication/useLogin";
 import { supabase } from "./supabase";
+import { SignupProps } from "../features/authentication/useSignup";
 
 export interface UserData {
-  user: User;
-  session: Session;
+  user: User | null;
+  session: Session | null;
 }
 
 export const login = async ({
@@ -15,6 +16,24 @@ export const login = async ({
     email: email || "",
     password: password || "",
   });
+
+  if (error) throw new Error(error.message);
+
+  return data;
+};
+
+export const signup = async ({
+  email,
+  firstName,
+  lastName,
+  password,
+}: SignupProps): Promise<{
+  user: User | null;
+  session: Session | null;
+} | null> => {
+  if (!email || !firstName || !lastName || !password) return null;
+
+  const { data, error } = await supabase.auth.signUp({ email, password });
 
   if (error) throw new Error(error.message);
 

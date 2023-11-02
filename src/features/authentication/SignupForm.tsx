@@ -1,7 +1,10 @@
 import { useForm } from "react-hook-form";
 import Button from "../../ui/Button";
 import Form from "../../ui/Form";
-import toast from "react-hot-toast";
+import { useSignup } from "./useSignup";
+import { useState } from "react";
+import styled from "styled-components";
+import MiniSpinner from "../../ui/MiniSpinner";
 
 type FormValues = {
   email: string | undefined;
@@ -11,10 +14,24 @@ type FormValues = {
   confirmPassword: string | undefined;
 };
 
+const SuccessContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3.2rem;
+  font-weight: 400;
+  font-size: 1.8rem;
+  text-align: center;
+`;
+
 const SignupForm: React.FC = () => {
   const { register, handleSubmit, formState, getValues, reset } =
     useForm<FormValues>();
   const { errors } = formState;
+
+  const { signup, isSigningUp } = useSignup();
+
+  const [success, setSuccess] = useState<boolean>(false);
 
   const onSubmit = ({
     email,
@@ -22,12 +39,26 @@ const SignupForm: React.FC = () => {
     lastName,
     password,
   }: FormValues): void => {
-    toast("Coming soon!");
-    toast(`${email} ${firstName} ${lastName} ${password}`);
-    reset();
+    if (!email || !firstName! || !lastName || !password) return;
+
+    signup(
+      { email, firstName, lastName, password },
+      {
+        onSuccess: () => {
+          setSuccess(true);
+        },
+        onSettled: () => {
+          reset();
+        },
+      }
+    );
   };
 
-  return (
+  return success ? (
+    <SuccessContainer>
+      Thanks! Check your inbox to verify your email.
+    </SuccessContainer>
+  ) : (
     <Form onSubmit={handleSubmit(onSubmit)} type="basic">
       <Form.FullRow
         label="Name"
@@ -40,6 +71,7 @@ const SignupForm: React.FC = () => {
             id="first-name"
             placeholder="First name"
             autoComplete="given-name"
+            disabled={isSigningUp}
             {...register("firstName", {
               required: "First name is required",
             })}
@@ -49,6 +81,7 @@ const SignupForm: React.FC = () => {
             id="last-name"
             placeholder="Last name"
             autoComplete="family-name"
+            disabled={isSigningUp}
             {...register("lastName", {
               required: "Last name is required",
             })}
@@ -62,6 +95,7 @@ const SignupForm: React.FC = () => {
           id="email"
           placeholder="Email"
           autoComplete="username email"
+          disabled={isSigningUp}
           {...register("email", {
             required: "Email is required",
             pattern: {
@@ -83,6 +117,7 @@ const SignupForm: React.FC = () => {
             id="password"
             placeholder="Password"
             autoComplete="new-password"
+            disabled={isSigningUp}
             {...register("password", {
               required: "Password is required",
               minLength: {
@@ -96,6 +131,7 @@ const SignupForm: React.FC = () => {
             id="confirm-password"
             placeholder="Confirm"
             autoComplete="new-password"
+            disabled={isSigningUp}
             {...register("confirmPassword", {
               required: "You need to confirm your password",
               validate: (value) =>
@@ -106,7 +142,9 @@ const SignupForm: React.FC = () => {
       </Form.FullRow>
 
       <Form.SubmissionRow $devPad>
-        <Button $size="large">Sign up</Button>
+        <Button $size="large">
+          {!isSigningUp ? "Sign up" : <MiniSpinner size="12px" />}
+        </Button>
       </Form.SubmissionRow>
     </Form>
   );
