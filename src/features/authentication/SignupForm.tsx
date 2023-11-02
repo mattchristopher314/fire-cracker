@@ -60,6 +60,7 @@ const SignupForm: React.FC = () => {
         <Form.Input
           type="text"
           id="email"
+          placeholder="Email"
           autoComplete="username email"
           {...register("email", {
             required: "Email is required",

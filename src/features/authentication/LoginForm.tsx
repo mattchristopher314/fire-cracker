@@ -1,9 +1,9 @@
-import { useState } from "react";
 import Button from "../../ui/Button";
 import { useLogin } from "./useLogin";
 import MiniSpinner from "../../ui/MiniSpinner";
 import Form from "../../ui/Form";
 import styled from "styled-components";
+import { useForm } from "react-hook-form";
 
 const StyledDevOnlyButtonContainer = styled.div`
   display: flex;
@@ -17,55 +17,65 @@ const StyledDevOnlyButtonContainer = styled.div`
   }
 
   @media (max-width: 34em) {
-    /* grid-template-columns: 1fr; */
     flex-direction: column;
     gap: 1.2rem;
   }
 `;
 
+type FormValues = {
+  email: string | undefined;
+  password: string | undefined;
+};
+
 const LoginForm: React.FC = () => {
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
+  const { register, handleSubmit, formState, setValue, reset } =
+    useForm<FormValues>();
+  const { errors } = formState;
 
   const { login, isLoggingIn } = useLogin();
 
-  const handleSubmit = (e: React.SyntheticEvent<HTMLFormElement>): void => {
-    e.preventDefault();
-
+  const onSubmit = ({ email, password }: FormValues): void => {
     if (!email || !password) return;
 
     login(
       { email, password },
       {
         onSettled: () => {
-          setEmail("");
-          setPassword("");
+          reset();
         },
       }
     );
   };
 
   return (
-    <Form onSubmit={handleSubmit} type="basic">
-      <Form.FullRow label="Email Address">
+    <Form onSubmit={handleSubmit(onSubmit)} type="basic">
+      <Form.FullRow label="Email Address" error={errors?.email?.message}>
         <Form.Input
           type="email"
           id="email"
+          placeholder="Email"
           autoComplete="username email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
           disabled={isLoggingIn}
+          {...register("email", {
+            required: "Email is required",
+            pattern: {
+              value: /\S+@\S+\.\S+/,
+              message: "Invalid email address",
+            },
+          })}
         />
       </Form.FullRow>
 
-      <Form.FullRow label="Password">
+      <Form.FullRow label="Password" error={errors?.password?.message}>
         <Form.Input
           type="password"
           id="password"
+          placeholder="Password"
           autoComplete="current-password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
           disabled={isLoggingIn}
+          {...register("password", {
+            required: "Password is required",
+          })}
         />
       </Form.FullRow>
 
@@ -79,11 +89,11 @@ const LoginForm: React.FC = () => {
           $variation="secondary"
           type="button"
           onClick={() => {
-            setEmail("tester@firecracker.website");
-            setPassword("password");
+            setValue("email", "tester@firecracker.website");
+            setValue("password", "password");
           }}
         >
-          Test Account
+          Use Test Account
         </Button>
       </StyledDevOnlyButtonContainer>
     </Form>
