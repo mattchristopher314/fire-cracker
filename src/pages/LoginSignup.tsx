@@ -4,6 +4,9 @@ import PageHeading from "../ui/PageHeading";
 import LoginForm from "../features/authentication/LoginForm";
 import ViewSwitch from "../ui/ViewSwitch";
 import SignupForm from "../features/authentication/SignupForm";
+import { createSearchParams, useNavigate, useParams } from "react-router-dom";
+import toast from "react-hot-toast";
+import { useEffect } from "react";
 
 const StyledLoginSignup = styled.div`
   width: 100%;
@@ -22,12 +25,33 @@ const FormContainer = styled.main`
 `;
 
 const LoginSignup: React.FC = () => {
+  const { success } = useParams();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    console.log(success);
+    if (success === "verified") {
+      toast.success("Verified! You may now log in.");
+
+      navigate({
+        pathname: "/",
+        search: `?${createSearchParams({
+          view: "login",
+        })}`,
+      });
+    }
+  }, [navigate, success]);
+
   return (
     <StyledLoginSignup>
       <Logo size="large" />
 
-      <ViewSwitch selections={{ login: "Log in", signup: "Sign up" }}>
+      <ViewSwitch
+        forceView={success === "success" ? "signup" : undefined}
+        selections={{ login: "Log in", signup: "Sign up" }}
+      >
         <ViewSwitch.Outlet
+          forceView={success === "success" ? "signup" : undefined}
           views={{
             login: (
               <div key="login">

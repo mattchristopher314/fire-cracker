@@ -1,5 +1,9 @@
 import { createContext, useContext, useState } from "react";
-import { useNavigate, useParams, useSearchParams } from "react-router-dom";
+import {
+  createSearchParams,
+  useNavigate,
+  useSearchParams,
+} from "react-router-dom";
 import styled, { css } from "styled-components";
 
 const StyledViewSwitchContainer = styled.section`
@@ -65,32 +69,34 @@ const StyledSwitchOption = styled.li<{ $active: boolean }>`
 `;
 
 type ViewSwitch<T> = T & {
-  Outlet: React.FC<{ views: { [key: string]: React.ReactElement } }>;
+  Outlet: React.FC<{
+    forceView: string | undefined;
+    views: { [key: string]: React.ReactElement };
+  }>;
 };
 
 const ActiveViewContext = createContext<string>("");
 
 const ViewSwitch: ViewSwitch<
   React.FC<{
+    forceView?: string;
     selections: { [key: string]: string };
     children: React.ReactNode;
   }>
-> = ({ selections, children }) => {
+> = ({ forceView, selections, children }) => {
   const [activeView, setActiveView] = useState<string>(
     Object.keys(selections)[0]
   );
 
-  const [params, setParams] = useSearchParams();
-
-  const { success } = useParams();
   const navigate = useNavigate();
 
-  const comparisonView =
-    params.get("view") || (success ? "signup" : activeView);
+  const [params] = useSearchParams();
 
   return (
     <StyledViewSwitchContainer>
-      <ActiveViewContext.Provider value={comparisonView}>
+      <ActiveViewContext.Provider
+        value={forceView || params.get("view") || activeView}
+      >
         <ViewSwitcher>
           {Object.entries(selections).map(([key, value]) => {
             return (
@@ -98,10 +104,16 @@ const ViewSwitch: ViewSwitch<
                 key={key}
                 onClick={() => {
                   setActiveView(key);
-                  navigate("/");
-                  setParams({ view: key });
+                  navigate({
+                    pathname: "/",
+                    search: `?${createSearchParams({
+                      view: key,
+                    })}`,
+                  });
                 }}
-                $active={key === comparisonView}
+                $active={
+                  key === (forceView || params.get("view") || activeView)
+                }
               >
                 {value}
               </SwitchOption>
@@ -133,14 +145,15 @@ const SwitchOption: React.FC<{
   );
 };
 
-const Outlet: React.FC<{ views: { [key: string]: React.ReactElement } }> = ({
-  views,
-}) => {
+const Outlet: React.FC<{
+  forceView: string | undefined;
+  views: { [key: string]: React.ReactElement };
+}> = ({ forceView, views }) => {
   const activeView = useContext(ActiveViewContext);
   const [params] = useSearchParams();
 
   return Object.entries(views)
-    .filter(([key]) => key === (params.get("view") || activeView))
+    .filter(([key]) => key === (forceView || params.get("view") || activeView))
     .map(([, value]) => value);
 };
 

@@ -33,7 +33,18 @@ export const signup = async ({
 } | null> => {
   if (!email || !firstName || !lastName || !password) return null;
 
-  const { data, error } = await supabase.auth.signUp({ email, password });
+  const { data, error } = await supabase.auth.signUp({
+    email,
+    password,
+    options: {
+      data: {
+        first_name_at_signup: firstName,
+        last_name_at_signup: lastName,
+      },
+      emailRedirectTo:
+        "https://firecracker.matthewlukechristopher.com/app/verified",
+    },
+  });
 
   if (error) throw new Error(error.message);
 
