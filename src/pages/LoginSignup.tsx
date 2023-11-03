@@ -4,9 +4,7 @@ import PageHeading from "../ui/PageHeading";
 import LoginForm from "../features/authentication/LoginForm";
 import ViewSwitch from "../ui/ViewSwitch";
 import SignupForm from "../features/authentication/SignupForm";
-import { createSearchParams, useNavigate, useParams } from "react-router-dom";
-import toast from "react-hot-toast";
-import { useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 const StyledLoginSignup = styled.div`
   width: 100%;
@@ -26,21 +24,6 @@ const FormContainer = styled.main`
 
 const LoginSignup: React.FC = () => {
   const { success } = useParams();
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    console.log(success);
-    if (success === "verified") {
-      toast.success("Verified! You may now log in.");
-
-      navigate({
-        pathname: "/",
-        search: `?${createSearchParams({
-          view: "login",
-        })}`,
-      });
-    }
-  }, [navigate, success]);
 
   return (
     <StyledLoginSignup>
@@ -56,6 +39,17 @@ const LoginSignup: React.FC = () => {
             login: (
               <div key="login">
                 <PageHeading>Log in to your account</PageHeading>
+                {success === "verified" && (
+                  <p
+                    style={{
+                      fontSize: "1.4rem",
+                      padding: "1.2rem 0",
+                      fontWeight: "500",
+                    }}
+                  >
+                    Email verified. You may now log in.
+                  </p>
+                )}
                 <FormContainer>
                   <LoginForm />
                 </FormContainer>
