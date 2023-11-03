@@ -1,4 +1,5 @@
 import { createContext, useContext, useState } from "react";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import styled, { css } from "styled-components";
 
 const StyledViewSwitchContainer = styled.section`
@@ -79,16 +80,28 @@ const ViewSwitch: ViewSwitch<
     Object.keys(selections)[0]
   );
 
+  const [params, setParams] = useSearchParams();
+
+  const { success } = useParams();
+  const navigate = useNavigate();
+
+  const comparisonView =
+    params.get("view") || (success ? "signup" : activeView);
+
   return (
     <StyledViewSwitchContainer>
-      <ActiveViewContext.Provider value={activeView}>
+      <ActiveViewContext.Provider value={comparisonView}>
         <ViewSwitcher>
           {Object.entries(selections).map(([key, value]) => {
             return (
               <SwitchOption
                 key={key}
-                onClick={() => setActiveView(key)}
-                $active={key === activeView}
+                onClick={() => {
+                  setActiveView(key);
+                  navigate("/");
+                  setParams({ view: key });
+                }}
+                $active={key === comparisonView}
               >
                 {value}
               </SwitchOption>
@@ -124,9 +137,10 @@ const Outlet: React.FC<{ views: { [key: string]: React.ReactElement } }> = ({
   views,
 }) => {
   const activeView = useContext(ActiveViewContext);
+  const [params] = useSearchParams();
 
   return Object.entries(views)
-    .filter(([key]) => key === activeView)
+    .filter(([key]) => key === (params.get("view") || activeView))
     .map(([, value]) => value);
 };
 

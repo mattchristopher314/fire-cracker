@@ -26,19 +26,19 @@ const LoginSignup: React.FC = () => {
     <StyledLoginSignup>
       <Logo size="large" />
 
-      <ViewSwitch selections={{ 1: "Log in", 2: "Sign up" }}>
+      <ViewSwitch selections={{ login: "Log in", signup: "Sign up" }}>
         <ViewSwitch.Outlet
           views={{
-            1: (
-              <div key={1}>
+            login: (
+              <div key="login">
                 <PageHeading>Log in to your account</PageHeading>
                 <FormContainer>
                   <LoginForm />
                 </FormContainer>
               </div>
             ),
-            2: (
-              <div key={2}>
+            signup: (
+              <div key="signup">
                 <PageHeading>Sign up</PageHeading>
                 <FormContainer>
                   <SignupForm />
