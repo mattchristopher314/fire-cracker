@@ -2,6 +2,7 @@ import { User, Session } from "@supabase/supabase-js";
 import { LoginProps } from "../features/authentication/useLogin";
 import { supabase } from "./supabase";
 import { SignupProps } from "../features/authentication/useSignup";
+import { BASE_URL } from "../utils/constants";
 
 export interface UserData {
   user: User | null;
@@ -41,8 +42,7 @@ export const signup = async ({
         first_name_at_signup: firstName,
         last_name_at_signup: lastName,
       },
-      emailRedirectTo:
-        "https://firecracker.matthewlukechristopher.com/app/verified",
+      emailRedirectTo: `${BASE_URL}/app/verified`,
     },
   });
 
