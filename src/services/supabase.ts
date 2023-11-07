@@ -19,6 +19,7 @@ export interface PBJSONData {
   oddsReciprocal: number;
   prizeAllocations: { value: number; number: number }[];
   averageRatePercentage: number;
+  nextDraw: string;
 }
 
 export interface TaxJSONData {

@@ -5,6 +5,7 @@ import Accordion from "../ui/Accordion";
 import Spinner from "../ui/Spinner";
 import { useHolding } from "../hooks/useHolding";
 import PremiumBondHolding from "../features/premium-bonds/PremiumBondHolding";
+import PremiumBondsStatsLayout from "../features/premium-bonds/PremiumBondsStatsLayout";
 
 const PremiumBonds: React.FC = () => {
   const { isLoading: isLoadingStats, data } = usePremiumBondsStats();
@@ -31,14 +32,7 @@ const PremiumBonds: React.FC = () => {
         setHolding={setHolding}
       ></PremiumBondHolding>
 
-      <div>
-        <p>Headline Rate: {data.data.averageRatePercentage}%</p>
-        <p>Prize Probability per Bond: 1/{data.data.oddsReciprocal}</p>
-        <p>
-          Probability of winning at least once per draw:{" "}
-          {1 - (1 - 1 / data.data.oddsReciprocal) ** (holding || 0)}
-        </p>
-      </div>
+      <PremiumBondsStatsLayout holding={holding} data={data.data} />
 
       <Accordion multiopen>
         <Accordion.AccordionItem title="Stats" id={1}>
