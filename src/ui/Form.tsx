@@ -44,6 +44,10 @@ const StyledForm = styled.form<{ type?: string }>`
     props.type === "modal" &&
     css`
       max-width: 80rem;
+
+      ${StyledRow} {
+        border-bottom: none !important;
+      }
     `}
     
   font-size: 1.4rem;
