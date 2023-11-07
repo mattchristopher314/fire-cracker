@@ -1,10 +1,11 @@
 import styled from "styled-components";
-import { breaks } from "../../styles/GlobalStyles";
+
 import MiniSpinner from "../../ui/MiniSpinner";
 import { useProfileData } from "../../context/useProfileData";
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import { supabaseUrl } from "../../services/supabase";
+import { breaks } from "../../utils/constants";
 
 const UserAvatar = styled.img`
   .unloaded & {
@@ -101,26 +102,6 @@ const StyledLoadedUserContainer = styled.div`
   .active &::after,
   &:hover::after {
     transform: translateX(-0.35rem);
-  }
-
-  @keyframes pulseInner {
-    from {
-      transform: translateX(-0.2rem) scale(0);
-    }
-
-    to {
-      transform: translateX(-0.2rem);
-    }
-  }
-
-  @keyframes pulseOuter {
-    from {
-      transform: translateX(-0.35rem) scale(0);
-    }
-
-    to {
-      transform: translateX(-0.35rem);
-    }
   }
 `;
 

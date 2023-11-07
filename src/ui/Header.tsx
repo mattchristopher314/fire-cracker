@@ -1,7 +1,7 @@
 import { styled } from "styled-components";
 import HeaderMenu from "./HeaderMenu";
 import User from "../features/authentication/User";
-import { breaks } from "../styles/GlobalStyles";
+import { breaks } from "../utils/constants";
 
 const StyledHeader = styled.header`
   background-color: var(--color-slate-0);

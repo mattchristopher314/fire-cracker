@@ -12,3 +12,13 @@ const mode = import.meta.env.MODE;
 export const BASE_URL = isValidMode(mode)
   ? baseUrls[mode]
   : baseUrls["development"];
+
+export const NAV_TRANSITION_DURATION = 300;
+
+export const breaks = {
+  AppWideStackPoint: "(max-width: 75em)",
+  AppNavPoint: "(max-width: 58em)",
+  AppFullWidthNavPoint: "(max-width: 39em)",
+  AppMinNavPoint: "(max-width: 31em)",
+  AppCompactPoint: "(max-width: 20em)",
+};

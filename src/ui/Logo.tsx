@@ -1,6 +1,6 @@
 import { NavLink, To } from "react-router-dom";
 import styled, { css } from "styled-components";
-import { breaks } from "../styles/GlobalStyles";
+import { breaks } from "../utils/constants";
 
 const StyledLogo = styled.div`
   text-align: center;

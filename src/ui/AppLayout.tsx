@@ -3,11 +3,11 @@ import { styled } from "styled-components";
 
 import { useLocationAsTitle } from "../hooks/useLocationAsTitle";
 
-import { breaks } from "../styles/GlobalStyles";
 import Header from "./Header";
 import Navigation from "./Navigation";
 import { ProfileProvider } from "../context/ProfileProvider";
 import Container from "./Container";
+import { breaks } from "../utils/constants";
 
 const StyledAppLayout = styled.div`
   position: relative;

@@ -1,9 +1,10 @@
 import React from "react";
 import styled, { css } from "styled-components";
-import { breaks } from "../styles/GlobalStyles";
+
 import StandardInput from "./Input";
 import Button from "./Button";
 import FileUpload from "./FileUpload";
+import { breaks } from "../utils/constants";
 
 type FormParent<T> = T & {
   Row: React.FC<{
@@ -42,7 +43,7 @@ const StyledForm = styled.form<{ type?: string }>`
   ${(props) =>
     props.type === "modal" &&
     css`
-      width: 80rem;
+      max-width: 80rem;
     `}
     
   font-size: 1.4rem;

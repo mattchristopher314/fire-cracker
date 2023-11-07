@@ -1,49 +1,14 @@
 import styled from "styled-components";
 import MainNav from "./MainNav";
 import Logo from "./Logo";
-import { breaks } from "../styles/GlobalStyles";
+
 import NavigationDrawer from "./NavigationDrawer";
 import { useState } from "react";
 import IconButton from "./IconButton";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { useClickOut } from "../hooks/useClickOut";
-
-const NAV_TRANSITION_DURATION = 300;
-
-const Overlay = styled.div<{ $show?: boolean }>`
-  width: 100dvw;
-  height: 100dvh;
-  background-color: rgba(0, 0, 0, 0.01);
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
-
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-
-  position: absolute;
-  left: 0;
-  top: 0;
-  z-index: 1;
-
-  &.should-transition-nav {
-    transition: transform ${NAV_TRANSITION_DURATION}ms ease-in-out,
-      opacity ${NAV_TRANSITION_DURATION}ms ease-in-out,
-      visibility ${NAV_TRANSITION_DURATION}ms ease-in-out;
-  }
-
-  @media ${breaks.AppNavPoint} {
-    opacity: ${(props) => (props.$show ? 1 : 0)};
-    visibility: ${(props) => (props.$show ? "visible" : "hidden")};
-    pointer-events: ${(props) => (props.$show ? "auto" : "none")};
-  }
-
-  @media ${breaks.AppFullWidthNavPoint} {
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-  }
-`;
+import { NAV_TRANSITION_DURATION, breaks } from "../utils/constants";
+import { Overlay } from "./Overlay";
 
 const StyledNavigation = styled.aside<{ $show?: boolean }>`
   grid-row: 1 / -1;

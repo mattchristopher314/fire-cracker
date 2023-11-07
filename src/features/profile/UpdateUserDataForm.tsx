@@ -7,6 +7,8 @@ import toast from "react-hot-toast";
 import { useForm } from "react-hook-form";
 import { useProfileData } from "../../context/useProfileData";
 import { useUserData } from "../../context/useUserData";
+import Modal from "../../ui/Modal";
+import DeleteAccountForm from "../authentication/DeleteAccountForm";
 
 type FormValues = {
   email: string | undefined;
@@ -141,6 +143,19 @@ const UpdateUserDataForm: React.FC = () => {
         >
           Reset
         </Button>
+
+        <Modal>
+          <Modal.Opener opens="delete-account">
+            <Button type="button" $size="large" $variation="danger">
+              Delete account
+            </Button>
+          </Modal.Opener>
+
+          <Modal.Window windowName="delete-account">
+            <DeleteAccountForm onCloseModal={() => {}} />
+          </Modal.Window>
+        </Modal>
+
         <Button $size="large" disabled={updateProfileMutation.isLoading}>
           Update account
         </Button>

@@ -1,7 +1,7 @@
 import { Bars3Icon } from "@heroicons/react/24/outline";
 import IconButton from "./IconButton";
 import styled from "styled-components";
-import { breaks } from "../styles/GlobalStyles";
+import { breaks } from "../utils/constants";
 
 const DrawerContainer = styled.div`
   grid-column: 1;
