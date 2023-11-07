@@ -38,7 +38,7 @@ export async function updateHolding({
 
   const { data: result, error } = await supabase
     .from("holdings")
-    .update({ description, quantity, data })
+    .upsert({ id: user?.id || "", vehicle, description, quantity, data })
     .eq("id", user?.id || "")
     .eq("vehicle", vehicle)
     .select();
