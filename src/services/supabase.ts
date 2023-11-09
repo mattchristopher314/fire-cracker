@@ -26,6 +26,10 @@ export interface TaxJSONData {
   rates: { bandLower?: number; bandUpper?: number; rate: number }[];
 }
 
+export interface SettingsJSONData {
+  income: number | undefined;
+}
+
 export interface Database {
   public: {
     Tables: {
@@ -85,6 +89,7 @@ export interface Database {
           {
             foreignKeyName: "holdings_id_fkey";
             columns: ["id"];
+            isOneToOne: false;
             referencedRelation: "users";
             referencedColumns: ["id"];
           }
@@ -97,6 +102,7 @@ export interface Database {
           first_name: string | null;
           id: string;
           last_name: string | null;
+          settings: Json | null;
         };
         Insert: {
           avatar?: string | null;
@@ -104,6 +110,7 @@ export interface Database {
           first_name?: string | null;
           id: string;
           last_name?: string | null;
+          settings?: Json | null;
         };
         Update: {
           avatar?: string | null;
@@ -111,11 +118,13 @@ export interface Database {
           first_name?: string | null;
           id?: string;
           last_name?: string | null;
+          settings?: Json | null;
         };
         Relationships: [
           {
             foreignKeyName: "profiles_id_fkey";
             columns: ["id"];
+            isOneToOne: true;
             referencedRelation: "users";
             referencedColumns: ["id"];
           }

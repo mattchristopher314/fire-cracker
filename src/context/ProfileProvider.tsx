@@ -8,6 +8,7 @@ const defaultProfile = {
   first_name: "",
   last_name: "",
   avatar: "/default-user.jpg",
+  settings: {},
 };
 export const ProfileContext = createContext<{
   isLoading: boolean;

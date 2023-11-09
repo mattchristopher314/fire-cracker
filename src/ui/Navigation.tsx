@@ -28,7 +28,7 @@ const StyledNavigation = styled.aside<{ $show?: boolean }>`
     transition: transform ${NAV_TRANSITION_DURATION}ms ease-in-out,
       opacity ${NAV_TRANSITION_DURATION}ms ease-in-out,
       visibility ${NAV_TRANSITION_DURATION}ms ease-in-out,
-      background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+      background-color 0.2s ease-in-out, border-color 0.2s ease-in-out !important;
   }
 
   @media ${breaks.AppNavPoint} {

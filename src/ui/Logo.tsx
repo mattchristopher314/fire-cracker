@@ -12,7 +12,7 @@ const StyledNavLink = styled(NavLink)<{ $hasHoverEffect: boolean }>`
     text-decoration: none;
     color: var(--color-cyan-950);
 
-    transition: color 0.2s ease-in-out;
+    transition: color 0.2s ease-in-out !important;
   }
 
   ${(props) =>

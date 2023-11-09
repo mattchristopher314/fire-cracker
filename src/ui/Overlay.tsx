@@ -49,14 +49,11 @@ export const Overlay = styled.div<{ $type?: string; $show?: boolean }>`
         }
       }
 
-      ${
-        props.$show &&
-        css`
-          animation: fadeOut ${NAV_TRANSITION_DURATION}ms ease-in-out normal
-            forwards !important;
-        `
-      }import { useMoveBack } from "../hooks/useMoveBack";
-
+      ${props.$show &&
+      css`
+        animation: fadeOut ${NAV_TRANSITION_DURATION}ms ease-in-out normal
+          forwards !important;
+      `}
     `}
 
   ${(props) =>
@@ -70,7 +67,7 @@ export const Overlay = styled.div<{ $type?: string; $show?: boolean }>`
       &.should-transition-nav {
         transition: transform ${NAV_TRANSITION_DURATION}ms ease-in-out,
           opacity ${NAV_TRANSITION_DURATION}ms ease-in-out,
-          visibility ${NAV_TRANSITION_DURATION}ms ease-in-out;
+          visibility ${NAV_TRANSITION_DURATION}ms ease-in-out !important;
       }
 
       @media ${breaks.AppNavPoint} {

@@ -56,6 +56,7 @@ const PremiumBondHolding: React.FC<{
                 type="text"
                 inputMode="numeric"
                 pattern="[0-9]*"
+                title="Please enter a valid amount (numbers only)"
                 value={holding || ""}
                 size={6}
                 maxLength={6}
