@@ -45,6 +45,7 @@ export const Payload = styled.span`
   font-weight: 500;
   display: flex;
   align-items: center;
+  text-transform: capitalize;
 `;
 
 const MinorStat: React.FC<{
