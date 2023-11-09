@@ -4,7 +4,7 @@ import Form from "../../ui/Form";
 import { useSignup } from "./useSignup";
 import styled from "styled-components";
 import MiniSpinner from "../../ui/MiniSpinner";
-import { useNavigate, useParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 
 type FormValues = {
   email: string | undefined;
@@ -31,8 +31,8 @@ const SignupForm: React.FC = () => {
 
   const { signup, isSigningUp } = useSignup();
 
-  const { success } = useParams();
-  const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const success = searchParams.get("success");
 
   const onSubmit = ({
     email,
@@ -46,7 +46,9 @@ const SignupForm: React.FC = () => {
       { email, firstName, lastName, password },
       {
         onSuccess: () => {
-          navigate("/success");
+          setSearchParams(
+            (prev) => new URLSearchParams({ ...prev, success: "success" })
+          );
         },
         onSettled: () => {
           reset();

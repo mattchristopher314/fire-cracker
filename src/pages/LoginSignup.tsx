@@ -4,7 +4,7 @@ import PageHeading from "../ui/PageHeading";
 import LoginForm from "../features/authentication/LoginForm";
 import ViewSwitch from "../ui/ViewSwitch";
 import SignupForm from "../features/authentication/SignupForm";
-import { useParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 
 const StyledLoginSignup = styled.div`
   width: 100%;
@@ -23,7 +23,8 @@ const FormContainer = styled.main`
 `;
 
 const LoginSignup: React.FC = () => {
-  const { success } = useParams();
+  const [searchParams] = useSearchParams();
+  const success = searchParams.get("success");
 
   return (
     <StyledLoginSignup>

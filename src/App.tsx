@@ -70,7 +70,7 @@ const App: React.FC = () => {
               </Route>
 
               <Route
-                path="/:success?"
+                index
                 element={
                   <ProtectedRoute redirectUrl="/dashboard" noAuth>
                     <LoginSignup />
