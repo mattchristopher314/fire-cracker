@@ -22,6 +22,7 @@ import MiniSpinner from "./ui/MiniSpinner";
 import styled from "styled-components";
 import { UserProvider } from "./context/UserProvider";
 import LoginSignup from "./pages/LoginSignup";
+import DarkModeProvider from "./context/DarkModeContext";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -46,7 +47,7 @@ const StyledLoadingToastSpinnerContainer = styled.span`
 
 const App: React.FC = () => {
   return (
-    <>
+    <DarkModeProvider>
       <QueryClientProvider client={queryClient}>
         <ReactQueryDevtools initialIsOpen={false} />
 
@@ -134,7 +135,7 @@ const App: React.FC = () => {
           )}
         </Toaster>
       </QueryClientProvider>
-    </>
+    </DarkModeProvider>
   );
 };
 

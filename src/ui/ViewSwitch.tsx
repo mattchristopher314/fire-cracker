@@ -13,6 +13,7 @@ const StyledViewSwitchContainer = styled.section`
   border: 1px solid var(--color-slate-100);
   border-radius: var(--border-radius-md);
   overflow: hidden;
+  color: var(--color-slate-800);
 `;
 
 const Padder = styled.div`

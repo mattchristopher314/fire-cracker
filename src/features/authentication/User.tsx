@@ -30,7 +30,7 @@ const StyledUser = styled(NavLink)`
   align-items: center;
   font-weight: 500;
   font-size: 1.4rem;
-  color: var(--color-grey-600);
+  color: var(--color-slate-600);
 
   & ${UserAvatar} {
     transition: box-shadow 0.2s ease-in-out;

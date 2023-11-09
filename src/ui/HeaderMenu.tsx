@@ -3,6 +3,7 @@ import IconButton from "./IconButton";
 import { Cog6ToothIcon } from "@heroicons/react/24/outline";
 import { useNavigate } from "react-router-dom";
 import Logout from "../features/authentication/Logout";
+import DarkModeToggle from "./DarkModeToggle";
 
 const StyledHeaderMenu = styled.ul`
   display: flex;
@@ -17,6 +18,8 @@ const HeaderMenu: React.FC = () => {
       <IconButton onClick={() => navigate("/settings")}>
         <Cog6ToothIcon />
       </IconButton>
+
+      <DarkModeToggle />
 
       <Logout />
     </StyledHeaderMenu>

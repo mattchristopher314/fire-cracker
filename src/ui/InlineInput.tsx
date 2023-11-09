@@ -7,6 +7,7 @@ const InlineInput = styled.input`
   border-radius: 0;
   border: none;
   position: relative;
+  background-color: inherit;
 
   border-bottom: 1px solid var(--color-slate-400);
   padding: 0.8rem 1.2rem;
