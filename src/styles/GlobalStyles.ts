@@ -185,7 +185,7 @@ const GlobalStyles = createGlobalStyle`
       --color-green-950: #f0fdf4;
 
       /* Nav Background */
-      --color-slate-0-trans: rgba(0, 0, 0, 0.1);
+      --color-slate-0-trans: rgba(0, 0, 0, 0.9);
     }
 
     --border-radius-tiny: 3px;

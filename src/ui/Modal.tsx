@@ -17,6 +17,7 @@ const StyledModal = styled.section`
   top: 50%;
   left: 50%;
   max-width: 100%;
+  color: var(--color-slate-800);
 
   transform: translate(-50%, -50%);
   background-color: var(--color-slate-0);

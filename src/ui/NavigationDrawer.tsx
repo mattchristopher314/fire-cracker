@@ -7,6 +7,7 @@ const DrawerContainer = styled.div`
   grid-column: 1;
   grid-row: 1 / -1;
 
+  background-color: var(--color-slate-0);
   border-right: 1px solid var(--color-slate-200);
 
   display: none;
