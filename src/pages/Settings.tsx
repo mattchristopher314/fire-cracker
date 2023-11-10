@@ -1,20 +1,53 @@
+import styled from "styled-components";
 import UpdateUserSettingsForm from "../features/profile/UpdateUserSettingsForm";
+import { useProfileSettings } from "../features/profile/useProfileSettings";
 import Heading from "../ui/Heading";
 import Row from "../ui/Row";
+import Spinner from "../ui/Spinner";
+import { useTaxBand } from "../utils";
+import MinorStat from "../ui/MinorStat";
+import { BanknotesIcon } from "@heroicons/react/24/outline";
+import { breaks } from "../utils/constants";
+
+const SettingsInfoLayout = styled.section`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 24rem);
+  gap: 1.2rem 2.4rem;
+
+  @media ${breaks.AppMinNavPoint} {
+    grid-template-columns: repeat(auto-fit, minmax(24rem, 1fr));
+  }
+`;
 
 const Settings: React.FC = () => {
+  const { isLoading: isLoadingSettings, settings } = useProfileSettings([
+    "income",
+  ]);
+
+  const { isLoading: isLoadingTaxBand, data: taxBand } = useTaxBand(
+    Number(settings?.income)
+  );
+
+  const isLoading = isLoadingSettings || isLoadingTaxBand;
+
+  if (isLoading) return <Spinner />;
+
   return (
     <>
       <Heading as="h1">Settings</Heading>
 
       <Row>
         <Heading as="h3">Info</Heading>
-        <p>Tax band etc here.</p>
+        <SettingsInfoLayout>
+          <MinorStat icon={<BanknotesIcon />} title="Tax band" color="blue">
+            {taxBand}%
+          </MinorStat>
+        </SettingsInfoLayout>
       </Row>
 
       <Row>
         <Heading as="h3">Update Settings</Heading>
-        <UpdateUserSettingsForm />
+        <UpdateUserSettingsForm isLoading={isLoading} settings={settings} />
       </Row>
     </>
   );

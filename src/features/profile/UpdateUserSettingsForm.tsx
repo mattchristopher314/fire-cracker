@@ -1,10 +1,10 @@
 import Form from "../../ui/Form";
 import Input from "../../ui/Input";
-import { useProfileSettings } from "./useProfileSettings";
 
-const UpdateUserSettingsForm: React.FC = () => {
-  const { isLoading, settings } = useProfileSettings(["income"]);
-
+const UpdateUserSettingsForm: React.FC<{
+  isLoading: boolean;
+  settings: { [key: string]: string | undefined } | undefined;
+}> = ({ isLoading, settings }) => {
   return (
     <Form>
       <Form.Row label="Income per annum (£)">
