@@ -8,7 +8,7 @@ export function useProfileSettings<T extends readonly string[]>(
   const { user } = useUserData();
 
   const { isLoading, data: settings } = useQuery({
-    queryKey: ["profile", user?.id, settingsToFetch],
+    queryKey: ["settings", user?.id, settingsToFetch],
     queryFn: () => getProfileSettings(user?.id || "", settingsToFetch),
   });
 

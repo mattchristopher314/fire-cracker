@@ -18,7 +18,8 @@ export const useTaxBand = (
       data?.data.rates
         .filter(
           (rate) =>
-            (rate.bandLower || 0) <= income && income < (rate.bandUpper || 0)
+            (rate.bandLower || 0) <= income &&
+            income < (rate.bandUpper || Infinity)
         )
         .map((rate) => rate.rate)[0] || 0,
   };
