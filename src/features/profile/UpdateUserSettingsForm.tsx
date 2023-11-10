@@ -1,12 +1,9 @@
-import { useProfileData } from "../../context/useProfileData";
 import Form from "../../ui/Form";
 import Input from "../../ui/Input";
-import { getProfileSettings } from "./getProfileSettings";
+import { useProfileSettings } from "./useProfileSettings";
 
 const UpdateUserSettingsForm: React.FC = () => {
-  const { isLoading, profile } = useProfileData();
-
-  const { income } = getProfileSettings(profile);
+  const { isLoading, settings } = useProfileSettings(["income"]);
 
   return (
     <Form>
@@ -16,7 +13,7 @@ const UpdateUserSettingsForm: React.FC = () => {
           inputMode="numeric"
           pattern="[0-9]*"
           title="Please enter a valid income (numbers only)"
-          placeholder={isLoading ? "Loading..." : income?.toString() || ""}
+          placeholder={isLoading ? "Loading..." : settings?.["income"] || ""}
         />
       </Form.Row>
     </Form>
