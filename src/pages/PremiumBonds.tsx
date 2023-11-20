@@ -6,6 +6,7 @@ import Spinner from "../ui/Spinner";
 import { useHolding } from "../hooks/useHolding";
 import PremiumBondHolding from "../features/premium-bonds/PremiumBondHolding";
 import PremiumBondsStatsLayout from "../features/premium-bonds/PremiumBondsStatsLayout";
+import PremiumBondsReturnLayout from "../features/premium-bonds/PremiumBondsReturnLayout";
 
 const PremiumBonds: React.FC = () => {
   const { isLoading: isLoadingStats, data } = usePremiumBondsStats();
@@ -33,6 +34,8 @@ const PremiumBonds: React.FC = () => {
       ></PremiumBondHolding>
 
       <PremiumBondsStatsLayout holding={holding} data={data.data} />
+
+      <PremiumBondsReturnLayout data={data.data} />
 
       <Accordion multiopen>
         <Accordion.AccordionItem title="Stats" id={1}>

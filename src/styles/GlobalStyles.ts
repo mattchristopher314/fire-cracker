@@ -60,6 +60,19 @@ const GlobalStyles = createGlobalStyle`
       --color-blue-900: #1e3a8a;
       --color-blue-950: #172554;
 
+      /* Red */
+      --color-red-50: #fef2f2;
+      --color-red-100: #fee2e2;
+      --color-red-200: #fecaca;
+      --color-red-300: #fca5a5;
+      --color-red-400: #f87171;
+      --color-red-500: #ef4444;
+      --color-red-600: #dc2626;
+      --color-red-700: #b91c1c;
+      --color-red-800: #991b1b;
+      --color-red-900: #7f1d1d;
+      --color-red-950: #450a0a;
+
       /* Yellow */
       --color-yellow-50: #fefce8;
       --color-yellow-100: #fef9c3;
@@ -144,6 +157,19 @@ const GlobalStyles = createGlobalStyle`
       --color-blue-800: #bfdbfe;
       --color-blue-900: #dbeafe;
       --color-blue-950: #eff6ff;
+
+      /* Red */
+      --color-red-50: #450a0a;
+      --color-red-100: #7f1d1d;
+      --color-red-200: #991b1b;
+      --color-red-300: #b91c1c;
+      --color-red-400: #dc2626;
+      --color-red-500: #ef4444;
+      --color-red-600: #f87171;
+      --color-red-700: #fca5a5;
+      --color-red-800: #fecaca;
+      --color-red-900: #fee2e2;
+      --color-red-950: #fef2f2;
 
       /* Yellow */
       --color-yellow-50: #422006;
