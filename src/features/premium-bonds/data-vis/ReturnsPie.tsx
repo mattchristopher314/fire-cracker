@@ -73,6 +73,7 @@ const ReturnsPie: React.FC<{ holding: number | null; data: PBJSONData }> = ({
     (cur, obj) => cur + obj.probability,
     0
   );
+  console.log(totalFrequency);
   const otherThreshold = (totalFrequency * MINANGLE_OTHER_DEGREES) / 360;
 
   const filteredReturns = [
@@ -97,6 +98,8 @@ const ReturnsPie: React.FC<{ holding: number | null; data: PBJSONData }> = ({
             innerRadius={60}
             outerRadius={100}
             isAnimationActive={false}
+            startAngle={90}
+            endAngle={-450}
           >
             <Label
               position="center"
