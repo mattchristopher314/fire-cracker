@@ -37,7 +37,7 @@ const UpdateUserSettingsForm: React.FC<{
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
-      <Form.Row label="Income per annum (£)" error={errors?.income?.message}>
+      <Form.Row label="Taxable income/yr (£)" error={errors?.income?.message}>
         <Input
           type="text"
           inputMode="numeric"

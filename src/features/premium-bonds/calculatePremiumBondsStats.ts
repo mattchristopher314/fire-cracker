@@ -9,8 +9,14 @@ export type EstimatedReturn = {
 export const EstimateReturns: (
   holding: number | null,
   data: PBJSONData,
-  colors: Array<string>
-) => Array<EstimatedReturn> = (holding, data, colors) => {
+  colors: Array<string>,
+  months?: number
+) => Array<EstimatedReturn> = (
+  holding,
+  data,
+  colors = ["slate"],
+  months = 1
+) => {
   const allocations = [...data.prizeAllocations];
   allocations.sort((a, b) => a.value - b.value);
   const totalPrizes = data.prizeAllocations.reduce(
@@ -18,9 +24,10 @@ export const EstimateReturns: (
     0
   );
 
-  const winProb = 1 - (1 - 1 / data.oddsReciprocal) ** (holding || 0);
+  const winProb =
+    1 - (1 - 1 / data.oddsReciprocal) ** ((holding || 0) * months);
 
-  const MAX_PRIZE = 750;
+  const MAX_PRIZE = (((4500 * (holding || 0)) / 50000) * months) / 12;
   const PRIZE_INTERVAL = 25;
 
   let prize = 25;
@@ -34,12 +41,12 @@ export const EstimateReturns: (
           (data.prizeAllocations.find((obj) => (obj?.value || 0) == x)
             ?.number || 0)) /
           totalPrizes) *
-        (prize == x
-          ? Math.exp(-(holding || 0) / data.oddsReciprocal)
+        (prize - x == 0
+          ? Math.exp(-((holding || 0) * months) / data.oddsReciprocal)
           : probs.find((obj) => obj.value == prize - x)?.prob || 0);
     }
 
-    curProb *= (holding || 0) / (data.oddsReciprocal * prize);
+    curProb *= ((holding || 0) * months) / (data.oddsReciprocal * prize);
     probs.push({ value: prize, prob: curProb });
     prize += PRIZE_INTERVAL;
   }
@@ -58,4 +65,24 @@ export const EstimateReturns: (
       } as EstimatedReturn;
     }),
   ];
+};
+
+export const MedianReturn: (
+  predictedReturns: Array<EstimatedReturn>
+) => number = (predictedReturns) => {
+  const medians: Array<number> = [];
+
+  let prev = 0;
+  let aft = predictedReturns.reduce((acc, cur) => acc + cur.probability, 0);
+
+  predictedReturns.forEach((element) => {
+    aft -= element.probability;
+    if (prev < 0.5 && aft < 0.5) {
+      medians.push(Number(element.value));
+    }
+
+    prev += element.probability;
+  });
+
+  return medians.reduce((acc, cur) => acc + cur, 0) / medians.length;
 };

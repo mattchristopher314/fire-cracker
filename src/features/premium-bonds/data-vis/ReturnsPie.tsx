@@ -8,7 +8,6 @@ import {
   TooltipProps,
 } from "recharts";
 import styled from "styled-components";
-import { PBJSONData } from "../../../services/supabase";
 import {
   EstimateReturns,
   EstimatedReturn,
@@ -18,6 +17,7 @@ import {
   ValueType,
 } from "recharts/types/component/DefaultTooltipContent";
 import Empty from "../../../ui/Empty";
+import { PBJSONData } from "../../../services/supabase";
 
 const StyledPieContainer = styled.div`
   width: 100%;
@@ -57,29 +57,31 @@ const CustomTooltip: React.FC<TooltipProps<ValueType, NameType>> = ({
   return <Empty />;
 };
 
-const ReturnsPie: React.FC<{ holding: number | null; data: PBJSONData }> = ({
-  holding,
-  data,
-}) => {
-  const MINANGLE_OTHER_DEGREES = 3.5;
-
-  const predictedReturns: Array<EstimatedReturn> = EstimateReturns(
+const ReturnsPie: React.FC<{
+  holding: number | null;
+  data: PBJSONData;
+}> = ({ holding, data }) => {
+  const predictedMonthlyReturns: Array<EstimatedReturn> = EstimateReturns(
     holding,
     data,
     ["blue", "green", "yellow", "cyan", "lime"]
   );
 
-  const totalFrequency = predictedReturns.reduce(
+  const MINANGLE_OTHER_DEGREES = 3.5;
+
+  const totalFrequency = predictedMonthlyReturns.reduce(
     (cur, obj) => cur + obj.probability,
     0
   );
   const otherThreshold = (totalFrequency * MINANGLE_OTHER_DEGREES) / 360;
 
   const filteredReturns = [
-    ...predictedReturns.filter((ret) => ret.probability >= otherThreshold),
+    ...predictedMonthlyReturns.filter(
+      (ret) => ret.probability >= otherThreshold
+    ),
     {
       value: "Other",
-      probability: predictedReturns
+      probability: predictedMonthlyReturns
         .filter((ret) => ret.probability < otherThreshold)
         .reduce((cur, obj) => cur + obj.probability, 0),
       color: "red",
