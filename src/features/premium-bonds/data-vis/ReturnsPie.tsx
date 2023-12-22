@@ -56,16 +56,18 @@ const CustomTooltip: React.FC<TooltipProps<ValueType, NameType>> = ({
   return null;
 };
 
-const ReturnsPie: React.FC<{ data: PBJSONData }> = ({ data }) => {
-  const MINANGLE_OTHER_DEGREES = 4;
+const ReturnsPie: React.FC<{ holding: number | null; data: PBJSONData }> = ({
+  holding,
+  data,
+}) => {
+  const MINANGLE_OTHER_DEGREES = 3.5;
 
-  const predictedReturns: Array<EstimatedReturn> = EstimateReturns(data, [
-    "blue",
-    "green",
-    "yellow",
-    "cyan",
-    "lime",
-  ]);
+  const predictedReturns: Array<EstimatedReturn> = EstimateReturns(
+    holding,
+    data,
+    ["blue", "green", "yellow", "cyan", "lime"]
+  );
+  console.log(predictedReturns);
 
   const totalFrequency = predictedReturns.reduce(
     (cur, obj) => cur + obj.probability,

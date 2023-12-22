@@ -9,11 +9,14 @@ const StyledPremiumBondsReturnLayout = styled.section`
   gap: 1.2rem 2.4rem;
 `;
 
-const PremiumBondsReturnLayout: React.FC<{ data: PBJSONData }> = ({ data }) => {
+const PremiumBondsReturnLayout: React.FC<{
+  holding: number | null;
+  data: PBJSONData;
+}> = ({ holding, data }) => {
   return (
     <StyledPremiumBondsReturnLayout>
       <MajorStatContainer title="Monthly Win Probabilities">
-        <ReturnsPie data={data} />
+        <ReturnsPie holding={holding} data={data} />
       </MajorStatContainer>
 
       <MajorStatContainer title="Savings Account Comparison">

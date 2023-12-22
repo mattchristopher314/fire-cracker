@@ -35,7 +35,7 @@ const PremiumBonds: React.FC = () => {
 
       <PremiumBondsStatsLayout holding={holding} data={data.data} />
 
-      <PremiumBondsReturnLayout data={data.data} />
+      <PremiumBondsReturnLayout holding={holding} data={data.data} />
 
       <Accordion multiopen>
         <Accordion.AccordionItem title="Stats" id={1}>
