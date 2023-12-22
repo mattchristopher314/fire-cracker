@@ -17,6 +17,7 @@ import {
   NameType,
   ValueType,
 } from "recharts/types/component/DefaultTooltipContent";
+import Empty from "../../../ui/Empty";
 
 const StyledPieContainer = styled.div`
   width: 100%;
@@ -42,18 +43,18 @@ const CustomTooltip: React.FC<TooltipProps<ValueType, NameType>> = ({
   if (active && payload && payload.length) {
     return (
       <StyledPieTooltip>
-        <p>{`${payload[0].name === "Other" ? "" : "£"}${
-          payload[0].name
-        }: ${Number(payload[0].value).toPrecision(3)}`}</p>
+        <p>{`${payload[0].name === "Other" ? "" : "£"}${payload[0].name}: ${(
+          Number(payload[0].value) * 100
+        ).toPrecision(3)}% chance`}</p>
         <p>
-          You'll win this prize about once every{" "}
+          You'll win this amount about once every{" "}
           {Math.round(1 / Number(payload[0].value))} months.
         </p>
       </StyledPieTooltip>
     );
   }
 
-  return null;
+  return <Empty />;
 };
 
 const ReturnsPie: React.FC<{ holding: number | null; data: PBJSONData }> = ({
@@ -67,13 +68,11 @@ const ReturnsPie: React.FC<{ holding: number | null; data: PBJSONData }> = ({
     data,
     ["blue", "green", "yellow", "cyan", "lime"]
   );
-  console.log(predictedReturns);
 
   const totalFrequency = predictedReturns.reduce(
     (cur, obj) => cur + obj.probability,
     0
   );
-  console.log(totalFrequency);
   const otherThreshold = (totalFrequency * MINANGLE_OTHER_DEGREES) / 360;
 
   const filteredReturns = [
