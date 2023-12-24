@@ -23,7 +23,7 @@ self.onmessage = async (message) => {
     const winProb =
       1 - (1 - 1 / data.oddsReciprocal) ** ((holding || 0) * months);
 
-    const MAX_PRIZE = (((4500 * (holding || 0)) / 50000) * months) / 12;
+    const MAX_PRIZE = (((4000 * (holding || 0)) / 50000) * months) / 12 + 500;
     const PRIZE_INTERVAL = 25;
 
     let prize = 25;
