@@ -62,9 +62,11 @@ const ReturnsPie: React.FC<{
   const [predictedMonthlyReturns, setPredictedMonthlyReturns] = useState<
     Array<EstimatedReturn>
   >([]);
+  const [isLoadingAverageReturns, setIsLoadingAverageReturns] = useState(true);
 
   useEffect(() => {
     const worker = new Worker(new URL("./returns.worker", import.meta.url));
+    setIsLoadingAverageReturns(true);
 
     (async () => {
       worker.postMessage({
@@ -76,6 +78,7 @@ const ReturnsPie: React.FC<{
         const res = message.data;
 
         setPredictedMonthlyReturns(res);
+        setIsLoadingAverageReturns(false);
       });
     })();
 
@@ -106,7 +109,22 @@ const ReturnsPie: React.FC<{
   ];
 
   return (
-    <StyledPieContainer>
+    <StyledPieContainer style={{ position: "relative" }}>
+      {isLoadingAverageReturns && (holding || 0) > 20000 && (
+        <p
+          style={{
+            fontSize: "1.4rem",
+            position: "absolute",
+            left: "50%",
+            transform: "translateX(-50%)",
+            textAlign: "center",
+            color: "var(--color-slate-700)",
+            fontWeight: 500,
+          }}
+        >
+          Loading...
+        </p>
+      )}
       <ResponsiveContainer>
         <PieChart>
           <Pie
