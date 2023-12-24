@@ -8,16 +8,14 @@ import {
   TooltipProps,
 } from "recharts";
 import styled from "styled-components";
-import {
-  EstimateReturns,
-  EstimatedReturn,
-} from "../calculatePremiumBondsStats";
+import { EstimatedReturn } from "../calculatePremiumBondStats";
 import {
   NameType,
   ValueType,
 } from "recharts/types/component/DefaultTooltipContent";
 import Empty from "../../../ui/Empty";
 import { PBJSONData } from "../../../services/supabase";
+import { useEffect, useState } from "react";
 
 const StyledPieContainer = styled.div`
   width: 100%;
@@ -61,11 +59,30 @@ const ReturnsPie: React.FC<{
   holding: number | null;
   data: PBJSONData;
 }> = ({ holding, data }) => {
-  const predictedMonthlyReturns: Array<EstimatedReturn> = EstimateReturns(
-    holding,
-    data,
-    ["blue", "green", "yellow", "cyan", "lime"]
-  );
+  const [predictedMonthlyReturns, setPredictedMonthlyReturns] = useState<
+    Array<EstimatedReturn>
+  >([]);
+
+  useEffect(() => {
+    const worker = new Worker(new URL("./returns.worker", import.meta.url));
+
+    (async () => {
+      worker.postMessage({
+        holding,
+        data,
+        colours: ["blue", "green", "yellow", "cyan", "lime"],
+      });
+      worker.addEventListener("message", (message) => {
+        const res = message.data;
+
+        setPredictedMonthlyReturns(res);
+      });
+    })();
+
+    return () => {
+      worker.terminate();
+    };
+  }, [data, holding]);
 
   const MINANGLE_OTHER_DEGREES = 3.5;
 

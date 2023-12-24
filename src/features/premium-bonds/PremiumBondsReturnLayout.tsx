@@ -2,7 +2,9 @@ import styled from "styled-components";
 import MajorStatContainer from "../../ui/MajorStatContainer";
 import ReturnsPie from "./data-vis/ReturnsPie";
 import { PBJSONData } from "../../services/supabase";
-import { EstimateReturns, MedianReturn } from "./calculatePremiumBondsStats";
+import { useEffect, useState } from "react";
+import MiniSpinner from "../../ui/MiniSpinner";
+import { MedianReturn } from "./calculatePremiumBondStats";
 
 const StyledPremiumBondsReturnLayout = styled.section`
   display: grid;
@@ -14,9 +16,31 @@ const PremiumBondsReturnLayout: React.FC<{
   holding: number | null;
   data: PBJSONData;
 }> = ({ holding, data }) => {
-  const medianAnnualReturn = MedianReturn(
-    EstimateReturns(holding, data, ["slate"], 12)
-  );
+  const [medianAnnualReturn, setMedianAnnualReturn] = useState<number>(0);
+  const [isLoadingMedianAnnualReturn, setIsLoadingMedianAnnualReturn] =
+    useState(true);
+
+  useEffect(() => {
+    const worker = new Worker(
+      new URL("./data-vis/returns.worker", import.meta.url)
+    );
+
+    (async () => {
+      setIsLoadingMedianAnnualReturn(true);
+
+      worker.postMessage({ holding, data, colours: ["slate"], months: 12 });
+      worker.addEventListener("message", (message) => {
+        const res = message.data;
+
+        setMedianAnnualReturn(MedianReturn(res));
+        setIsLoadingMedianAnnualReturn(false);
+      });
+    })();
+
+    return () => {
+      worker.terminate();
+    };
+  }, [data, holding]);
 
   return (
     <StyledPremiumBondsReturnLayout>
@@ -28,9 +52,17 @@ const PremiumBondsReturnLayout: React.FC<{
             fontSize: "1.6rem",
             fontWeight: "500",
             color: "var(--color-slate-600)",
+            display: "inline-flex",
+            alignItems: "center",
+            gap: "0.8rem",
           }}
         >
-          Median annual return: £{medianAnnualReturn}
+          Median annual return:{" "}
+          {isLoadingMedianAnnualReturn && (holding || 0) > 20000 ? (
+            <MiniSpinner size="14px" />
+          ) : (
+            `£${medianAnnualReturn}`
+          )}
         </span>
       </MajorStatContainer>
 

@@ -14,6 +14,7 @@ const MiniSpinner = styled(BiLoaderAlt)<{ size: string }>`
       height: ${props.size};
     `}
 
+  color: inherit;
   animation: ${rotate} 1.5s infinite linear;
 `;
 
