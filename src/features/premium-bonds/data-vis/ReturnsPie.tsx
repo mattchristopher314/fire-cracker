@@ -39,6 +39,8 @@ const CustomTooltip: React.FC<TooltipProps<ValueType, NameType>> = ({
   payload,
 }) => {
   if (active && payload && payload.length) {
+    const months = Math.round(1 / Number(payload[0].value));
+
     return (
       <StyledPieTooltip>
         <p>{`${payload[0].name === "Other" ? "" : "£"}${payload[0].name}: ${(
@@ -46,7 +48,7 @@ const CustomTooltip: React.FC<TooltipProps<ValueType, NameType>> = ({
         ).toPrecision(3)}% chance`}</p>
         <p>
           You'll win this amount about once every{" "}
-          {Math.round(1 / Number(payload[0].value))} months.
+          {months > 1 ? `${months} months` : `month`}.
         </p>
       </StyledPieTooltip>
     );
