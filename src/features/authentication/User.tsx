@@ -33,7 +33,7 @@ const StyledUser = styled(NavLink)`
   color: var(--color-slate-600);
 
   & ${UserAvatar} {
-    transition: box-shadow 0.2s ease-in-out;
+    transition: box-shadow 0.2s ease-in-out !important;
   }
 
   &.active ${UserAvatar}, &:hover ${UserAvatar} {
@@ -83,7 +83,7 @@ const StyledLoadedUserContainer = styled.div`
     height: 3rem;
     z-index: 1;
     opacity: 0.65;
-    transform: translateX(-0.2rem) scale(0);
+    transform: translateX(-0.2rem) scale(0.75);
   }
 
   &::after {
@@ -91,7 +91,7 @@ const StyledLoadedUserContainer = styled.div`
     height: 3.3rem;
     z-index: 0;
     opacity: 0.35;
-    transform: translateX(-0.35rem) scale(0);
+    transform: translateX(-0.35rem) scale(0.75);
   }
 
   .active &::before,
@@ -107,7 +107,7 @@ const StyledLoadedUserContainer = styled.div`
 
 const StyledNameContainer = styled.span`
   vertical-align: middle;
-  line-height: 2.6rem;
+  line-height: 1.6rem;
 `;
 
 const User: React.FC = () => {
