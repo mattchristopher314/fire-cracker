@@ -11,6 +11,7 @@ const DrawerContainer = styled.div`
   border-right: 1px solid var(--color-slate-200);
 
   display: none;
+  border-bottom: 1px solid var(--color-slate-200);
 
   & svg {
     width: 3.2rem;
@@ -23,7 +24,6 @@ const DrawerContainer = styled.div`
 
   @media ${breaks.AppMinNavPoint} {
     grid-row: 1;
-    border-bottom: 1px solid var(--color-slate-200);
   }
 `;
 
