@@ -5,6 +5,7 @@ import { PBJSONData } from "../../services/supabase";
 import { useEffect, useState } from "react";
 import MiniSpinner from "../../ui/MiniSpinner";
 import { MedianReturn } from "./calculatePremiumBondStats";
+import PremiumBondsSavingsAccountComparison from "./PremiumBondsSavingsAccountComparison";
 
 const StyledPremiumBondsReturnLayout = styled.section`
   display: grid;
@@ -67,7 +68,10 @@ const PremiumBondsReturnLayout: React.FC<{
       </MajorStatContainer>
 
       <MajorStatContainer title="Savings Account Comparison">
-        Tax/Return breakdown
+        <PremiumBondsSavingsAccountComparison
+          holding={holding || 0}
+          medianAnnualReturn={medianAnnualReturn}
+        />
       </MajorStatContainer>
     </StyledPremiumBondsReturnLayout>
   );
