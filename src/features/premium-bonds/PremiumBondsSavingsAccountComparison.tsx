@@ -11,11 +11,13 @@ const PremiumBondsSavingsAccountComparison: React.FC<{
 }> = ({ holding, medianAnnualReturn }) => {
   return (
     <StyltedPremiumBondsSavingsAccountComparison>
-      Median interest rate:{" "}
-      {holding === 0
-        ? 0
-        : ((medianAnnualReturn / holding) * 100).toPrecision(3)}
-      %
+      <p>
+        Median interest rate:{" "}
+        {holding === 0
+          ? 0
+          : ((medianAnnualReturn / holding) * 100).toPrecision(3)}
+        %
+      </p>
       <Tooltip>
         <Tooltip.Main>Tax-adjusted rate (AER): 4.5%</Tooltip.Main>
         <Tooltip.Info>

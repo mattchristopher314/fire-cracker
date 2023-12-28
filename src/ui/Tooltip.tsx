@@ -46,6 +46,7 @@ const StyledInfoContainer = styled.div`
     position: absolute;
     left: 50%;
     top: 0;
+    transform-origin: center;
     transform: translate(-50%, -60%) rotate(-45deg);
     background-color: var(--color-slate-50);
     border: 1px solid var(--color-slate-300);
@@ -56,14 +57,17 @@ const StyledInfoContainer = styled.div`
 
 const StyledInfoButton = styled.span`
   display: block;
-  width: calc(16px + 1.6rem);
-  height: calc(16px + 1.6rem);
+  width: 32px;
+  height: 32px;
   cursor: help;
   padding: 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   & svg {
-    width: 100%;
-    height: 100%;
+    width: 16px;
+    height: 16px;
   }
 
   &:hover + ${StyledInfoContainer} {
