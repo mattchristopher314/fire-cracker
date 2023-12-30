@@ -8,6 +8,7 @@ import { useTaxBand } from "../utils";
 import MinorStat from "../ui/MinorStat";
 import { BanknotesIcon } from "@heroicons/react/24/outline";
 import { breaks } from "../utils/constants";
+import { TaxJSONData } from "../services/supabase";
 
 const SettingsInfoLayout = styled.section`
   display: grid;
@@ -40,7 +41,10 @@ const Settings: React.FC = () => {
         <Heading as="h3">Info</Heading>
         <SettingsInfoLayout>
           <MinorStat icon={<BanknotesIcon />} title="Tax band" color="blue">
-            {taxBand}%
+            {isLoadingTaxBand
+              ? (taxBand as string)
+              : (taxBand as TaxJSONData["rates"][number]).rate}
+            %
           </MinorStat>
         </SettingsInfoLayout>
       </Row>

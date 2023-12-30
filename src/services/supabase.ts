@@ -23,7 +23,12 @@ export interface PBJSONData {
 }
 
 export interface TaxJSONData {
-  rates: { bandLower?: number; bandUpper?: number; rate: number }[];
+  rates: {
+    bandLower?: number;
+    bandUpper?: number;
+    rate: number;
+    personalSavingsAllowance?: number;
+  }[];
 }
 
 export interface Database {
