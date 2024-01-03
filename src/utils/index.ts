@@ -22,14 +22,18 @@ export const useTaxBand = (
       data?.data.rates.filter(
         (rate) =>
           (rate.bandLower || 0) <= income &&
-          income < (rate.bandUpper || Infinity)
+          income <= (rate.bandUpper || Infinity)
       )?.[0] || "Loading...",
   };
 };
 
 export const useTaxableEquivalentAmount = (
   untaxedAmount: number
-): { isLoading: boolean; data: number | "Loading" } => {
+): {
+  isLoading: boolean;
+  data: number | "Loading";
+  taxFreeSavingsAllowance: number;
+} => {
   const { isLoading: isLoadingIncome, settings } = useProfileSettings([
     "income",
   ]);
@@ -44,15 +48,16 @@ export const useTaxableEquivalentAmount = (
   );
 
   if (isLoadingIncome || isLoadingRates || isLoadingTaxBand)
-    return { isLoading: true, data: "Loading" };
+    return { isLoading: true, data: "Loading", taxFreeSavingsAllowance: 0 };
 
-  const psa =
-    (taxBand as TaxJSONData["rates"][number]).personalSavingsAllowance ??
+  const taxFreeSavingsAllowance = Math.max(
+    (taxBand as TaxJSONData["rates"][number]).personalSavingsAllowance || 0,
     (rates?.data.rates[0].bandUpper || 0) +
       6000 -
-      (Number(settings?.income) || 0);
+      (Number(settings?.income) || 0)
+  );
 
-  const taxFree = Math.min(psa, untaxedAmount);
+  const taxFree = Math.min(taxFreeSavingsAllowance, untaxedAmount);
   const taxRate = (taxBand as TaxJSONData["rates"][number]).rate / 100;
 
   return {
@@ -60,6 +65,7 @@ export const useTaxableEquivalentAmount = (
     data:
       taxFree +
       (untaxedAmount - taxFree) /
-        (1 - (taxRate === 0 ? rates?.data.rates[0].rate || 1 : taxRate)),
+        (1 - (taxRate === 0 ? rates?.data.rates[0].rate ?? 0 : taxRate)),
+    taxFreeSavingsAllowance,
   };
 };

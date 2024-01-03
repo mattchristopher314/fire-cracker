@@ -4,9 +4,9 @@ import { useProfileSettings } from "../features/profile/useProfileSettings";
 import Heading from "../ui/Heading";
 import Row from "../ui/Row";
 import Spinner from "../ui/Spinner";
-import { useTaxBand } from "../utils";
+import { useTaxBand, useTaxableEquivalentAmount } from "../utils";
 import MinorStat from "../ui/MinorStat";
-import { BanknotesIcon } from "@heroicons/react/24/outline";
+import { BanknotesIcon, ChartPieIcon } from "@heroicons/react/24/outline";
 import { breaks } from "../utils/constants";
 import { TaxJSONData } from "../services/supabase";
 
@@ -29,7 +29,11 @@ const Settings: React.FC = () => {
     Number(settings?.income)
   );
 
-  const isLoading = isLoadingSettings || isLoadingTaxBand;
+  const { isLoading: isLoadingTaxFreeInterest, taxFreeSavingsAllowance } =
+    useTaxableEquivalentAmount(0);
+
+  const isLoading =
+    isLoadingSettings || isLoadingTaxBand || isLoadingTaxFreeInterest;
 
   if (isLoading) return <Spinner />;
 
@@ -45,6 +49,14 @@ const Settings: React.FC = () => {
               ? (taxBand as string)
               : (taxBand as TaxJSONData["rates"][number]).rate}
             %
+          </MinorStat>
+
+          <MinorStat
+            icon={<ChartPieIcon />}
+            title="Tax-free Interest"
+            color="green"
+          >
+            £{taxFreeSavingsAllowance}
           </MinorStat>
         </SettingsInfoLayout>
       </Row>
