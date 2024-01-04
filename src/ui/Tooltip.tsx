@@ -29,8 +29,9 @@ const StyledInfoContainer = styled.div`
   padding: 0.8rem;
   z-index: 1;
   right: 0;
-  transform: translate(calc(50% - 16px), calc(100% - 16px));
+  transform: translate(calc(50% - 16px), calc(50% + 12px));
   font-size: 80%;
+  width: 70%;
 
   &:hover {
     cursor: help;
@@ -47,7 +48,7 @@ const StyledInfoContainer = styled.div`
     left: 50%;
     top: 0;
     transform-origin: center;
-    transform: translate(-50%, -60%) rotate(-45deg);
+    transform: translate(calc(-50% - 0.5px), -60%) rotate(-45deg);
     background-color: var(--color-slate-50);
     border: 1px solid var(--color-slate-300);
     border-left: none;
