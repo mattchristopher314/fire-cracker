@@ -7,23 +7,22 @@ export const useTaxBand = (
   income: number
 ): {
   isLoading: boolean;
-  data: TaxJSONData["rates"][number] | "Loading...";
+  data: TaxJSONData["rates"][number] | undefined;
 } => {
   const { isLoading, data } = useQuery({
     queryKey: ["stats", PossibleStats.TAX],
     queryFn: () => getStats<TaxJSONData>(PossibleStats.TAX),
   });
 
-  if (isLoading) return { isLoading: true, data: "Loading..." };
+  if (isLoading) return { isLoading: true, data: undefined };
 
   return {
     isLoading: false,
-    data:
-      data?.data.rates.filter(
-        (rate) =>
-          (rate.bandLower || 0) <= income &&
-          income <= (rate.bandUpper || Infinity)
-      )?.[0] || "Loading...",
+    data: data?.data.rates.filter(
+      (rate) =>
+        (rate.bandLower || 0) <= income &&
+        income <= (rate.bandUpper || Infinity)
+    )?.[0],
   };
 };
 
@@ -31,8 +30,8 @@ export const useTaxableEquivalentAmount = (
   untaxedAmount: number
 ): {
   isLoading: boolean;
-  data: number | "Loading";
-  taxFreeSavingsAllowance: number;
+  data: number | undefined;
+  taxFreeSavingsAllowance: number | undefined;
 } => {
   const { isLoading: isLoadingIncome, settings } = useProfileSettings([
     "income",
@@ -48,7 +47,11 @@ export const useTaxableEquivalentAmount = (
   );
 
   if (isLoadingIncome || isLoadingRates || isLoadingTaxBand)
-    return { isLoading: true, data: "Loading", taxFreeSavingsAllowance: 0 };
+    return {
+      isLoading: true,
+      data: undefined,
+      taxFreeSavingsAllowance: undefined,
+    };
 
   const taxFreeSavingsAllowance = Math.max(
     (taxBand as TaxJSONData["rates"][number]).personalSavingsAllowance || 0,
