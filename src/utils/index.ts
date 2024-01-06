@@ -54,14 +54,14 @@ export const useTaxableEquivalentAmount = (
     };
 
   const taxFreeSavingsAllowance = Math.max(
-    (taxBand as TaxJSONData["rates"][number]).personalSavingsAllowance || 0,
+    (taxBand as TaxJSONData["rates"][number])?.personalSavingsAllowance || 0,
     (rates?.data.rates[0].bandUpper || 0) +
       6000 -
       (Number(settings?.income) || 0)
   );
 
   const taxFree = Math.min(taxFreeSavingsAllowance, untaxedAmount);
-  const taxRate = (taxBand as TaxJSONData["rates"][number]).rate / 100;
+  const taxRate = (taxBand as TaxJSONData["rates"][number])?.rate / 100;
 
   return {
     isLoading: false,

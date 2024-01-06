@@ -47,7 +47,7 @@ const Settings: React.FC = () => {
           <MinorStat icon={<BanknotesIcon />} title="Tax band" color="blue">
             {isLoadingTaxBand
               ? "Loading..."
-              : (taxBand as TaxJSONData["rates"][number]).rate}
+              : (taxBand as TaxJSONData["rates"][number])?.rate}
             %
           </MinorStat>
 
