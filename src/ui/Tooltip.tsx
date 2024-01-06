@@ -32,6 +32,7 @@ const StyledInfoContainer = styled.div`
   transform: translate(calc(50% - 16px), calc(50% + 12px));
   font-size: 80%;
   width: 70%;
+  line-height: 1.2;
 
   &:hover {
     cursor: help;
@@ -57,7 +58,6 @@ const StyledInfoContainer = styled.div`
 `;
 
 const StyledInfoButton = styled.span`
-  display: block;
   width: 32px;
   height: 32px;
   cursor: help;
@@ -65,6 +65,7 @@ const StyledInfoButton = styled.span`
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
 
   & svg {
     width: 16px;
