@@ -72,7 +72,7 @@ const StyledLoadedUserContainer = styled.div`
     content: "";
     background: var(--color-brand-lo);
     position: absolute;
-    left: 0;
+    top: 50%;
     border-radius: 50%;
 
     transition: transform 0.4s cubic-bezier(0.6, -0.7, 0.4, 1.7);
@@ -83,7 +83,7 @@ const StyledLoadedUserContainer = styled.div`
     height: 3rem;
     z-index: 1;
     opacity: 0.65;
-    transform: translateX(-0.2rem) scale(0.75);
+    transform: translate(-0.2rem, -50%) scale(0.75);
   }
 
   &::after {
@@ -91,17 +91,17 @@ const StyledLoadedUserContainer = styled.div`
     height: 3.3rem;
     z-index: 0;
     opacity: 0.35;
-    transform: translateX(-0.35rem) scale(0.75);
+    transform: translate(-0.35rem, -50%) scale(0.75);
   }
 
   .active &::before,
   &:hover::before {
-    transform: translateX(-0.2rem);
+    transform: translate(-0.2rem, -50%);
   }
 
   .active &::after,
   &:hover::after {
-    transform: translateX(-0.35rem);
+    transform: translate(-0.35rem, -50%);
   }
 `;
 
