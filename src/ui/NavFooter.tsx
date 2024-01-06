@@ -9,6 +9,7 @@ const StyledFooter = styled.footer`
   flex-direction: column;
   justify-content: space-between;
   gap: 0.8rem;
+  margin-top: auto;
 
   & p {
     line-height: 1.2;
