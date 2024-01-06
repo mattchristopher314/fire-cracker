@@ -6,6 +6,10 @@ import {
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
+const StyledNav = styled.nav`
+  overflow-y: scroll;
+`;
+
 const NavList = styled.ul`
   display: flex;
   flex-direction: column;
@@ -56,7 +60,7 @@ const MainNav: React.FC<{
   onClick?: React.MouseEventHandler<HTMLLIElement>;
 }> = ({ onClick }) => {
   return (
-    <nav>
+    <StyledNav>
       <NavList>
         <li onClick={onClick}>
           <StyledNavLink to="/dashboard">
@@ -79,7 +83,7 @@ const MainNav: React.FC<{
           </StyledNavLink>
         </li>
       </NavList>
-    </nav>
+    </StyledNav>
   );
 };
 

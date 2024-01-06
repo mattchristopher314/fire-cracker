@@ -9,6 +9,7 @@ import { XMarkIcon } from "@heroicons/react/24/outline";
 import { useClickOut } from "../hooks/useClickOut";
 import { NAV_TRANSITION_DURATION, breaks } from "../utils/constants";
 import { Overlay } from "./Overlay";
+import NavFooter from "./NavFooter";
 
 const StyledNavigation = styled.aside<{ $show?: boolean }>`
   grid-row: 1 / -1;
@@ -20,6 +21,7 @@ const StyledNavigation = styled.aside<{ $show?: boolean }>`
   display: flex;
   flex-direction: column;
   gap: 3.2rem;
+  height: 100dvh;
 
   position: relative;
   z-index: 2;
@@ -42,7 +44,6 @@ const StyledNavigation = styled.aside<{ $show?: boolean }>`
     position: absolute;
     top: 0;
     left: 0;
-    min-height: 100dvh;
 
     width: min(100%, 45rem);
 
@@ -123,6 +124,7 @@ const Navigation: React.FC = () => {
 
         <Logo onClick={closeNav} to="/dashboard" />
         <MainNav onClick={closeNav} />
+        <NavFooter />
       </StyledNavigation>
     </>
   );
