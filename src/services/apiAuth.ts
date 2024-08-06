@@ -69,19 +69,27 @@ export const deleteCurrentUser = async (
   const user = await getCurrentUser();
 
   if (!user || confirmAddress !== user.email) {
-    throw new Error("Could not validate");
+    throw new Error("Could not validate email");
   }
 
-  const { data, error } = await supabase
+  const { data: existingContentList, error: existingContentError } =
+    await supabase.storage.from("avatars").list(`${user.id}`);
+  const { error: removeError } = await supabase.storage
+    .from("avatars")
+    .remove(existingContentList?.map((x) => `${user.id}/${x.name}`) || []);
+
+  const { data, error: userDeleteError } = await supabase
     .from("profiles")
     .delete()
     .eq("id", user?.id || "")
     .select()
     .single();
 
-  logout();
+  if (existingContentError) throw new Error(existingContentError.message);
+  if (removeError) throw new Error(removeError.message);
+  if (userDeleteError) throw new Error(userDeleteError.message);
 
-  if (error) throw new Error(error.message);
+  logout();
 
   return data;
 };
