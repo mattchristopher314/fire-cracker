@@ -9,7 +9,7 @@ import PremiumBondsSavingsAccountComparison from "./PremiumBondsSavingsAccountCo
 
 const StyledPremiumBondsReturnLayout = styled.section`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(36rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(24rem, 1fr));
   gap: 1.2rem 2.4rem;
 `;
 
