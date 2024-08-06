@@ -57,10 +57,17 @@ export const updateCurrentUser = async ({
     if (error) throw new Error(error.message);
 
     if (avatar && avatarPath) {
+      const { data: existingContentList, error: existingContentError } =
+        await supabase.storage.from("avatars").list(`${user.id}`);
+      const { error: removeError } = await supabase.storage
+        .from("avatars")
+        .remove(existingContentList?.map((x) => `${user.id}/${x.name}`) || []);
       const { error: uploadError } = await supabase.storage
         .from("avatars")
         .upload(avatarPath, avatar);
 
+      if (existingContentError) throw new Error(existingContentError.message);
+      if (removeError) throw new Error(removeError.message);
       if (uploadError) throw new Error(uploadError.message);
     }
 
