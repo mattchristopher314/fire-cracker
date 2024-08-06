@@ -25,6 +25,10 @@ const variations = {
     color: var(--color-cyan-50);
     background-color: var(--color-brand-lo);
 
+    .dark-mode & {
+      color: var(--color-cyan-950);
+    }
+
     &:hover {
       background-color: var(--color-brand-lo-hover);
     }

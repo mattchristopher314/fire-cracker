@@ -5,17 +5,25 @@ import LoginForm from "../features/authentication/LoginForm";
 import ViewSwitch from "../ui/ViewSwitch";
 import SignupForm from "../features/authentication/SignupForm";
 import { useSearchParams } from "react-router-dom";
+import DarkModeToggle from "../ui/DarkModeToggle";
 
 const StyledLoginSignup = styled.div`
   width: 100%;
   min-height: 100dvh;
-  background-color: var(--color-slate-50);
+  background-color: var(--color-slate-100);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 3.2rem;
   padding: 2.4rem;
+`;
+
+const StyledDarkModeToggle = styled.div`
+  position: fixed;
+  top: 0;
+  right: 0;
+  padding: 1.2rem;
 `;
 
 const FormContainer = styled.main`
@@ -28,6 +36,10 @@ const LoginSignup: React.FC = () => {
 
   return (
     <StyledLoginSignup>
+      <StyledDarkModeToggle>
+        <DarkModeToggle size="3.2rem" $background="--color-slate-200" />
+      </StyledDarkModeToggle>
+
       <Logo size="large" />
 
       <ViewSwitch

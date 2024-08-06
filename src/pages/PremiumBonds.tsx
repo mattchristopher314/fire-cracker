@@ -7,6 +7,7 @@ import { useHolding } from "../hooks/useHolding";
 import PremiumBondHolding from "../features/premium-bonds/PremiumBondHolding";
 import PremiumBondsStatsLayout from "../features/premium-bonds/PremiumBondsStatsLayout";
 import PremiumBondsReturnLayout from "../features/premium-bonds/PremiumBondsReturnLayout";
+import Heading from "../ui/Heading";
 
 const PremiumBonds: React.FC = () => {
   const { isLoading: isLoadingStats, data } = usePremiumBondsStats();
@@ -27,6 +28,8 @@ const PremiumBonds: React.FC = () => {
 
   return (
     <>
+      <Heading as="h1">Premium Bonds</Heading>
+
       <PremiumBondHolding
         heldAmount={amount}
         holding={holding}

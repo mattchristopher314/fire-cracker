@@ -1,6 +1,6 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
-const IconButton = styled.button`
+const IconButton = styled.button<{ size?: string; $background?: string }>`
   background: none;
   border: none;
   padding: 0.4rem;
@@ -12,14 +12,23 @@ const IconButton = styled.button`
   justify-content: center;
 
   &:hover {
-    background-color: var(--color-slate-100);
+    ${(props) => css`
+      background-color: var(${props.$background});
+    `};
   }
 
   & svg {
-    width: 2.4rem;
-    height: 2.4rem;
+    ${(props) => css`
+      width: ${props.size};
+      height: ${props.size};
+    `}
     color: var(--color-brand-lo);
   }
 `;
+
+IconButton.defaultProps = {
+  size: "2.4rem",
+  $background: "--color-slate-100",
+};
 
 export default IconButton;

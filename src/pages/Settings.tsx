@@ -44,7 +44,11 @@ const Settings: React.FC = () => {
       <Row>
         <Heading as="h3">Info</Heading>
         <SettingsInfoLayout>
-          <MinorStat icon={<BanknotesIcon />} title="Tax band" color="blue">
+          <MinorStat
+            icon={<BanknotesIcon />}
+            title="Income tax band"
+            color="blue"
+          >
             {isLoadingTaxBand
               ? "Loading..."
               : (taxBand as TaxJSONData["rates"][number])?.rate}
@@ -53,7 +57,7 @@ const Settings: React.FC = () => {
 
           <MinorStat
             icon={<ChartPieIcon />}
-            title="Tax-free Interest"
+            title="Tax-free savings interest"
             color="green"
           >
             £{taxFreeSavingsAllowance}

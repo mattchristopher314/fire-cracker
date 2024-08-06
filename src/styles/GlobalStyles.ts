@@ -5,7 +5,7 @@ const GlobalStyles = createGlobalStyle`
   :root {
     &, &.light-mode {
       & * {
-        transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+        transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
       }
 
       /* Brand */

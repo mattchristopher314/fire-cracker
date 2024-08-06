@@ -26,6 +26,11 @@ const StyledNavigation = styled.aside<{ $show?: boolean }>`
   position: relative;
   z-index: 2;
 
+  &:not(.should-transition-nav) {
+    transition: background-color 0.2s ease-in-out, border-color 0s,
+      box-shadow 0.2s ease-in-out;
+  }
+
   &.should-transition-nav {
     transition: transform ${NAV_TRANSITION_DURATION}ms ease-in-out,
       opacity ${NAV_TRANSITION_DURATION}ms ease-in-out,

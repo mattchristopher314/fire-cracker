@@ -21,6 +21,11 @@ const UserAvatar = styled.img`
   border-radius: 50%;
   z-index: 1;
   box-shadow: var(--shadow-avatar);
+  transition: none !important;
+
+  &.should-transition-bg {
+    transition: box-shadow 0.2s ease-in-out !important;
+  }
 `;
 
 const StyledUser = styled(NavLink)`
@@ -31,10 +36,6 @@ const StyledUser = styled(NavLink)`
   font-weight: 500;
   font-size: 1.4rem;
   color: var(--color-slate-600);
-
-  & ${UserAvatar} {
-    transition: box-shadow 0.2s ease-in-out !important;
-  }
 
   &.active ${UserAvatar}, &:hover ${UserAvatar} {
     box-shadow: none;
@@ -52,6 +53,11 @@ const StyledUser = styled(NavLink)`
 `;
 
 const StyledLoaderContainer = styled.div`
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-right: 1.2rem;
+
   color: var(--color-brand-lo);
 `;
 
@@ -117,6 +123,7 @@ const User: React.FC = () => {
   } = useProfileData();
 
   const [isLoadingAvatar, setIsLoadingAvatar] = useState<boolean>(true);
+  const [shouldTransitionBg, setShouldTransitionBg] = useState<boolean>(false);
   const fullName = `${first_name || ""}${last_name ? ` ${last_name}` : ""}`;
 
   return (
@@ -135,8 +142,13 @@ const User: React.FC = () => {
                 ? `${supabaseUrl}/storage/v1/object/public/avatars${avatar}`
                 : "/default-user.jpg"
             }
+            className={shouldTransitionBg ? "should-transition-bg" : ""}
             alt={`${fullName}'s avatar`}
-            onLoad={() => setIsLoadingAvatar(false)}
+            onLoad={() => {
+              setIsLoadingAvatar(false);
+
+              setTimeout(() => setShouldTransitionBg(true), 200);
+            }}
           />
           <StyledNameContainer>{fullName}</StyledNameContainer>
         </StyledLoadedUserContainer>
