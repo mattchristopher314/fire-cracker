@@ -22,3 +22,5 @@ export const breaks = {
   AppMinNavPoint: "(max-width: 31em)",
   AppCompactPoint: "(max-width: 20em)",
 };
+
+export const AVATAR_FILE_SIZE_LIMIT = 1 * 1000 * 1000;
