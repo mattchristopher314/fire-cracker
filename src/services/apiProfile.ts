@@ -1,6 +1,11 @@
 import { getCurrentUser } from "./apiAuth";
 import { Database, supabase } from "./supabase";
 
+const testerAccountUUID =
+  import.meta.env.VITE_TESTER_ACCOUNT_UUID ||
+  process.env.VITE_TESTER_ACCOUNT_UUID ||
+  "";
+
 export async function getProfile(id: string | undefined) {
   const { data, error } = await supabase
     .from("profiles")
@@ -39,6 +44,8 @@ export const updateCurrentUser = async ({
       password: password,
     });
 
+    if (user.id === testerAccountUUID && updatePasswordError)
+      throw new Error("Permissions on the tester account are restricted.");
     if (updatePasswordError) throw new Error(updatePasswordError.message);
   }
 
@@ -54,6 +61,8 @@ export const updateCurrentUser = async ({
       .select()
       .single();
 
+    if (user.id === testerAccountUUID && error)
+      throw new Error("Permissions on the tester account are restricted.");
     if (error) throw new Error(error.message);
 
     if (avatar && avatarPath) {
@@ -67,7 +76,13 @@ export const updateCurrentUser = async ({
         .upload(avatarPath, avatar);
 
       if (existingContentError) throw new Error(existingContentError.message);
+
+      if (user.id === testerAccountUUID && removeError)
+        throw new Error("Permissions on the tester account are restricted.");
       if (removeError) throw new Error(removeError.message);
+
+      if (user.id === testerAccountUUID && uploadError)
+        throw new Error("Permissions on the tester account are restricted.");
       if (uploadError) throw new Error(uploadError.message);
     }
 
