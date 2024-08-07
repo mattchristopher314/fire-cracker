@@ -57,9 +57,10 @@ const PremiumBondHolding: React.FC<{
                 inputMode="numeric"
                 pattern="[0-9]*"
                 title="Please enter a valid amount (numbers only)"
-                value={holding || ""}
+                value={holding !== null ? holding : ""}
                 size={6}
                 maxLength={6}
+                min={0}
                 max={100000}
                 onChange={(e) => {
                   if (
@@ -74,7 +75,7 @@ const PremiumBondHolding: React.FC<{
                 }}
               />
             </PreventWrap>
-            {!!holding && heldAmount !== holding && (
+            {holding !== null && heldAmount !== holding && (
               <Button
                 $variation="primary"
                 $size="small"

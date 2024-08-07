@@ -1,6 +1,17 @@
 import styled from "styled-components";
 import Tooltip from "../../ui/Tooltip";
 import { useTaxableEquivalentAmount } from "../../utils";
+import MiniSpinner from "../../ui/MiniSpinner";
+
+const StyledEmptyPremiumBondsSavingsAccountComparisonContainer = styled.section`
+  display: flex;
+  height: calc(100%);
+  margin-bottom: 3.2rem;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 2.4rem;
+`;
 
 const StyltedPremiumBondsSavingsAccountComparison = styled.div`
   font-size: 1.6rem;
@@ -42,7 +53,8 @@ const StyltedPremiumBondsSavingsAccountComparison = styled.div`
 const PremiumBondsSavingsAccountComparison: React.FC<{
   holding: number;
   medianAnnualReturn: number;
-}> = ({ holding, medianAnnualReturn }) => {
+  isLoadingMedianAnnualReturn: boolean;
+}> = ({ holding, medianAnnualReturn, isLoadingMedianAnnualReturn }) => {
   const untaxedRate = holding === 0 ? 0 : (medianAnnualReturn / holding) * 100;
   const { isLoading, data: taxableEquivalentAmount } =
     useTaxableEquivalentAmount(medianAnnualReturn);
@@ -51,10 +63,14 @@ const PremiumBondsSavingsAccountComparison: React.FC<{
       ? 0
       : ((isLoading ? 0 : Number(taxableEquivalentAmount)) / holding) * 100;
 
-  return (
+  return isLoading || isLoadingMedianAnnualReturn ? (
+    <StyledEmptyPremiumBondsSavingsAccountComparisonContainer>
+      <MiniSpinner size="40px" />
+    </StyledEmptyPremiumBondsSavingsAccountComparisonContainer>
+  ) : (
     <StyltedPremiumBondsSavingsAccountComparison>
       <div>
-        <p>Median interest rate:</p>
+        <p>Median interest rate (AER):</p>
         <span>{untaxedRate.toPrecision(3)}%</span>
       </div>
 

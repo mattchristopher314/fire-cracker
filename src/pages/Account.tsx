@@ -6,8 +6,6 @@ import UserStatsForm from "../features/profile/UserStatsForm";
 const Account: React.FC = () => {
   return (
     <>
-      <Heading as="h1">Your Account</Heading>
-
       <Row>
         <Heading as="h3">Update User Data</Heading>
         <UpdateUserDataForm />

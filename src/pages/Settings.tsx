@@ -26,7 +26,7 @@ const Settings: React.FC = () => {
   ]);
 
   const { isLoading: isLoadingTaxBand, data: taxBand } = useTaxBand(
-    Number(settings?.income)
+    Number(settings?.income || "0")
   );
 
   const { isLoading: isLoadingTaxFreeInterest, taxFreeSavingsAllowance } =
@@ -39,8 +39,6 @@ const Settings: React.FC = () => {
 
   return (
     <>
-      <Heading as="h1">Settings</Heading>
-
       <Row>
         <Heading as="h3">Info</Heading>
         <SettingsInfoLayout>

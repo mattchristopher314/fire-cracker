@@ -1,5 +1,5 @@
 const Budget: React.FC = () => {
-  return <div>Budget Page</div>;
+  return <div>Budget page content.</div>;
 };
 
 export default Budget;

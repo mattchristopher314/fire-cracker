@@ -14,7 +14,7 @@ const StyledComingSoon = styled.section`
     width: 4.8rem;
     height: 4.8rem;
     transform-origin: center center;
-    transition: color 0.4s ease-in-out, transform 0.4s ease-in-out;
+    transition: color 0.4s ease-in-out, transform 0.4s ease-in-out !important;
   }
 
   &:hover svg {

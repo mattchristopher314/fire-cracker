@@ -16,32 +16,39 @@ const PremiumBonds: React.FC = () => {
     useHolding("premium-bonds");
   const amount = holdingInfo?.quantity || 0;
 
-  const [holding, setHolding] = useState<number | null>(0);
+  const [holding, setHolding] = useState<number | null>(amount);
+  const [isInitialLoad, setIsInitialLoad] = useState<boolean>(true);
 
   const isLoading = isLoadingStats || isLoadingHolding;
 
   useEffect(() => {
     setHolding(amount);
+
+    setIsInitialLoad(false);
   }, [amount]);
 
   if (isLoading || !(data && data.data)) return <Spinner />;
 
   return (
     <>
-      <Heading as="h1">Premium Bonds</Heading>
-
       <PremiumBondHolding
         heldAmount={amount}
-        holding={holding}
+        holding={isInitialLoad ? holding || amount : holding}
         setHolding={setHolding}
       ></PremiumBondHolding>
 
-      <PremiumBondsStatsLayout holding={holding} data={data.data} />
+      <PremiumBondsStatsLayout
+        holding={isInitialLoad ? holding || amount : holding}
+        data={data.data}
+      />
 
-      <PremiumBondsReturnLayout holding={holding} data={data.data} />
+      <PremiumBondsReturnLayout
+        holding={isInitialLoad ? holding || amount : holding}
+        data={data.data}
+      />
 
       <Accordion multiopen>
-        <Accordion.AccordionItem title="Stats" id={1}>
+        <Accordion.AccordionItem title="Prize Draw Stats" id={1}>
           <PremiumBondsAllocationTable
             data={data.data.prizeAllocations}
             source={data.source || ""}

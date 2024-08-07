@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { PiPiggyBank } from "react-icons/pi";
+
 import MajorStatContainer from "../../ui/MajorStatContainer";
 import ReturnsPie from "./data-vis/ReturnsPie";
 import { PBJSONData } from "../../services/supabase";
@@ -6,6 +8,37 @@ import { useEffect, useState } from "react";
 import MiniSpinner from "../../ui/MiniSpinner";
 import { MedianReturn } from "./calculatePremiumBondStats";
 import PremiumBondsSavingsAccountComparison from "./PremiumBondsSavingsAccountComparison";
+import Heading from "../../ui/Heading";
+
+const StyledEmptyPremiumBondsReturnLayoutContainer = styled.section`
+  padding: 5.6rem 6.4rem;
+
+  background-color: var(--color-slate-0);
+  border: 1px solid var(--color-slate-100);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-sm);
+`;
+
+const StyledStartSaving = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 2.4rem;
+
+  & svg {
+    color: var(--color-slate-400);
+    width: 4.8rem;
+    height: 4.8rem;
+    transform-origin: center center;
+    transition: color 0.4s ease-in-out, transform 0.4s ease-in-out !important;
+  }
+
+  &:hover svg {
+    color: var(--color-slate-400-hover);
+    transform: scale(1.05);
+    will-change: transform;
+  }
+`;
 
 const StyledPremiumBondsReturnLayout = styled.section`
   display: grid;
@@ -43,7 +76,17 @@ const PremiumBondsReturnLayout: React.FC<{
     };
   }, [data, holding]);
 
-  return (
+  return !holding ? (
+    <StyledEmptyPremiumBondsReturnLayoutContainer>
+      <StyledStartSaving>
+        <PiPiggyBank />
+
+        <Heading as="h2" color="var(--color-slate-600)">
+          Start saving to see more stats!
+        </Heading>
+      </StyledStartSaving>
+    </StyledEmptyPremiumBondsReturnLayoutContainer>
+  ) : (
     <StyledPremiumBondsReturnLayout>
       <MajorStatContainer title="Monthly Win Probabilities">
         <ReturnsPie holding={holding} data={data} />
@@ -71,6 +114,7 @@ const PremiumBondsReturnLayout: React.FC<{
         <PremiumBondsSavingsAccountComparison
           holding={holding || 0}
           medianAnnualReturn={medianAnnualReturn}
+          isLoadingMedianAnnualReturn={isLoadingMedianAnnualReturn}
         />
       </MajorStatContainer>
     </StyledPremiumBondsReturnLayout>

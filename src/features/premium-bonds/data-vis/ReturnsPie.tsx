@@ -16,10 +16,15 @@ import {
 import Empty from "../../../ui/Empty";
 import { PBJSONData } from "../../../services/supabase";
 import { useEffect, useState } from "react";
+import MiniSpinner from "../../../ui/MiniSpinner";
 
 const StyledPieContainer = styled.div`
   width: 100%;
   height: 300px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const StyledPieTooltip = styled.div`
@@ -112,54 +117,43 @@ const ReturnsPie: React.FC<{
 
   return (
     <StyledPieContainer style={{ position: "relative" }}>
-      {isLoadingAverageReturns && (holding || 0) > 20000 && (
-        <p
-          style={{
-            fontSize: "1.4rem",
-            position: "absolute",
-            left: "50%",
-            transform: "translateX(-50%)",
-            textAlign: "center",
-            color: "var(--color-slate-700)",
-            fontWeight: 500,
-          }}
-        >
-          Loading...
-        </p>
-      )}
-      <ResponsiveContainer>
-        <PieChart>
-          <Pie
-            nameKey="value"
-            dataKey="probability"
-            data={filteredReturns}
-            innerRadius={60}
-            outerRadius={100}
-            isAnimationActive={false}
-            startAngle={90}
-            endAngle={-450}
-          >
-            <Label
-              position="center"
-              value="Winnings/Month"
-              style={{
-                fontSize: "130%",
-                fill: "var(--color-slate-700)",
-                textAnchor: "middle",
-              }}
-            />
-
-            {filteredReturns.map((entry) => (
-              <Cell
-                key={entry.value}
-                fill={`var(--color-${entry.color}-400)`}
+      {isLoadingAverageReturns && (holding || 0) > 20000 ? (
+        <MiniSpinner size="40px" />
+      ) : (
+        <ResponsiveContainer>
+          <PieChart>
+            <Pie
+              nameKey="value"
+              dataKey="probability"
+              data={filteredReturns}
+              innerRadius={60}
+              outerRadius={100}
+              isAnimationActive={false}
+              startAngle={90}
+              endAngle={-450}
+            >
+              <Label
+                position="center"
+                value="Winnings/Month"
+                style={{
+                  fontSize: "130%",
+                  fill: "var(--color-slate-700)",
+                  textAnchor: "middle",
+                }}
               />
-            ))}
-          </Pie>
 
-          <Tooltip content={<CustomTooltip />} />
-        </PieChart>
-      </ResponsiveContainer>
+              {filteredReturns.map((entry) => (
+                <Cell
+                  key={entry.value}
+                  fill={`var(--color-${entry.color}-400)`}
+                />
+              ))}
+            </Pie>
+
+            <Tooltip content={<CustomTooltip />} />
+          </PieChart>
+        </ResponsiveContainer>
+      )}
     </StyledPieContainer>
   );
 };

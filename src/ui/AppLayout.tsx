@@ -9,6 +9,7 @@ import { ProfileProvider } from "../context/ProfileProvider";
 import Container from "./Container";
 import { breaks } from "../utils/constants";
 import { usePageTitle } from "../hooks/usePageTitle";
+import Heading from "./Heading";
 
 const StyledAppLayout = styled.div`
   position: relative;
@@ -50,6 +51,8 @@ const AppLayout: React.FC = () => {
 
         <MainArea>
           <Container>
+            <Heading as="h1">{tabTitle}</Heading>
+
             <Outlet />
           </Container>
         </MainArea>

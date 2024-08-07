@@ -43,7 +43,7 @@ const UpdateUserSettingsForm: React.FC<{
           inputMode="numeric"
           pattern="[0-9]*"
           title="Please enter a valid income (numbers only)"
-          placeholder={isLoading ? "Loading..." : settings?.["income"] || ""}
+          placeholder={isLoading ? "Loading..." : settings?.["income"] || "0"}
           disabled={updateProfileSettingsMutation.isLoading}
           {...register("income", {
             pattern: {
