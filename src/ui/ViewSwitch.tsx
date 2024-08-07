@@ -40,8 +40,6 @@ const StyledSwitchOption = styled.li<{ $active: boolean }>`
   cursor: pointer;
   color: var(--color-slate-500);
 
-  transition: color 0.3s ease-in-out, background 0.3s ease-in-out;
-
   &:not(:last-child) {
     border-right: 1px solid var(--color-slate-100);
   }
