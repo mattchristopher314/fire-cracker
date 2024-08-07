@@ -81,7 +81,7 @@ const LoginForm: React.FC = () => {
 
       <StyledDevOnlyButtonContainer>
         <Button $size="large">
-          {!isLoggingIn ? "Log In" : <MiniSpinner size="12px" />}
+          {!isLoggingIn ? "Log In" : <MiniSpinner size="18px" />}
         </Button>
 
         <Button

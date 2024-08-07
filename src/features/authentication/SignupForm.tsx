@@ -49,8 +49,6 @@ const SignupForm: React.FC = () => {
           setSearchParams(
             (prev) => new URLSearchParams({ ...prev, success: "success" })
           );
-        },
-        onSettled: () => {
           reset();
         },
       }
@@ -146,7 +144,7 @@ const SignupForm: React.FC = () => {
 
       <Form.SubmissionRow $devPad>
         <Button $size="large">
-          {!isSigningUp ? "Sign up" : <MiniSpinner size="12px" />}
+          {!isSigningUp ? "Sign up" : <MiniSpinner size="16px" />}
         </Button>
       </Form.SubmissionRow>
     </Form>
