@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 import { breaks } from "../utils/constants";
 
-const Heading = styled.h1<{ $shouldHideOnLargeScreens: boolean }>`
+const Heading = styled.h1<{ $shouldHideOnLargeScreens?: boolean }>`
   color: ${(props) => props.color};
 
   ${(props) =>
