@@ -8,6 +8,7 @@ import Navigation from "./Navigation";
 import { ProfileProvider } from "../context/ProfileProvider";
 import Container from "./Container";
 import { breaks } from "../utils/constants";
+import { usePageTitle } from "../hooks/usePageTitle";
 
 const StyledAppLayout = styled.div`
   position: relative;
@@ -39,6 +40,7 @@ const MainArea = styled.main`
 
 const AppLayout: React.FC = () => {
   const tabTitle = useLocationAsTitle();
+  usePageTitle(tabTitle, true);
 
   return (
     <ProfileProvider>
