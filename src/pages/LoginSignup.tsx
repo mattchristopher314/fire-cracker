@@ -20,7 +20,7 @@ const StyledLoginSignup = styled.div`
 `;
 
 const StyledDarkModeToggle = styled.div`
-  position: fixed;
+  position: absolute;
   top: 0;
   right: 0;
   padding: 1.2rem;
