@@ -82,9 +82,14 @@ export const deleteCurrentUser = async (
 
   const { data: existingContentList, error: existingContentError } =
     await supabase.storage.from("avatars").list(`${user.id}`);
-  const { error: removeError } = await supabase.storage
-    .from("avatars")
-    .remove(existingContentList?.map((x) => `${user.id}/${x.name}`) || []);
+
+  if (existingContentList && existingContentList.length > 0) {
+    const { error: removeError } = await supabase.storage
+      .from("avatars")
+      .remove(existingContentList?.map((x) => `${user.id}/${x.name}`) || []);
+
+    if (removeError) throw new Error(removeError.message);
+  }
 
   const { data, error: userDeleteError } = await supabase
     .from("profiles")
@@ -94,10 +99,12 @@ export const deleteCurrentUser = async (
     .single();
 
   if (existingContentError) throw new Error(existingContentError.message);
-  if (removeError) throw new Error(removeError.message);
+
   if (userDeleteError) throw new Error(userDeleteError.message);
 
-  logout();
+  const darkMode: string | null = localStorage.getItem("isDarkMode");
+  localStorage.clear();
+  if (darkMode) localStorage.setItem("isDarkMode", darkMode);
 
   return data;
 };
