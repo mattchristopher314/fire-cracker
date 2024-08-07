@@ -24,3 +24,5 @@ export const breaks = {
 };
 
 export const AVATAR_FILE_SIZE_LIMIT = 1 * 1000 * 1000;
+
+export const APP_TITLE = "FIRECracker";

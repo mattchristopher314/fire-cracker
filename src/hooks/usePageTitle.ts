@@ -1,10 +1,13 @@
 import { useEffect, useRef } from "react";
+import { APP_TITLE } from "../utils/constants";
 
 export function usePageTitle(
   title: string,
   prevailOnUnmount: boolean = false
 ): void {
-  const prefixTitle: React.MutableRefObject<string> = useRef(document.title);
+  const prefixTitle: React.MutableRefObject<string> = useRef(APP_TITLE);
+
+  console.log(prefixTitle, title, prevailOnUnmount);
 
   useEffect(() => {
     document.title = `${prefixTitle.current}${
