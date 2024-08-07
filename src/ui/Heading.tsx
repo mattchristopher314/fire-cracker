@@ -1,7 +1,9 @@
 import styled, { css } from "styled-components";
+import { breaks } from "../utils/constants";
 
-const Heading = styled.h1`
+const Heading = styled.h1<{ $shouldHideOnLargeScreens: boolean }>`
   color: ${(props) => props.color};
+
   ${(props) =>
     props.as === "h1" &&
     css`
@@ -28,11 +30,22 @@ const Heading = styled.h1`
     `}
 
   line-height: 1.2;
+
+  ${(props) =>
+    props.$shouldHideOnLargeScreens &&
+    css`
+      display: none;
+
+      @media ${breaks.AppMinNavPoint} {
+        display: block;
+      }
+    `}
 `;
 
 Heading.defaultProps = {
   color: "inherit",
   as: "h1",
+  $shouldHideOnLargeScreens: false,
 };
 
 export default Heading;

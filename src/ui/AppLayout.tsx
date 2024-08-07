@@ -51,7 +51,9 @@ const AppLayout: React.FC = () => {
 
         <MainArea>
           <Container>
-            <Heading as="h1">{tabTitle}</Heading>
+            <Heading as="h1" $shouldHideOnLargeScreens>
+              {tabTitle}
+            </Heading>
 
             <Outlet />
           </Container>

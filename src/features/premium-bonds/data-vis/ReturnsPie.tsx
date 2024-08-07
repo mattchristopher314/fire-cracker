@@ -146,6 +146,7 @@ const ReturnsPie: React.FC<{
                 <Cell
                   key={entry.value}
                   fill={`var(--color-${entry.color}-400)`}
+                  style={{ outline: "none" }}
                 />
               ))}
             </Pie>
