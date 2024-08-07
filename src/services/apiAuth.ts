@@ -9,6 +9,11 @@ export interface UserData {
   session: Session | null;
 }
 
+const testerAccountUUID =
+  import.meta.env.VITE_TESTER_ACCOUNT_UUID ||
+  process.env.VITE_TESTER_ACCOUNT_UUID ||
+  "";
+
 export const login = async ({
   email,
   password,
@@ -71,6 +76,9 @@ export const deleteCurrentUser = async (
   if (!user || confirmAddress !== user.email) {
     throw new Error("Could not validate email");
   }
+
+  if (user.id === testerAccountUUID)
+    throw new Error("Permissions on the tester account are restricted.");
 
   const { data: existingContentList, error: existingContentError } =
     await supabase.storage.from("avatars").list(`${user.id}`);

@@ -1,6 +1,7 @@
+import { PostgrestError } from "@supabase/supabase-js";
 import { AVATAR_FILE_SIZE_LIMIT } from "../utils/constants";
 import { getCurrentUser } from "./apiAuth";
-import { Database, supabase } from "./supabase";
+import { supabase } from "./supabase";
 
 const testerAccountUUID =
   import.meta.env.VITE_TESTER_ACCOUNT_UUID ||
@@ -31,7 +32,7 @@ export const updateCurrentUser = async ({
   lastName: string | undefined;
   avatar: File | undefined;
   password: string | undefined;
-}): Promise<Database["public"]["Tables"]["profiles"]["Row"] | null> => {
+}) => {
   const user = await getCurrentUser();
 
   if (!user) throw new Error("Failed to fetch active user to update");
@@ -51,16 +52,34 @@ export const updateCurrentUser = async ({
   }
 
   if (firstName || lastName || avatar) {
-    const { data: initialUpdateData, error: initialUpdateError } =
-      await supabase
-        .from("profiles")
-        .update({
-          first_name: firstName || undefined,
-          last_name: lastName || undefined,
-        })
-        .eq("id", user.id)
-        .select()
-        .single();
+    let initialUpdateData: {
+      avatar: string | null;
+      created_at: string;
+      first_name: string | null;
+      id: string;
+      last_name: string | null;
+    } | null;
+    let initialUpdateError: PostgrestError | null;
+
+    if (firstName || lastName) {
+      const { data: initialUpdateDataRes, error: initialUpdateErrorRes } =
+        await supabase
+          .from("profiles")
+          .update({
+            first_name: firstName || undefined,
+            last_name: lastName || undefined,
+          })
+          .eq("id", user.id)
+          .select()
+          .single();
+      initialUpdateData = initialUpdateDataRes;
+      initialUpdateError = initialUpdateErrorRes;
+    } else {
+      const { data: initialUpdateDataRes, error: initialUpdateErrorRes } =
+        await supabase.from("profiles").select("*").eq("id", user.id).single();
+      initialUpdateData = initialUpdateDataRes;
+      initialUpdateError = initialUpdateErrorRes;
+    }
 
     if (user.id === testerAccountUUID && initialUpdateError)
       throw new Error("Permissions on the tester account are restricted.");
