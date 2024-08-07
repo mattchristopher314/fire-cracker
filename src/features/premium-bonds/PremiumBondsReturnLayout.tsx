@@ -105,7 +105,7 @@ const PremiumBondsReturnLayout: React.FC<{
           {isLoadingMedianAnnualReturn && (holding || 0) > 20000 ? (
             <MiniSpinner size="14px" />
           ) : (
-            `£${medianAnnualReturn}`
+            `£${medianAnnualReturn.toFixed(2)}`
           )}
         </span>
       </MajorStatContainer>

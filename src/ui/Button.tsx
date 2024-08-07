@@ -66,6 +66,10 @@ const Button = styled.button<{
   transition: background-color 0.2s ease-in-out;
   ${(props) => sizes[props.$size as keyof typeof sizes] + ";"}
   ${(props) => variations[props.$variation as keyof typeof variations] + ";"};
+
+  &:disabled {
+    cursor: not-allowed;
+  }
 `;
 
 Button.defaultProps = {

@@ -65,7 +65,7 @@ const DeleteAccountForm: React.FC<{ onCloseModal: () => void }> = ({
     toast.promise(deleteAccount, {
       loading: "Deleting account",
       success: "Successfully deleted account",
-      error: (e: Error) => e.message,
+      error: (e: Error) => `Something went wrong: ${e.message}`,
     });
   };
 

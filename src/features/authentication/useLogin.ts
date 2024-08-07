@@ -33,7 +33,7 @@ export const useLogin = () => {
     },
     onError: (err) => {
       if (err instanceof Error) {
-        toast.error(err.message);
+        toast.error(`Something went wrong: ${err.message}`);
       }
     },
   });

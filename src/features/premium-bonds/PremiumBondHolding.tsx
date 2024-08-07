@@ -6,6 +6,11 @@ import PreventWrap from "../../ui/PreventWrap";
 import Button from "../../ui/Button";
 import toast from "react-hot-toast";
 import { useUpdateHolding } from "../../hooks/useUpdateHolding";
+import { useForm } from "react-hook-form";
+
+type FormValues = {
+  holdingForm: number;
+};
 
 const StyledHoldingAmount = styled.span`
   font-size: 1.4rem;
@@ -31,7 +36,16 @@ const PremiumBondHolding: React.FC<{
 }> = ({ heldAmount, holding, setHolding }) => {
   const updateHoldingMutation = useUpdateHolding("premium-bonds");
 
+  const { register, handleSubmit } = useForm<FormValues>();
+
   const handleUpdateHolding = (): void => {
+    if (
+      holding === null ||
+      heldAmount === holding ||
+      updateHoldingMutation.isLoading ||
+      !/^\d*$/.test(holding?.toString() || "0")
+    )
+      return;
     const updateHolding = updateHoldingMutation.mutateAsync({
       vehicle: "premium-bonds",
       quantity: holding || 0,
@@ -40,14 +54,14 @@ const PremiumBondHolding: React.FC<{
     toast.promise(updateHolding, {
       loading: "Updating holding",
       success: "Successfully updated holding",
-      error: (e: Error) => e.message,
+      error: (e: Error) => `Something went wrong: ${e.message}`,
     });
   };
 
   return (
     <Row $background>
       <Heading as="h3">
-        <form onSubmit={(e) => e.preventDefault()}>
+        <form onSubmit={handleSubmit(handleUpdateHolding)}>
           <HoldingContainer>
             Holding:
             <PreventWrap>
@@ -56,12 +70,15 @@ const PremiumBondHolding: React.FC<{
                 type="text"
                 inputMode="numeric"
                 pattern="[0-9]*"
-                title="Please enter a valid amount (numbers only)"
+                title="Please enter a valid amount (integers only, 0-100,000)"
                 value={holding !== null ? holding : ""}
                 size={6}
                 maxLength={6}
                 min={0}
                 max={100000}
+                {...register("holdingForm", {
+                  required: "Amount is required",
+                })}
                 onChange={(e) => {
                   if (
                     e.target.value &&
@@ -83,9 +100,15 @@ const PremiumBondHolding: React.FC<{
                 style={{
                   marginLeft: "0.4rem",
                   verticalAlign: "top",
+                  cursor: /^\d*$/.test(holding?.toString() || "0")
+                    ? ""
+                    : "not-allowed",
                 }}
-                onClick={handleUpdateHolding}
-                disabled={updateHoldingMutation.isLoading}
+                disabled={
+                  holding !== null &&
+                  heldAmount !== holding &&
+                  updateHoldingMutation.isLoading
+                }
               >
                 Update Holding
               </Button>

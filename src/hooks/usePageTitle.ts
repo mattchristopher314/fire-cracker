@@ -7,8 +7,6 @@ export function usePageTitle(
 ): void {
   const prefixTitle: React.MutableRefObject<string> = useRef(APP_TITLE);
 
-  console.log(prefixTitle, title, prevailOnUnmount);
-
   useEffect(() => {
     document.title = `${prefixTitle.current}${
       title === "Dashboard" ? "" : ` | ${title}`

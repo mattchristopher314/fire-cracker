@@ -30,7 +30,7 @@ export const useSignup = () => {
     } | null> => signupApi({ email, firstName, lastName, password }),
     onError: (err) => {
       if (err instanceof Error) {
-        toast.error(err.message);
+        toast.error(`Something went wrong: ${err.message}`);
       }
     },
   });

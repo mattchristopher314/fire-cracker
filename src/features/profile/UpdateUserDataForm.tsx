@@ -49,7 +49,7 @@ const UpdateUserDataForm: React.FC = () => {
     toast.promise(updateProfile, {
       loading: "Updating profile",
       success: "Successfully updated profile",
-      error: (e: Error) => e.message,
+      error: (e: Error) => `Something went wrong: ${e.message}`,
     });
   };
 

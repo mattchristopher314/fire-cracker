@@ -31,7 +31,7 @@ const UpdateUserSettingsForm: React.FC<{
     toast.promise(updateProfileSettings, {
       loading: "Updating settings",
       success: "Successfully updated settings",
-      error: (e: Error) => e.message,
+      error: (e: Error) => `Something went wrong: ${e.message}`,
     });
   };
 

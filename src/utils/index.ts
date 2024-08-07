@@ -20,8 +20,8 @@ export const useTaxBand = (
     isLoading: false,
     data: data?.data.rates.filter(
       (rate) =>
-        (rate.bandLower || 0) <= income &&
-        income <= (rate.bandUpper || Infinity)
+        (rate.bandLower || 0) <= (income || 0) &&
+        (income || 0) <= (rate.bandUpper || Infinity)
     )?.[0],
   };
 };
