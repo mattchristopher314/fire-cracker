@@ -47,7 +47,7 @@ export const signup = async ({
         first_name_at_signup: firstName,
         last_name_at_signup: lastName,
       },
-      emailRedirectTo: `${BASE_URL}/app?success=verified`,
+      emailRedirectTo: `${BASE_URL}/app/dashboard?success=verified`,
     },
   });
 

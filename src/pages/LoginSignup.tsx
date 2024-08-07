@@ -52,17 +52,6 @@ const LoginSignup: React.FC = () => {
             login: (
               <div key="login">
                 <PageHeading>Log in to your account</PageHeading>
-                {success === "verified" && (
-                  <p
-                    style={{
-                      fontSize: "1.4rem",
-                      padding: "1.2rem 0",
-                      fontWeight: "500",
-                    }}
-                  >
-                    Email verified. You may now log in.
-                  </p>
-                )}
                 <FormContainer>
                   <LoginForm />
                 </FormContainer>

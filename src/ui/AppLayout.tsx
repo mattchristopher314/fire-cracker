@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useSearchParams } from "react-router-dom";
 import { styled } from "styled-components";
 
 import { useLocationAsTitle } from "../hooks/useLocationAsTitle";
@@ -10,6 +10,8 @@ import Container from "./Container";
 import { breaks } from "../utils/constants";
 import { usePageTitle } from "../hooks/usePageTitle";
 import Heading from "./Heading";
+import { useEffect } from "react";
+import toast from "react-hot-toast";
 
 const StyledAppLayout = styled.div`
   position: relative;
@@ -40,6 +42,14 @@ const MainArea = styled.main`
 `;
 
 const AppLayout: React.FC = () => {
+  const [searchParams] = useSearchParams();
+  const success = searchParams.get("success");
+
+  useEffect(() => {
+    if (success === "verified")
+      toast.success("Email verified!", { id: "verified" });
+  }, [success]);
+
   const tabTitle = useLocationAsTitle();
   usePageTitle(tabTitle, true);
 

@@ -11,8 +11,6 @@ export interface SignupProps {
 }
 
 export const useSignup = () => {
-  // const queryClient = useQueryClient();
-
   const { mutate: signup, isLoading: isSigningUp } = useMutation<
     UserData | null,
     unknown,
