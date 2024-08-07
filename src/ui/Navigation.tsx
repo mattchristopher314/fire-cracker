@@ -15,7 +15,7 @@ const StyledNavigation = styled.aside<{ $show?: boolean }>`
   grid-row: 1 / -1;
 
   background-color: var(--color-slate-0);
-  padding: 3.2rem 2.4rem;
+  padding: 3.2rem 2.4rem 2.4rem 2.4rem;
   border-right: 1px solid var(--color-slate-200);
 
   display: flex;
