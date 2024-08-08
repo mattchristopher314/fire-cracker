@@ -22,7 +22,7 @@ const StyledHeader = styled.header`
 `;
 
 const StyledHeaderText = styled.h1`
-  font-weight: 500;
+  font-weight: 600;
   font-size: 2rem;
   letter-spacing: 0.5px;
 
