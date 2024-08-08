@@ -76,7 +76,7 @@ const Empty = styled.p`
 
 const Table: Table<
   React.FC<{ $columns: string; children: React.ReactNode }>
-> = ({ $columns, children }) => {
+> = ({ $columns = "1fr", children }) => {
   return (
     <TableContext.Provider value={{ $columns }}>
       <StyledTable role="table">{children}</StyledTable>
@@ -165,12 +165,8 @@ const Attribution: React.FC<{ url: string; source_updated: string }> = ({
   );
 };
 
-Table.defaultProps = {
-  $columns: "1fr",
-};
-
 const TableContext = createContext<{ $columns: string }>({
-  $columns: Table?.defaultProps["$columns"] || "",
+  $columns: "1fr",
 });
 
 Table.Header = Header;

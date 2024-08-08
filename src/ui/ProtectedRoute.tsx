@@ -17,7 +17,7 @@ const ProtectedRoute: React.FC<{
   redirectUrl?: To;
   noAuth?: boolean;
   children: React.ReactNode;
-}> = ({ redirectUrl, noAuth, children }) => {
+}> = ({ redirectUrl = "/", noAuth = false, children }) => {
   const navigate = useNavigate();
 
   const { isLoading, isAuthenticated } = useUserData();
@@ -25,10 +25,7 @@ const ProtectedRoute: React.FC<{
   useEffect(
     function () {
       if (noAuth !== !isAuthenticated && !isLoading) {
-        navigate(
-          redirectUrl || ProtectedRoute.defaultProps?.redirectUrl || "/",
-          { replace: true }
-        );
+        navigate(redirectUrl || "/", { replace: true });
 
         return;
       }
@@ -46,11 +43,6 @@ const ProtectedRoute: React.FC<{
   if (noAuth !== isAuthenticated) return children;
 
   return;
-};
-
-ProtectedRoute.defaultProps = {
-  noAuth: false,
-  redirectUrl: "/",
 };
 
 export default ProtectedRoute;

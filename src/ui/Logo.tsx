@@ -77,7 +77,7 @@ const Logo: React.FC<{
   onClick?: React.MouseEventHandler<HTMLDivElement>;
   to?: To;
   size?: string;
-}> = ({ onClick, to, size }) => {
+}> = ({ onClick, to, size = "regular" }) => {
   return (
     <StyledLogo onClick={onClick}>
       <StyledNavLink to={to || ""} $hasHoverEffect={!!onClick || !!to}>
@@ -90,10 +90,6 @@ const Logo: React.FC<{
       </StyledNavLink>
     </StyledLogo>
   );
-};
-
-Logo.defaultProps = {
-  size: "regular",
 };
 
 export default Logo;

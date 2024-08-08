@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import PremiumBondsAllocationTable from "../features/premium-bonds/PremiumBondsAllocationTable";
-import { usePremiumBondsStats } from "../features/premium-bonds/usePremiumBondsStats";
-import Accordion from "../ui/Accordion";
-import Spinner from "../ui/Spinner";
-import { useHolding } from "../hooks/useHolding";
-import PremiumBondHolding from "../features/premium-bonds/PremiumBondHolding";
-import PremiumBondsStatsLayout from "../features/premium-bonds/PremiumBondsStatsLayout";
-import PremiumBondsReturnLayout from "../features/premium-bonds/PremiumBondsReturnLayout";
+import PremiumBondsAllocationTable from "../../features/premium-bonds/PremiumBondsAllocationTable";
+import { usePremiumBondsStats } from "../../features/premium-bonds/usePremiumBondsStats";
+import Accordion from "../../ui/Accordion";
+import Spinner from "../../ui/Spinner";
+import { useHolding } from "../../hooks/useHolding";
+import PremiumBondHolding from "../../features/premium-bonds/PremiumBondHolding";
+import PremiumBondsStatsLayout from "../../features/premium-bonds/PremiumBondsStatsLayout";
+import PremiumBondsReturnLayout from "../../features/premium-bonds/PremiumBondsReturnLayout";
 
 const PremiumBonds: React.FC = () => {
   const { isLoading: isLoadingStats, data } = usePremiumBondsStats();

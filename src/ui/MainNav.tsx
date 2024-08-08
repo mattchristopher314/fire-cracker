@@ -3,6 +3,8 @@ import {
   HomeIcon,
   SparklesIcon,
 } from "@heroicons/react/24/outline";
+import { PiWallet } from "react-icons/pi";
+import { AiOutlineStock } from "react-icons/ai";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
@@ -77,9 +79,23 @@ const MainNav: React.FC<{
         </li>
 
         <li onClick={onClick}>
-          <StyledNavLink to="/premium-bonds">
+          <StyledNavLink to="/holdings/cash">
+            <PiWallet />
+            <span>Cash</span>
+          </StyledNavLink>
+        </li>
+
+        <li onClick={onClick}>
+          <StyledNavLink to="/holdings/premium-bonds">
             <SparklesIcon />
             <span>Premium Bonds</span>
+          </StyledNavLink>
+        </li>
+
+        <li onClick={onClick}>
+          <StyledNavLink to="/holdings/stocks">
+            <AiOutlineStock />
+            <span>Stocks</span>
           </StyledNavLink>
         </li>
       </NavList>

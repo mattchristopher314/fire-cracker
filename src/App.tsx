@@ -12,7 +12,7 @@ import GlobalStyles from "./styles/GlobalStyles";
 import PageNotFound from "./pages/PageNotFound";
 import AppLayout from "./ui/AppLayout";
 import Dashboard from "./pages/Dashboard";
-import PremiumBonds from "./pages/PremiumBonds";
+import PremiumBonds from "./pages/holdings/PremiumBonds";
 import IconButton from "./ui/IconButton";
 import Budget from "./pages/Budget";
 import Settings from "./pages/Settings";
@@ -23,6 +23,8 @@ import styled from "styled-components";
 import { UserProvider } from "./context/UserProvider";
 import LoginSignup from "./pages/LoginSignup";
 import DarkModeProvider from "./context/DarkModeContext";
+import Stocks from "./pages/holdings/Stocks";
+import Cash from "./pages/holdings/Cash";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -64,7 +66,13 @@ const App: React.FC = () => {
               >
                 <Route path="dashboard" element={<Dashboard />} />
                 <Route path="budget" element={<Budget />} />
-                <Route path="premium-bonds" element={<PremiumBonds />} />
+
+                <Route path="holdings/cash" element={<Cash />} />
+                <Route
+                  path="holdings/premium-bonds"
+                  element={<PremiumBonds />}
+                />
+                <Route path="holdings/stocks" element={<Stocks />} />
 
                 <Route path="account" element={<Account />} />
                 <Route path="settings" element={<Settings />} />

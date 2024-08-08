@@ -60,16 +60,12 @@ const Form: FormParent<
       children: React.ReactNode;
     }
   >
-> = ({ type, children, ...intrinsic }) => {
+> = ({ type = "regular", children, ...intrinsic }) => {
   return (
     <StyledForm type={type} {...intrinsic}>
       {children}
     </StyledForm>
   );
-};
-
-Form.defaultProps = {
-  type: "regular",
 };
 
 const StyledRow = styled.div<{
@@ -184,7 +180,7 @@ const Row: React.FC<{
   labelsId?: string;
   error?: string;
   children: React.ReactElement;
-}> = ({ type, label, labelsId, error, children }) => {
+}> = ({ type = "regular", label, labelsId, error, children }) => {
   return (
     <StyledRow type={type}>
       {label && <Label htmlFor={labelsId || children.props.id}>{label}</Label>}
@@ -192,10 +188,6 @@ const Row: React.FC<{
       {error && <Error>{error}</Error>}
     </StyledRow>
   );
-};
-
-Row.defaultProps = {
-  type: "regular",
 };
 
 const StyledFullRow = styled.div`
@@ -250,27 +242,19 @@ const Input = styled.input`
 const MultiFieldContainer: React.FC<{
   columns: number;
   children: React.ReactNode;
-}> = ({ columns, children }) => {
+}> = ({ columns = 1, children }) => {
   return <StyledMultiField $columns={columns}>{children}</StyledMultiField>;
-};
-
-MultiFieldContainer.defaultProps = {
-  columns: 1,
 };
 
 const SubmissionRow: React.FC<{
   $devPad?: boolean;
   children: React.ReactNode;
-}> = ({ $devPad, children }) => {
+}> = ({ $devPad = false, children }) => {
   return (
     <StyledRow type="regular" $disallowStack $devPad={$devPad}>
       {children}
     </StyledRow>
   );
-};
-
-SubmissionRow.defaultProps = {
-  $devPad: false,
 };
 
 Form.Row = Row;

@@ -18,7 +18,7 @@ const StyledAccordion = styled.section`
 
 const Accordion: Accordion<
   React.FC<{ children: React.ReactNode; multiopen?: boolean }>
-> = ({ children, multiopen }) => {
+> = ({ children, multiopen = false }) => {
   const [activeId, setActiveId] = useState<number>();
 
   return (
@@ -28,10 +28,6 @@ const Accordion: Accordion<
   );
 };
 
-Accordion.defaultProps = {
-  multiopen: false,
-};
-
 const AccordionContext = createContext<{
   activeId: number | undefined;
   setActiveId: ((id: number | undefined) => void) | undefined;
@@ -39,7 +35,7 @@ const AccordionContext = createContext<{
 }>({
   activeId: undefined,
   setActiveId: undefined,
-  multiopen: Accordion.defaultProps["multiopen"],
+  multiopen: false,
 });
 
 const StyledAccordionOpener = styled.div`

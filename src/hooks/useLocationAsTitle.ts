@@ -1,7 +1,7 @@
 import { useLocation } from "react-router-dom";
 
 const FormatAsTitle = (title: string): string => {
-  return title
+  return (title.split("/").pop() || title)
     .split(" ")
     .map((x) => x.charAt(0).toUpperCase() + x.slice(1))
     .join(" ");
@@ -12,7 +12,8 @@ export const useLocationAsTitle = (): string => {
 
   let locationName: string = location.pathname
     .replace("/", "")
-    .replace("-", " ");
+    .replace(/-/g, " ");
+  console.log(location.pathname, locationName);
   locationName = FormatAsTitle(locationName);
 
   return locationName;
