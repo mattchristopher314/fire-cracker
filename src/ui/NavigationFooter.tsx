@@ -16,14 +16,15 @@ const StyledFooter = styled.footer`
   }
 `;
 
-const NavFooter: React.FC = () => {
+const NavigationFooter: React.FC = () => {
   return (
     <StyledFooter>
       <p>
         Information provided is believed to be correct but is not and must not
         be considered financial advice. FIRECracker is not regulated by the
         Financial Conduct Authority (FCA), nor are its authors qualified
-        financial advisors.
+        financial advisors. When investing, your money is at risk and the value
+        of your investments may fall as well as rise.
       </p>
 
       <p>
@@ -34,4 +35,4 @@ const NavFooter: React.FC = () => {
   );
 };
 
-export default NavFooter;
+export default NavigationFooter;

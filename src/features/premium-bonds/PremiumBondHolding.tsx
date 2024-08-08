@@ -42,7 +42,7 @@ const PremiumBondHolding: React.FC<{
     if (
       holding === null ||
       heldAmount === holding ||
-      updateHoldingMutation.isLoading ||
+      updateHoldingMutation.isPending ||
       !/^\d*$/.test(holding?.toString() || "0")
     )
       return;
@@ -107,7 +107,7 @@ const PremiumBondHolding: React.FC<{
                 disabled={
                   holding !== null &&
                   heldAmount !== holding &&
-                  updateHoldingMutation.isLoading
+                  updateHoldingMutation.isPending
                 }
               >
                 Update Holding

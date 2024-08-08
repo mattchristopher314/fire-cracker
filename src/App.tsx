@@ -51,7 +51,10 @@ const App: React.FC = () => {
   return (
     <DarkModeProvider>
       <QueryClientProvider client={queryClient}>
-        <ReactQueryDevtools initialIsOpen={false} />
+        <ReactQueryDevtools
+          buttonPosition={"bottom-left"}
+          initialIsOpen={false}
+        />
 
         <GlobalStyles />
         <UserProvider>

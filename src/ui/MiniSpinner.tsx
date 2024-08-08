@@ -7,7 +7,7 @@ const rotate = keyframes`
   }
 `;
 
-const MiniSpinner = styled(BiLoaderAlt)<{ size: string }>`
+const MiniSpinner = styled(BiLoaderAlt)<{ size?: string }>`
   ${(props) =>
     css`
       width: ${props.size};

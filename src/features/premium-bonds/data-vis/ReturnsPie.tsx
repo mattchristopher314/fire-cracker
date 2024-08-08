@@ -52,7 +52,7 @@ const CustomTooltip: React.FC<TooltipProps<ValueType, NameType>> = ({
           Number(payload[0].value) * 100
         ).toPrecision(3)}% chance`}</p>
         <p>
-          You'll win this amount about once every{" "}
+          You&aspos;ll win this amount about once every{" "}
           {months > 1 ? `${months} months` : `month`}.
         </p>
       </StyledPieTooltip>
@@ -98,13 +98,13 @@ const ReturnsPie: React.FC<{
 
   const totalFrequency = predictedMonthlyReturns.reduce(
     (cur, obj) => cur + obj.probability,
-    0
+    0,
   );
   const otherThreshold = (totalFrequency * MINANGLE_OTHER_DEGREES) / 360;
 
   const filteredReturns = [
     ...predictedMonthlyReturns.filter(
-      (ret) => ret.probability >= otherThreshold
+      (ret) => ret.probability >= otherThreshold,
     ),
     {
       value: "Other",

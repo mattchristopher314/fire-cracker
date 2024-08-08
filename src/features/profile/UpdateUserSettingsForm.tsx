@@ -25,7 +25,7 @@ const UpdateUserSettingsForm: React.FC<{
         onSettled: () => {
           reset();
         },
-      }
+      },
     );
 
     toast.promise(updateProfileSettings, {
@@ -44,7 +44,7 @@ const UpdateUserSettingsForm: React.FC<{
           pattern="[0-9]*"
           title="Please enter a valid income (numbers only)"
           placeholder={isLoading ? "Loading..." : settings?.["income"] || "0"}
-          disabled={updateProfileSettingsMutation.isLoading}
+          disabled={updateProfileSettingsMutation.isPending}
           {...register("income", {
             pattern: {
               value: /^(0|[1-9]\d*)(\.\d+)?$/,
@@ -60,14 +60,14 @@ const UpdateUserSettingsForm: React.FC<{
           $size="large"
           $variation="secondary"
           onClick={() => reset()}
-          disabled={updateProfileSettingsMutation.isLoading}
+          disabled={updateProfileSettingsMutation.isPending}
         >
           Reset
         </Button>
 
         <Button
           $size="large"
-          disabled={updateProfileSettingsMutation.isLoading}
+          disabled={updateProfileSettingsMutation.isPending}
         >
           Update settings
         </Button>

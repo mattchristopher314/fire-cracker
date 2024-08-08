@@ -30,7 +30,9 @@ const StyledNavLink = styled(NavLink)`
     font-weight: 500;
     padding: 1.2rem 2.4rem;
 
-    transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+    transition:
+      color 0.2s ease-in-out,
+      background-color 0.2s ease-in-out;
   }
 
   &:hover,

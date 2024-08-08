@@ -9,7 +9,7 @@ export const useDeleteAccount = () => {
   const deleteAccountMutation = useMutation({
     mutationFn: deleteCurrentUser,
     onSuccess: () => {
-      queryClient.invalidateQueries(["user"]);
+      queryClient.invalidateQueries({ queryKey: ["user"] });
       navigate("/", { replace: true });
     },
   });

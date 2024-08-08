@@ -9,7 +9,7 @@ import { XMarkIcon } from "@heroicons/react/24/outline";
 import { useClickOut } from "../hooks/useClickOut";
 import { NAV_TRANSITION_DURATION, breaks } from "../utils/constants";
 import { Overlay } from "./Overlay";
-import NavFooter from "./NavFooter";
+import NavigationFooter from "./NavigationFooter";
 
 const StyledNavigation = styled.aside<{ $show?: boolean }>`
   grid-row: 1 / -1;
@@ -129,7 +129,7 @@ const Navigation: React.FC = () => {
 
         <Logo onClick={closeNav} to="/dashboard" />
         <MainNav onClick={closeNav} />
-        <NavFooter />
+        <NavigationFooter />
       </StyledNavigation>
     </>
   );

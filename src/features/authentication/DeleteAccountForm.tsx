@@ -94,7 +94,7 @@ const DeleteAccountForm: React.FC<{ onCloseModal: () => void }> = ({
             id="confirm-address"
             type="text"
             autoComplete="off"
-            disabled={deleteAccountMutation.isLoading}
+            disabled={deleteAccountMutation.isPending}
             {...register("confirmAddress", {
               required: "Enter your email to delete account",
               pattern: {

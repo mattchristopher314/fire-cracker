@@ -13,7 +13,6 @@ export const useLocationAsTitle = (): string => {
   let locationName: string = location.pathname
     .replace("/", "")
     .replace(/-/g, " ");
-  console.log(location.pathname, locationName);
   locationName = FormatAsTitle(locationName);
 
   return locationName;

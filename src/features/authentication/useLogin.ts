@@ -14,7 +14,7 @@ export const useLogin = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
-  const { mutate: login, isLoading: isLoggingIn } = useMutation<
+  const { mutate: login, isPending: isLoggingIn } = useMutation<
     UserData,
     unknown,
     LoginProps,

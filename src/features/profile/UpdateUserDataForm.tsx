@@ -43,7 +43,7 @@ const UpdateUserDataForm: React.FC = () => {
           reset();
           history.replaceState(window.history.state, "");
         },
-      }
+      },
     );
 
     toast.promise(updateProfile, {
@@ -73,7 +73,7 @@ const UpdateUserDataForm: React.FC = () => {
           <Input
             type="text"
             id="first-name"
-            disabled={isLoading || updateProfileMutation.isLoading}
+            disabled={isLoading || updateProfileMutation.isPending}
             placeholder={
               isLoading ? "Loading..." : profile?.first_name || "First name"
             }
@@ -82,7 +82,7 @@ const UpdateUserDataForm: React.FC = () => {
           <Input
             type="text"
             id="last-name"
-            disabled={isLoading || updateProfileMutation.isLoading}
+            disabled={isLoading || updateProfileMutation.isPending}
             placeholder={
               isLoading ? "Loading..." : profile?.last_name || "Last name"
             }
@@ -95,7 +95,7 @@ const UpdateUserDataForm: React.FC = () => {
         <FileUpload
           accept="image/jpeg, image/png"
           id="avatar"
-          disabled={updateProfileMutation.isLoading}
+          disabled={updateProfileMutation.isPending}
           {...register("avatar")}
         />
       </Form.Row>
@@ -111,7 +111,7 @@ const UpdateUserDataForm: React.FC = () => {
             id="password"
             placeholder="New password"
             autoComplete="new-password"
-            disabled={updateProfileMutation.isLoading}
+            disabled={updateProfileMutation.isPending}
             {...register("password", {
               minLength: {
                 value: 8,
@@ -124,7 +124,7 @@ const UpdateUserDataForm: React.FC = () => {
             id="confirm-password"
             placeholder="Confirm new password"
             autoComplete="new-password"
-            disabled={updateProfileMutation.isLoading}
+            disabled={updateProfileMutation.isPending}
             {...register("confirmPassword", {
               validate: (value) =>
                 getValues().password === value || "Passwords do not match",
@@ -139,7 +139,7 @@ const UpdateUserDataForm: React.FC = () => {
           $size="large"
           $variation="secondary"
           onClick={() => reset()}
-          disabled={updateProfileMutation.isLoading}
+          disabled={updateProfileMutation.isPending}
         >
           Reset
         </Button>
@@ -156,7 +156,7 @@ const UpdateUserDataForm: React.FC = () => {
           </Modal.Window>
         </Modal>
 
-        <Button $size="large" disabled={updateProfileMutation.isLoading}>
+        <Button $size="large" disabled={updateProfileMutation.isPending}>
           Update account
         </Button>
       </Form.SubmissionRow>

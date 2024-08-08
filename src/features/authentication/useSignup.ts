@@ -11,7 +11,7 @@ export interface SignupProps {
 }
 
 export const useSignup = () => {
-  const { mutate: signup, isLoading: isSigningUp } = useMutation<
+  const { mutate: signup, isPending: isSigningUp } = useMutation<
     UserData | null,
     unknown,
     SignupProps,
