@@ -7,6 +7,7 @@ import { PiWallet } from "react-icons/pi";
 import { AiOutlineStock } from "react-icons/ai";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
+import MultiNav from "./MultiNav";
 
 const StyledNav = styled.nav`
   overflow-y: scroll;
@@ -80,26 +81,28 @@ const MainNav: React.FC<{
           </StyledNavLink>
         </li>
 
-        <li onClick={onClick}>
-          <StyledNavLink to="/holdings/cash">
-            <PiWallet />
-            <span>Cash</span>
-          </StyledNavLink>
-        </li>
+        <MultiNav sectionTitle="Holdings">
+          <li onClick={onClick}>
+            <StyledNavLink to="/holdings/cash">
+              <PiWallet />
+              <span>Cash</span>
+            </StyledNavLink>
+          </li>
 
-        <li onClick={onClick}>
-          <StyledNavLink to="/holdings/premium-bonds">
-            <SparklesIcon />
-            <span>Premium Bonds</span>
-          </StyledNavLink>
-        </li>
+          <li onClick={onClick}>
+            <StyledNavLink to="/holdings/premium-bonds">
+              <SparklesIcon />
+              <span>Premium Bonds</span>
+            </StyledNavLink>
+          </li>
 
-        <li onClick={onClick}>
-          <StyledNavLink to="/holdings/stocks">
-            <AiOutlineStock />
-            <span>Stocks</span>
-          </StyledNavLink>
-        </li>
+          <li onClick={onClick}>
+            <StyledNavLink to="/holdings/stocks">
+              <AiOutlineStock />
+              <span>Stocks</span>
+            </StyledNavLink>
+          </li>
+        </MultiNav>
       </NavList>
     </StyledNav>
   );
