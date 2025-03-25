@@ -1,4 +1,4 @@
-import { Outlet, useSearchParams } from "react-router-dom";
+import { Outlet, useSearchParams } from "react-router";
 import { styled } from "styled-components";
 
 import { useLocationAsTitle } from "../hooks/useLocationAsTitle";

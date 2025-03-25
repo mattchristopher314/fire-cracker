@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import IconButton from "./IconButton";
 import { Cog6ToothIcon } from "@heroicons/react/24/outline";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import Logout from "../features/authentication/Logout";
 import DarkModeToggle from "./DarkModeToggle";
 

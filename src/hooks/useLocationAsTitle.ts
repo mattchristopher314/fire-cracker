@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { useLocation } from "react-router";
 
 const FormatAsTitle = (title: string): string => {
   return (title.split("/").pop() || title)

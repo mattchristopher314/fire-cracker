@@ -1,5 +1,5 @@
 import { styled } from "styled-components";
-import { To, useNavigate } from "react-router-dom";
+import { To, useNavigate } from "react-router";
 import { useEffect } from "react";
 
 import Spinner from "./Spinner";

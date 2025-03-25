@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 import MiniSpinner from "../../ui/MiniSpinner";
 import { useProfileData } from "../../context/useProfileData";
-import { NavLink } from "react-router-dom";
+import { NavLink } from "react-router";
 import { useState } from "react";
 import { supabaseUrl } from "../../services/supabase";
 import { breaks } from "../../utils/constants";

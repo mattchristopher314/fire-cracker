@@ -4,7 +4,7 @@ import PageHeading from "../ui/PageHeading";
 import LoginForm from "../features/authentication/LoginForm";
 import ViewSwitch from "../ui/ViewSwitch";
 import SignupForm from "../features/authentication/SignupForm";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router";
 import DarkModeToggle from "../ui/DarkModeToggle";
 
 const StyledLoginSignup = styled.div`

@@ -5,7 +5,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { PiWallet } from "react-icons/pi";
 import { AiOutlineStock } from "react-icons/ai";
-import { NavLink } from "react-router-dom";
+import { NavLink } from "react-router";
 import styled from "styled-components";
 import MultiNav from "./MultiNav";
 

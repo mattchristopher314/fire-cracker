@@ -4,7 +4,7 @@ import Form from "../../ui/Form";
 import { useSignup } from "./useSignup";
 import styled from "styled-components";
 import MiniSpinner from "../../ui/MiniSpinner";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router";
 
 type FormValues = {
   email: string | undefined;

@@ -3,7 +3,7 @@ import {
   createSearchParams,
   useNavigate,
   useSearchParams,
-} from "react-router-dom";
+} from "react-router";
 import styled, { css } from "styled-components";
 
 const StyledViewSwitchContainer = styled.section`

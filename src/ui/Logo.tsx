@@ -1,4 +1,4 @@
-import { NavLink, To } from "react-router-dom";
+import { NavLink, To } from "react-router";
 import styled, { css } from "styled-components";
 import { breaks } from "../utils/constants";
 

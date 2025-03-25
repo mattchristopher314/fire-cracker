@@ -1,7 +1,7 @@
 import { User, Session } from "@supabase/supabase-js";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 
 import { UserData, login as loginApi } from "../../services/apiAuth";
 
